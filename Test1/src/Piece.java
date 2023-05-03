@@ -6,16 +6,21 @@ import java.util.Objects;
 
 
 public abstract class Piece {
-    private String color;
+    public String color;
     private int x;
     private int y;
     public Icon icon;
+
 
     public Piece(String color, int x, int y) {
         this.color = color;
         this.x = x;
         this.y = y;
+
+
     }
+
+
 
     public String getColor() {
         return color;
@@ -60,12 +65,13 @@ class Pawn extends Piece {
     }
 
     public boolean isValidMove(int newX, int newY) {
-        // Check if move is valid for pawn
-        // ...
+
 
         return true;
     }
+
 }
+
 
 class Knight extends Piece {
     private boolean hasMoved;
@@ -217,14 +223,14 @@ class Knight extends Piece {
         // ...
     }
 
-    public void movePiece(Piece piece, int newX, int newY) {
-        if (piece.isValidMove(newX, newY)) {
-            board[piece.getX()][piece.getY()] = null;
-            piece.setX(newX);
-            piece.setY(newY);
-            board[newX][newY] = piece;
-        }
-    }
+//    public void movePiece(Piece piece, int newX, int newY) {
+//        if (piece.isValidMove(newX, newY)) {
+//            board[piece.getX()][piece.getY()] = null;
+//            piece.setX(newX);
+//            piece.setY(newY);
+//            board[newX][newY] = piece;
+//        }
+
 
     public boolean isCheckmate() {
         // Check if a player is in checkmate

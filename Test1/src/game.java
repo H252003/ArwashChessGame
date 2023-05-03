@@ -11,7 +11,7 @@ import java.awt.event.ComponentEvent;
 public class game extends JFrame {
     private static final int boardSize=400;
     private static final int squareSize = boardSize/8 ;
-    private JPanel board ;
+    public static JPanel board ;
     public static square[][] squares ;
 
     //    method to set margins
@@ -69,32 +69,48 @@ public class game extends JFrame {
         squares = new square[8][8];
         for (int i = 0; i < 8; i++) {
             for (int j = 0; j < 8; j++) {
-                squares[i][j] = new square();
+                squares[i][j] = new square(i,j);
                 squares[i][j].setPreferredSize(new Dimension(squareSize, squareSize));
                 if (i == 6) {
                     squares[i][j] = new square(new Pawn("black",j,i));
                 }
                 else if (i==7) {
-
-                    squares[i][3]= new square(new Queen("black",3,i));
-                    squares[i][4]= new square(new King("black",4,i));
-                    squares[i][1]= new square(new Knight("black",1,i));
-                    squares[i][6]= new square(new Knight("black",6,i));
-                    squares[i][2]= new square(new Bishop("black",2,i));
-                    squares[i][5]= new square(new Bishop("black",5,i));
-                    squares[i][0]= new square(new Rock("black",0,i));
-                    squares[i][7]=new square(new Rock("black",7,i));
-                } else if (i==1) {
+                    if(j==3)
+                    squares[i][j]= new square(new Queen("black",3,i));
+                    if(j==4)
+                        squares[i][j]= new square(new King("black",4,i));
+                    if(j==1)
+                    squares[i][j]= new square(new Knight("black",1,i));
+                    if(j==6)
+                    squares[i][j]= new square(new Knight("black",6,i));
+                    if(j==2)
+                    squares[i][j]= new square(new Bishop("black",2,i));
+                    if(j==5)
+                    squares[i][j]= new square(new Bishop("black",5,i));
+                    if(j==0)
+                    squares[i][j]= new square(new Rock("black",0,i));
+                    if(j==7)
+                    squares[i][j]=new square(new Rock("black",7,i));
+                }
+                else if (i==1) {
                    squares[i][j] = new square(new Pawn("white",j,i));}
-                else if (i==0) {
-                    squares[i][3]= new square(new Queen("white",3,i));
-                    squares[i][4]= new square(new King("white",4,i));
-                    squares[i][1]= new square(new Knight("white",1,i));
-                    squares[i][6]= new square(new Knight("white",6,i));
-                    squares[i][2]= new square(new Bishop("white",2,i));
-                    squares[i][5]= new square(new Bishop("white",5,i));
-                    squares[i][0]= new square(new Rock("white",0,i));
-                    squares[i][7]=new square(new Rock("white",7,i));
+                else if (i==0 ) {
+                    if(j==3)
+                    squares[i][j]= new square(new Queen("white",3,i));
+                    if(j==4)
+                    squares[i][j]= new square(new King("white",4,i));
+                    if(j==1)
+                    squares[i][j]= new square(new Knight("white",1,i));
+                    if(j==6)
+                    squares[i][j]= new square(new Knight("white",6,i));
+                    if(j==2)
+                    squares[i][j]= new square(new Bishop("white",2,i));
+                    if(j==5)
+                    squares[i][j]= new square(new Bishop("white",5,i));
+                    if(j==0)
+                    squares[i][j]= new square(new Rock("white",0,i));
+                    if(j==7)
+                    squares[i][j]=new square(new Rock("white",7,i));
                 }
                 int row = i;
                 int col = j;
@@ -104,6 +120,8 @@ public class game extends JFrame {
                     squares[i][j].setBackground(new Color(219, 107, 107));
                 }
                 board.add(squares[i][j]);
+
+
             }}
         // add component listener to maintain square ratio of board
         addComponentListener(new ComponentAdapter() {
