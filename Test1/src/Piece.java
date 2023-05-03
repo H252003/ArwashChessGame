@@ -19,7 +19,12 @@ public abstract class Piece {
 
 
     }
-
+public boolean isSameTeam(Piece p1 , Piece p2)
+{
+    if(p1 == null || p2 == null)
+        return false;
+    return p1.color.equals(p2.color);
+}
 
 
     public String getColor() {
