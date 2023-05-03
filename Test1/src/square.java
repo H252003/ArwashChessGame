@@ -48,10 +48,13 @@ public class square extends JButton implements ActionListener {
             System.out.println("first presseed!");
             return;
         }
-        if (begin_move && !piece_hold.isSameTeam(piece,piece_hold)) {
+        if (begin_move) {
 
-            if(xPos == piece_hold.getX() && yPos == piece_hold.getY())
+            if(piece_hold.isSameTeam(piece,piece_hold)) {
+                begin_move = false;
+                System.out.println("turned off");
                 return;
+            }
             this.piece = piece_hold;
           game.squares[piece_hold.getY()][piece_hold.getX()].piece = null;
 
