@@ -6,16 +6,16 @@ public class square extends JButton implements ActionListener {
     public square(Piece p) {
         piece = p;
         addActionListener(this);
-        xPos = p.getX();
-        yPos = p.getY();
+        col = p.getX();
+        row = p.getY();
 
 
     }
 
-    public square(int xPos, int yPos) {
+    public square(int col, int row) {
         addActionListener(this);
-        this.xPos = xPos;
-        this.yPos = yPos;
+        this.col = col;
+        this.row = row;
     }
 
     public square() {
@@ -24,12 +24,12 @@ public class square extends JButton implements ActionListener {
 
     }
 
-    public int xPos;
-    public int yPos;
+    public int col;
+    public int row;
     public Piece piece;
     public static boolean begin_move = false;
-    public static boolean end_move = false;
-    public static Piece piece_hold;
+
+    public static Piece oldPiece;
 
     @Override
     public Icon getIcon() {
@@ -44,31 +44,33 @@ public class square extends JButton implements ActionListener {
 
         if (this.piece != null && !begin_move) {
             begin_move = true;
-            piece_hold = this.piece;
+            oldPiece = this.piece;
             System.out.println("first presseed!");
             return;
         }
         if (begin_move) {
 
-            if(piece_hold.isSameTeam(piece,piece_hold)) {
-                begin_move = false;
-                System.out.println("turned off");
+            if(oldPiece.isSameTeam(piece, oldPiece)) {
+                oldPiece = this.piece;
+                System.out.println("change");
                 return;
             }
-            this.piece = piece_hold;
-          game.squares[piece_hold.getY()][piece_hold.getX()].piece = null;
+            this.piece = oldPiece;
+          game.squares[oldPiece.x][oldPiece.y].piece = null;
 
-          // game.squares[piece_hold.getY()][piece_hold.getX()] = null;
 
 
 
 //           game.squares[this.xPos][this.yPos].piece = piece_hold;
-            this.piece.setY(xPos);
-            this.piece.setX(yPos);
-           piece_hold=null;
+
+            this.piece.y = row;
+            this.piece.x = col;
+
+
+           oldPiece =null;
             System.out.println("moove!");
-            System.out.println(this.xPos);
-            System.out.println(this.yPos);
+            System.out.println(this.col);
+            System.out.println(this.row);
             begin_move = false;
             game.board.repaint();
             game.board.revalidate();

@@ -7,15 +7,15 @@ import java.util.Objects;
 
 public abstract class Piece {
     public String color;
-    private int x;
-    private int y;
+    public int x;
+    public int y;
     public Icon icon;
 
 
     public Piece(String color, int x, int y) {
         this.color = color;
-        this.x = x;
-        this.y = y;
+        this.x = y;
+        this.y = x;
 
 
     }
