@@ -1,4 +1,5 @@
 import javax.swing.*;
+import java.awt.*;
 import java.awt.event.MouseListener;
 import java.util.ArrayList;
 import java.util.List;
@@ -10,22 +11,26 @@ public abstract class Piece {
     public int x;
     public int y;
     public Icon icon;
+
+    public boolean isFirst_move = true;
 //public boolean isFirstMove=true;
 
     public Piece(String color, int x, int y) {
         this.color = color;
         this.x = y;
         this.y = x;
+        //this.isFirst_move = true;
 
 
     }
-    public boolean isSameTeam(Piece p1 , Piece p2)
+    public static boolean isSameTeam(Piece p1, Piece p2)
     {
         if(p1 == null || p2 == null)
             return false;
         return p1.color.equals(p2.color);
     }
     public boolean moveCanEat(int newX, int newY){
+
         return false;
     }
 
@@ -54,14 +59,15 @@ public abstract class Piece {
 }
 
 class Pawn extends Piece {
-    private boolean hasMoved =true;
-int colorIndex;
+    private boolean hasMoved = true;
+    public static int colorIndex;
+
     public Pawn(String color, int x, int y) {
         super(color, x, y);
         hasMoved = false;
         try {
             if (color == "white") {
-                icon  = new ImageIcon(getClass().getClassLoader().getResource("resources/chess_white_pawn-removebg-preview (1).png"));
+                icon = new ImageIcon(getClass().getClassLoader().getResource("resources/chess_white_pawn-removebg-preview (1).png"));
 
 
             } else {
@@ -72,24 +78,46 @@ int colorIndex;
         }
     }
 
+
     public boolean isValidMovement(int newX, int newY) {
-       /* if(hasMoved==false){
-            if ((this.x-newX==2)&&(this.y-newY==0))
+        if (this.color.equals("white"))
+            colorIndex = -1;
+        else colorIndex = 1;
+
+            //push pawn 1
+        if(this.y == newY && newX == this.x - colorIndex ) //&& game.squares[newX][newY].piece == null
                 return true;
-            else return false;
-        }else {*/
-            if ((this.x - newX == 1) && (this.y - newY == 0))
-                return true;
-            else return false;
+
+        //push pawn 2
+        if (isFirst_move && this.y == newY && newX == this.x - colorIndex * 2 && game.squares[newX + colorIndex][newY].piece == null) //&& game.squares[newX][newY].piece == null
+            return true;
+
+        //capture left
+        if(this.y == newY - 1 && newX == this.x - colorIndex && game.squares[newX][newY].piece != null)
+            return true;
+
+        //capture right
+        if(this.y == newY + 1 && newX == this.x - colorIndex && game.squares[newX][newY].piece != null)
+            return true;
+
+
+
+
+            return false;
+    }
+//            if ((this.x - newX == 1) && (this.y - newY == 0))
+//            if ((this.x - newX == 2) && (this.y - newY == 0))
+//                return true;
+//            else return false;
+//        } else {
+
+        public boolean moveCanEat ( int newX, int newY)
+        {
+
+            return false;
         }
 
-    public boolean moveCanEat(int newX, int newY)
-    {
-
-        return false;
     }
-
-}
 
 
 class Knight extends Piece {
@@ -142,9 +170,17 @@ class Bishop extends Piece {
     }
 
     public boolean isValidMovement(int newX, int newY) {
-        // Check if move is valid for pawn
+        // Check if move is valid for bishop
         if(Math.abs(this.x - newX) <= 3)
+        {
+            if(this.x == newX)
+                return Math.abs(this.y - newY) == 1;
+
             return Math.abs(this.x - newX) ==  Math.abs(this.y - newY);
+        }
+
+
+            //return game.squares[newX][newY].piece == null ; //||
         return false;
     }
 }
@@ -167,7 +203,7 @@ class Rock extends Piece {
     }
 
     public boolean isValidMovement(int newX, int newY) {
-        // Check if move is valid for pawn
+        // Check if move is valid for rook
         return this.x == newX || this.y == newY;
 
 
@@ -234,12 +270,7 @@ class King extends Piece {
         }
     }
 
-   /* public boolean isValidMovement(int newX, int newY) {
-        // Check if move is valid for pawn
-        // ...
 
-        return true;
-    }*/
     public boolean isValidMovement(int newX, int newY) {
         // Check if move is valid for pawn
         // if(Math.abs(this.x - newX) <= 3)

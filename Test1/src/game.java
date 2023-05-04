@@ -141,10 +141,16 @@ public class game extends JFrame {
                 for (int j = 0; j < 8; j++) {
 
                     if (isValidMove(square.oldPiece,squares, i, j)) {
-                        squares[i][j].setBackground(new Color(12, 253, 1));
+//                        if(square.oldPiece.isSameTeam(square.oldPiece , squares[i][j].piece))
+//                            squares[i][j].setBackground(new Color(255, 0, 0));
+                        if(squares[i][j].piece == null)
+                            squares[i][j].setBackground(new Color(12, 253, 1));
+                        else
+                            squares[i][j].setBackground(new Color(253, 240, 1));
                     }
-//                } else
-//                    squares[i][j].setBackground(new Color(253, 0, 2));
+                    // color same team pieces with red
+                 else if(square.oldPiece.isValidMovement(i,j) && square.oldPiece.isSameTeam(square.oldPiece , squares[i][j].piece))
+                    squares[i][j].setBackground(new Color(253, 0, 2));
                 }
 
             }
@@ -170,6 +176,7 @@ public class game extends JFrame {
     }
     public static boolean isValidMove(Piece oldPiece ,square[][] squares, int x, int y){
         if(oldPiece.isSameTeam(oldPiece,squares[x][y].piece)){
+
             return false ;
         }
         if(!oldPiece.isValidMovement(x,y)) {

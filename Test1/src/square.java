@@ -1,4 +1,5 @@
 import javax.swing.*;
+import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
@@ -27,6 +28,7 @@ public class square extends JButton implements ActionListener {
     public Piece piece = null;
     public static boolean begin_move = false;
 
+
     public static Piece oldPiece = null;
 
     @Override
@@ -44,39 +46,56 @@ public class square extends JButton implements ActionListener {
             begin_move = true;
             oldPiece = this.piece;
             System.out.println("first presseed!");
-            game.paintComp(game.squares) ;
+            game.paintComp(game.squares);
             return;
 
         }
         if (begin_move) {
 
-            if(oldPiece.isSameTeam(piece, oldPiece)) {
+            if (oldPiece.isSameTeam(piece, oldPiece)) {
                 oldPiece = this.piece;
                 game.getBack(game.squares);
                 System.out.println("change");
-                game.paintComp(game.squares) ;
+                game.paintComp(game.squares);
                 return;
             }
-            this.piece = oldPiece;
-            game.squares[oldPiece.x][oldPiece.y].piece = null;
+
+            //make it move on only green
+            for (int i = 0; i < 8; i++) {
+                for (int j = 0; j < 8; j++) {
+
+                    if (game.isValidMove(square.oldPiece, game.squares, i, j))
+                        if(this.col == i && this.row == j){
+
+                        this.piece = oldPiece;
+
+                        // add to panel but check whether white or black
 
 
-            this.piece.y = row;
-            this.piece.x = col;
+                        game.squares[oldPiece.x][oldPiece.y].piece = null;
 
 
-            oldPiece =null;
-            System.out.println("moove!");
-            game.getBack(game.squares);
-            System.out.println(this.col);
-            System.out.println(this.row);
-            begin_move = false;
-            game.board.repaint();
-            game.board.revalidate();
+                        this.piece.y = row;
+                        this.piece.x = col;
+                        this.piece.isFirst_move = false;
 
 
+                        //oldPiece = null;
+
+                        System.out.println("moove!");
+                        game.getBack(game.squares);
+                        System.out.println(this.col);
+                        System.out.println(this.row);
+                        begin_move = false;
+                        game.board.repaint();
+                        game.board.revalidate();
+                    }
+
+
+                }
+
+            }
         }
-
     }
 
     public static void main (String args[])
