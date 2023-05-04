@@ -152,6 +152,9 @@ public class game extends JFrame {
         }
     }
 
+
+
+
     public static void getBack(square[][] squares) {
         for (int i = 0; i < 8; i++) {
             for (int j = 0; j < 8; j++) {
@@ -176,6 +179,7 @@ public class game extends JFrame {
             return false;
         return true ;
     }
+
 
     public static void main (String args[])
     {

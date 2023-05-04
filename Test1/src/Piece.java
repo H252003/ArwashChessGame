@@ -10,7 +10,7 @@ public abstract class Piece {
     public int x;
     public int y;
     public Icon icon;
-
+//public boolean isFirstMove=true;
 
     public Piece(String color, int x, int y) {
         this.color = color;
@@ -54,8 +54,8 @@ public abstract class Piece {
 }
 
 class Pawn extends Piece {
-    private boolean hasMoved;
-
+    private boolean hasMoved =true;
+int colorIndex;
     public Pawn(String color, int x, int y) {
         super(color, x, y);
         hasMoved = false;
@@ -73,10 +73,15 @@ class Pawn extends Piece {
     }
 
     public boolean isValidMovement(int newX, int newY) {
-
-
-        return true;
-    }
+       /* if(hasMoved==false){
+            if ((this.x-newX==2)&&(this.y-newY==0))
+                return true;
+            else return false;
+        }else {*/
+            if ((this.x - newX == 1) && (this.y - newY == 0))
+                return true;
+            else return false;
+        }
 
     public boolean moveCanEat(int newX, int newY)
     {
@@ -211,7 +216,7 @@ class Rock extends Piece {
     }
 }
 class King extends Piece {
-    private boolean hasMoved;
+    private boolean hasMoved=true;
 
     public King(String color, int x, int y) {
         super(color, x, y);
@@ -229,11 +234,18 @@ class King extends Piece {
         }
     }
 
-    public boolean isValidMovement(int newX, int newY) {
+   /* public boolean isValidMovement(int newX, int newY) {
         // Check if move is valid for pawn
         // ...
 
         return true;
+    }*/
+    public boolean isValidMovement(int newX, int newY) {
+        // Check if move is valid for pawn
+        // if(Math.abs(this.x - newX) <= 3)
+        if (Math.abs((this.x - newX)*(this.y-newY))==1 ||Math.abs(newY-this.y)+ Math.abs( newX-this.x)==1)
+            return true;
+        else return false;
     }
 }
 class Queen extends Piece {
