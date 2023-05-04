@@ -119,7 +119,13 @@ public class login_page extends JFrame {
             public void actionPerformed(ActionEvent e) {
                 String user = usernameField.getText();
                 String pass = passwordField.getText();
-                if (user.equals("admin")) {
+
+                if ((user.equals("bassant") && pass.equals("bassant")) ||
+                        (user.equals("hisham") && pass.equals("hisham")) ||
+                        (user.equals("meram") && pass.equals("meram")) ||
+                        (user.equals("judy") && pass.equals("judy")) ||
+                        (user.equals("adham") && pass.equals("adham"))) {
+
                     JOptionPane.showMessageDialog(null, "helloooo!");
                     System.out.println("logged in page!!");
                     dispose();
