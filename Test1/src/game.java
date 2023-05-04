@@ -9,10 +9,10 @@ import java.awt.event.ComponentEvent;
 
 
 public class game extends JFrame {
-    private static final int boardSize=400;
-    private static final int squareSize = boardSize/8 ;
-    public static JPanel board ;
-    public static square[][] squares ;
+    private static final int boardSize = 400;
+    private static final int squareSize = boardSize / 8;
+    public static JPanel board;
+    public static square[][] squares;
 
     //    method to set margins
     private int calculateMarginSize() {
@@ -69,48 +69,46 @@ public class game extends JFrame {
         squares = new square[8][8];
         for (int i = 0; i < 8; i++) {
             for (int j = 0; j < 8; j++) {
-                squares[i][j] = new square(i,j);
+                squares[i][j] = new square(i, j);
                 squares[i][j].setPreferredSize(new Dimension(squareSize, squareSize));
                 if (i == 6) {
-                    squares[i][j] = new square(new Pawn("black",j,i));
-                }
-                else if (i==7) {
-                    if(j==3)
-                    squares[i][j]= new square(new Queen("black",3,i));
-                    if(j==4)
-                        squares[i][j]= new square(new King("black",4,i));
-                    if(j==1)
-                    squares[i][j]= new square(new Knight("black",1,i));
-                    if(j==6)
-                    squares[i][j]= new square(new Knight("black",6,i));
-                    if(j==2)
-                    squares[i][j]= new square(new Bishop("black",2,i));
-                    if(j==5)
-                    squares[i][j]= new square(new Bishop("black",5,i));
-                    if(j==0)
-                    squares[i][j]= new square(new Rock("black",0,i));
-                    if(j==7)
-                    squares[i][j]=new square(new Rock("black",7,i));
-                }
-                else if (i==1) {
-                   squares[i][j] = new square(new Pawn("white",j,i));}
-                else if (i==0 ) {
-                    if(j==3)
-                    squares[i][j]= new square(new Queen("white",3,i));
-                    if(j==4)
-                    squares[i][j]= new square(new King("white",4,i));
-                    if(j==1)
-                    squares[i][j]= new square(new Knight("white",1,i));
-                    if(j==6)
-                    squares[i][j]= new square(new Knight("white",6,i));
-                    if(j==2)
-                    squares[i][j]= new square(new Bishop("white",2,i));
-                    if(j==5)
-                    squares[i][j]= new square(new Bishop("white",5,i));
-                    if(j==0)
-                    squares[i][j]= new square(new Rock("white",0,i));
-                    if(j==7)
-                    squares[i][j]=new square(new Rock("white",7,i));
+                    squares[i][j] = new square(new Pawn("black", j, i));
+                } else if (i == 7) {
+                    if (j == 3)
+                        squares[i][j] = new square(new Queen("black", 3, i));
+                    if (j == 4)
+                        squares[i][j] = new square(new King("black", 4, i));
+                    if (j == 1)
+                        squares[i][j] = new square(new Knight("black", 1, i));
+                    if (j == 6)
+                        squares[i][j] = new square(new Knight("black", 6, i));
+                    if (j == 2)
+                        squares[i][j] = new square(new Bishop("black", 2, i));
+                    if (j == 5)
+                        squares[i][j] = new square(new Bishop("black", 5, i));
+                    if (j == 0)
+                        squares[i][j] = new square(new Rock("black", 0, i));
+                    if (j == 7)
+                        squares[i][j] = new square(new Rock("black", 7, i));
+                } else if (i == 1) {
+                    squares[i][j] = new square(new Pawn("white", j, i));
+                } else if (i == 0) {
+                    if (j == 3)
+                        squares[i][j] = new square(new Queen("white", 3, i));
+                    if (j == 4)
+                        squares[i][j] = new square(new King("white", 4, i));
+                    if (j == 1)
+                        squares[i][j] = new square(new Knight("white", 1, i));
+                    if (j == 6)
+                        squares[i][j] = new square(new Knight("white", 6, i));
+                    if (j == 2)
+                        squares[i][j] = new square(new Bishop("white", 2, i));
+                    if (j == 5)
+                        squares[i][j] = new square(new Bishop("white", 5, i));
+                    if (j == 0)
+                        squares[i][j] = new square(new Rock("white", 0, i));
+                    if (j == 7)
+                        squares[i][j] = new square(new Rock("white", 7, i));
                 }
                 int row = i;
                 int col = j;
@@ -122,7 +120,8 @@ public class game extends JFrame {
                 board.add(squares[i][j]);
 
 
-            }}
+            }
+        }
         // add component listener to maintain square ratio of board
         addComponentListener(new ComponentAdapter() {
             @Override
@@ -135,11 +134,55 @@ public class game extends JFrame {
         });
 
     }
-    public static void main(String args[])
+
+    public static void paintComp(square[][] squares) {
+        if(square.oldPiece != null ) {
+            for (int i = 0; i < 8; i++) {
+                for (int j = 0; j < 8; j++) {
+
+                    if (isValidMove(square.oldPiece,squares, i, j)) {
+                        squares[i][j].setBackground(new Color(12, 253, 1));
+                    }
+//                } else
+//                    squares[i][j].setBackground(new Color(253, 0, 2));
+                }
+
+            }
+
+        }
+    }
+
+    public static void getBack(square[][] squares) {
+        for (int i = 0; i < 8; i++) {
+            for (int j = 0; j < 8; j++) {
+                if ((i + j) % 2 == 0) {
+                    squares[i][j].setBackground(new Color(0, 0, 0));
+                } else {
+                    squares[i][j].setBackground(new Color(219, 107, 107));
+                }
+
+            }
+        }
+
+    }
+    public static boolean isValidMove(Piece oldPiece ,square[][] squares, int x, int y){
+        if(oldPiece.isSameTeam(oldPiece,squares[x][y].piece)){
+            return false ;
+        }
+        if(!oldPiece.isValidMovement(x,y)) {
+            return false;
+        }
+        if(oldPiece.moveCanEat(x,y))
+            return false;
+        return true ;
+    }
+
+    public static void main (String args[])
     {
         new game();
     }
 
 }
+
 
 
