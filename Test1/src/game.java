@@ -13,6 +13,8 @@ public class game extends JFrame {
     private static final int squareSize = boardSize / 8;
     public static JPanel board;
     public static square[][] squares;
+    public static TimerLabel Timer1 = new TimerLabel();
+    public static TimerLabel Timer2 = new TimerLabel();
 
     //    method to set margins
     private int calculateMarginSize() {
@@ -133,8 +135,30 @@ public class game extends JFrame {
             }
         });
 
-        TimerLabel Timer1 = new TimerLabel(timer1,time);
-        TimerLabel Timer2 = new TimerLabel(timer2,time);
+
+        Timer1 = new TimerLabel(timer1,time);
+        Timer2 = new TimerLabel(timer2,time);
+
+        if(TimerLabel.whiteTurn){
+            Timer2.startTimer();
+            Timer1.stopTimer();
+        }
+        else {
+            Timer1.startTimer();
+            Timer2.stopTimer();
+        }
+    }
+
+    Piece getKing(Icon icon)
+    {
+        for (int i = 0; i < 8; i++) {
+            for (int j = 0; j < 8; j++) {
+
+                if(squares[i][j].piece.icon == icon)
+                    return squares[i][j].piece;
+            }
+            }
+        return null;
     }
 
     public static void paintComp(square[][] squares) {

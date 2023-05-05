@@ -5,11 +5,17 @@ import java.text.DecimalFormat;
 
 public class TimerLabel extends JLabel {
 
+
+    public static boolean whiteTurn = true;
     private Timer timer;
     private int second, minute;
     private String ddSecond, ddMinute;
     private DecimalFormat dFormat = new DecimalFormat("00");
 
+    public TimerLabel()
+    {
+
+    }
     public TimerLabel(JLabel timerLabel, String time) {
         super();
         int clock = Integer.parseInt(time);

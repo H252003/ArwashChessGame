@@ -18,11 +18,18 @@ public class promotion extends JFrame implements ActionListener {
         frame.setLayout(null);
         frame.setTitle("Chess Game");
         frame.getContentPane().setBackground(new Color(0x494949));
+        frame.setVisible(true);
 
 
     }
     @Override
     public void actionPerformed(ActionEvent e) {
+
+    }
+
+    public static void main(String args[])
+    {
+        new promotion();
 
     }
 }

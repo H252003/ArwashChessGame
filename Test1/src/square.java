@@ -42,7 +42,7 @@ public class square extends JButton implements ActionListener {
     @Override
     public void actionPerformed(ActionEvent e) {
 
-        if (this.piece != null && !begin_move) {
+        if (this.piece != null && !begin_move && (TimerLabel.whiteTurn && this.piece.color.equals("white") || !TimerLabel.whiteTurn && this.piece.color.equals("black"))) {
             begin_move = true;
             oldPiece = this.piece;
             System.out.println("first presseed!");
@@ -88,6 +88,21 @@ public class square extends JButton implements ActionListener {
                         System.out.println(this.col);
                         System.out.println(this.row);
                         begin_move = false;
+
+                        //change player turn
+                        TimerLabel.whiteTurn = !TimerLabel.whiteTurn;
+
+                        //start timer
+                        if(TimerLabel.whiteTurn)
+                        {
+                            game.Timer2.startTimer();
+                            game.Timer1.stopTimer();
+                        }
+                        else {
+                            game.Timer1.startTimer();
+                            game.Timer2.stopTimer();
+                        }
+
                         game.board.repaint();
                         game.board.revalidate();
                     }

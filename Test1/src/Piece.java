@@ -11,6 +11,7 @@ public abstract class Piece {
     public int x;
     public int y;
     public Icon icon;
+
     public boolean checked=false;
 
     public boolean isFirst_move = true;
@@ -104,11 +105,25 @@ class Pawn extends Piece {
 
             return false;
     }
-    /*if (this.color.equals("white"))
+    /*String color = this.color;
+    if (color.equals("white"))
     colorIndex=7;
             else colorIndex=0;
-           /* if(newX==colorIndex){
+           if(newX==colorIndex){
                 promotedPawn(newX,newY);
+           int promoted piece = JOptionPane.showConfirmDialog(null, "Choose a piece:", "mabrooooook", JOptionPane.ROOK_BISHOP_QUEEN_KNIGHT_OPTION);
+            if (promoted piece == JOptionPane.ROOK_OPTION) {
+                squares[newX][newY] = new square(new Rock(color, 5, i));
+                }
+
+            else if (promoted piece == JOptionPane.BISHOP_OPTION) {
+                JOptionPane.showMessageDialog(null, "byeee");
+
+
+            } else {
+                JOptionPane.showMessageDialog(null, "aywa kdaa et3dl");
+            }
+
             }*/
 
 //
@@ -226,14 +241,15 @@ class Bishop extends Piece {
         // Check if move is valid for bishop
         if(Math.abs(this.x - newX) <= 3)
         {
+            //make it not eat its opposite when shifting colors
             if(this.x == newX)
+                if(game.squares[newX][newY].piece == null || isSameTeam(this,game.squares[newX][newY].piece))
+
                 return Math.abs(this.y - newY) == 1;
 
             return Math.abs(this.x - newX) ==  Math.abs(this.y - newY);
         }
 
-
-            //return game.squares[newX][newY].piece == null ; //||
         return false;
     }
 }
@@ -257,7 +273,7 @@ class Rock extends Piece {
 
     public boolean isValidMovement(int newX, int newY) {
         // Check if move is valid for rook
-        return this.x == newX || this.y == newY;
+        return (this.x == newX && this.y != newY) || (this.x != newX && this.y == newY);
 
 
     }
@@ -372,7 +388,9 @@ class Queen extends Piece {
 
     public boolean isValidMovement(int newX, int newY) {
         // Check if move is valid for pawn
-        return (this.x == newX || this.y == newY) || (Math.abs(this.x - newX) ==  Math.abs(this.y - newY));
+        if(this.x == newX)
+            return Math.abs(this.y - newY) >0;
+        return ((this.x == newX && this.y != newY) || (this.x != newX && this.y == newY)) || (Math.abs(this.x - newX) ==  Math.abs(this.y - newY));
 
     }
     public boolean moveCanEat(int newX, int newY)
