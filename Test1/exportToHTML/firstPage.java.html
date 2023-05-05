@@ -1,0 +1,114 @@
+<html>
+<head>
+<title>firstPage.java</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<style type="text/css">
+.s0 { color: #cc7832;}
+.s1 { color: #a9b7c6;}
+.s2 { color: #6a8759;}
+.s3 { color: #6897bb;}
+.s4 { color: #808080;}
+</style>
+</head>
+<body bgcolor="#2b2b2b">
+<table CELLSPACING=0 CELLPADDING=5 COLS=1 WIDTH="100%" BGCOLOR="#606060" >
+<tr><td><center>
+<font face="Arial, Helvetica" color="#000000">
+firstPage.java</font>
+</center></td></tr></table>
+<pre><span class="s0">import </span><span class="s1">javax.swing.*</span><span class="s0">;</span>
+<span class="s0">import </span><span class="s1">java.awt.*</span><span class="s0">;</span>
+<span class="s0">import </span><span class="s1">java.awt.event.ActionEvent</span><span class="s0">;</span>
+<span class="s0">import </span><span class="s1">java.awt.event.ActionListener</span><span class="s0">;</span>
+
+<span class="s0">public class </span><span class="s1">firstPage </span><span class="s0">extends </span><span class="s1">JFrame {</span>
+
+    <span class="s0">private </span><span class="s1">JLabel game_lab = </span><span class="s0">new </span><span class="s1">JLabel()</span><span class="s0">;</span>
+    <span class="s0">public boolean </span><span class="s1">guest = </span><span class="s0">false;</span>
+
+    <span class="s0">public </span><span class="s1">firstPage() {</span>
+        <span class="s0">super</span><span class="s1">(</span><span class="s2">&quot;Swing App&quot;</span><span class="s1">)</span><span class="s0">;</span>
+
+        <span class="s1">JPanel panel = </span><span class="s0">new </span><span class="s1">JPanel()</span><span class="s0">;</span>
+        <span class="s1">panel.setLayout(</span><span class="s0">new </span><span class="s1">GridBagLayout())</span><span class="s0">;</span>
+
+        <span class="s1">JLabel gameLabel = </span><span class="s0">new </span><span class="s1">JLabel(</span><span class="s2">&quot;team twooo chess game&quot;</span><span class="s1">)</span><span class="s0">;</span>
+        <span class="s1">gameLabel.setFont(</span><span class="s0">new </span><span class="s1">Font(</span><span class="s2">&quot;Algerian&quot;</span><span class="s0">, </span><span class="s1">Font.PLAIN</span><span class="s0">, </span><span class="s3">48</span><span class="s1">))</span><span class="s0">;</span>
+        <span class="s1">GridBagConstraints gbcGameLabel = </span><span class="s0">new </span><span class="s1">GridBagConstraints()</span><span class="s0">;</span>
+        <span class="s1">gbcGameLabel.gridx = </span><span class="s3">0</span><span class="s0">;</span>
+        <span class="s1">gbcGameLabel.gridy = </span><span class="s3">0</span><span class="s0">;</span>
+        <span class="s1">gbcGameLabel.gridwidth = </span><span class="s3">2</span><span class="s0">;</span>
+        <span class="s1">gbcGameLabel.anchor = GridBagConstraints.CENTER</span><span class="s0">;</span>
+        <span class="s1">gbcGameLabel.fill = GridBagConstraints.NONE</span><span class="s0">;</span>
+        <span class="s1">gbcGameLabel.insets.top = </span><span class="s3">20</span><span class="s0">;</span>
+        <span class="s1">gbcGameLabel.insets.left = </span><span class="s3">20</span><span class="s0">;</span>
+        <span class="s1">gbcGameLabel.insets.right = </span><span class="s3">20</span><span class="s0">;</span>
+        <span class="s1">panel.add(gameLabel</span><span class="s0">, </span><span class="s1">gbcGameLabel)</span><span class="s0">;</span>
+
+        <span class="s1">JButton loginButton = </span><span class="s0">new </span><span class="s1">JButton(</span><span class="s2">&quot;login&quot;</span><span class="s1">)</span><span class="s0">;</span>
+        <span class="s1">loginButton.setFont(</span><span class="s0">new </span><span class="s1">Font(</span><span class="s2">&quot;JetBrains Mono&quot;</span><span class="s0">, </span><span class="s1">Font.PLAIN</span><span class="s0">, </span><span class="s3">28</span><span class="s1">))</span><span class="s0">;</span>
+        <span class="s1">GridBagConstraints gbcLoginButton = </span><span class="s0">new </span><span class="s1">GridBagConstraints()</span><span class="s0">;</span>
+        <span class="s1">gbcLoginButton.gridx = </span><span class="s3">0</span><span class="s0">;</span>
+        <span class="s1">gbcLoginButton.gridy = </span><span class="s3">1</span><span class="s0">;</span>
+        <span class="s1">gbcLoginButton.gridwidth = </span><span class="s3">1</span><span class="s0">;</span>
+        <span class="s1">gbcLoginButton.anchor = GridBagConstraints.CENTER</span><span class="s0">;</span>
+        <span class="s1">gbcLoginButton.fill = GridBagConstraints.HORIZONTAL</span><span class="s0">;</span>
+        <span class="s1">gbcLoginButton.insets.top = </span><span class="s3">20</span><span class="s0">;</span>
+        <span class="s1">gbcLoginButton.insets.left = </span><span class="s3">20</span><span class="s0">;</span>
+        <span class="s1">gbcLoginButton.insets.right = </span><span class="s3">10</span><span class="s0">;</span>
+        <span class="s1">panel.add(loginButton</span><span class="s0">, </span><span class="s1">gbcLoginButton)</span><span class="s0">;</span>
+
+        <span class="s1">JButton guestButton = </span><span class="s0">new </span><span class="s1">JButton(</span><span class="s2">&quot;guest&quot;</span><span class="s1">)</span><span class="s0">;</span>
+        <span class="s1">guestButton.setFont(</span><span class="s0">new </span><span class="s1">Font(</span><span class="s2">&quot;JetBrains Mono&quot;</span><span class="s0">, </span><span class="s1">Font.PLAIN</span><span class="s0">, </span><span class="s3">28</span><span class="s1">))</span><span class="s0">;</span>
+        <span class="s1">GridBagConstraints gbcGuestButton = </span><span class="s0">new </span><span class="s1">GridBagConstraints()</span><span class="s0">;</span>
+        <span class="s1">gbcGuestButton.gridx = </span><span class="s3">1</span><span class="s0">;</span>
+        <span class="s1">gbcGuestButton.gridy = </span><span class="s3">1</span><span class="s0">;</span>
+        <span class="s1">gbcGuestButton.gridwidth = </span><span class="s3">1</span><span class="s0">;</span>
+        <span class="s1">gbcGuestButton.anchor = GridBagConstraints.CENTER</span><span class="s0">;</span>
+        <span class="s1">gbcGuestButton.fill = GridBagConstraints.HORIZONTAL</span><span class="s0">;</span>
+        <span class="s1">gbcGuestButton.insets.top = </span><span class="s3">20</span><span class="s0">;</span>
+        <span class="s1">gbcGuestButton.insets.left = </span><span class="s3">10</span><span class="s0">;</span>
+        <span class="s1">gbcGuestButton.insets.right = </span><span class="s3">20</span><span class="s0">;</span>
+        <span class="s1">panel.add(guestButton</span><span class="s0">, </span><span class="s1">gbcGuestButton)</span><span class="s0">;</span>
+
+        <span class="s0">this</span><span class="s1">.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE)</span><span class="s0">;</span>
+        <span class="s0">this</span><span class="s1">.setContentPane(panel)</span><span class="s0">;</span>
+        <span class="s0">this</span><span class="s1">.pack()</span><span class="s0">;</span>
+        <span class="s0">this</span><span class="s1">.setVisible(</span><span class="s0">true</span><span class="s1">)</span><span class="s0">;</span>
+
+        <span class="s1">setTitle(</span><span class="s2">&quot;ahleeen&quot;</span><span class="s1">)</span><span class="s0">;</span>
+        <span class="s1">setContentPane(panel)</span><span class="s0">;</span>
+        <span class="s1">setSize(</span><span class="s3">700</span><span class="s0">, </span><span class="s3">400</span><span class="s1">)</span><span class="s0">;</span>
+        <span class="s1">setVisible(</span><span class="s0">true</span><span class="s1">)</span><span class="s0">;</span>
+        <span class="s1">setDefaultCloseOperation(EXIT_ON_CLOSE)</span><span class="s0">;</span>
+
+        <span class="s1">loginButton.addActionListener(</span><span class="s0">new </span><span class="s1">ActionListener() {</span>
+            <span class="s1">@Override</span>
+            <span class="s0">public void </span><span class="s1">actionPerformed(ActionEvent e) {</span>
+                <span class="s1">System.out.println(</span><span class="s2">&quot;Open Login Page !!&quot;</span><span class="s1">)</span><span class="s0">;</span>
+                <span class="s1">login_page log = </span><span class="s0">new </span><span class="s1">login_page()</span><span class="s0">;</span>
+                <span class="s1">dispose()</span><span class="s0">; </span><span class="s4">//close it to open login page</span>
+            <span class="s1">}</span>
+        <span class="s1">})</span><span class="s0">;</span>
+        <span class="s1">guestButton.addActionListener(</span><span class="s0">new </span><span class="s1">ActionListener() {</span>
+            <span class="s1">@Override</span>
+            <span class="s0">public void </span><span class="s1">actionPerformed(ActionEvent e) {</span>
+                <span class="s1">System.out.println(</span><span class="s2">&quot;Open New Game Page!!&quot;</span><span class="s1">)</span><span class="s0">;</span>
+                <span class="s1">guest = </span><span class="s0">true; </span><span class="s4">//to know that he is a guest</span>
+                <span class="s1">new_game gam = </span><span class="s0">new </span><span class="s1">new_game(guest)</span><span class="s0">;      </span><span class="s4">//guest</span>
+                <span class="s1">dispose()</span><span class="s0">;                  </span><span class="s4">//close it to open guest page</span>
+            <span class="s1">}</span>
+        <span class="s1">})</span><span class="s0">;</span>
+    <span class="s1">}</span>
+
+
+
+    <span class="s0">public static void </span><span class="s1">main(String args[])</span>
+    <span class="s1">{</span>
+        <span class="s1">SwingUtilities.invokeLater(() -&gt; </span><span class="s0">new </span><span class="s1">firstPage())</span><span class="s0">;</span>
+    <span class="s1">}</span>
+<span class="s1">}</span>
+
+</pre>
+</body>
+</html>

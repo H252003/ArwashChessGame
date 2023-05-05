@@ -1,0 +1,156 @@
+<html>
+<head>
+<title>login_page.java</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<style type="text/css">
+.s0 { color: #cc7832;}
+.s1 { color: #a9b7c6;}
+.s2 { color: #6a8759;}
+.s3 { color: #6897bb;}
+</style>
+</head>
+<body bgcolor="#2b2b2b">
+<table CELLSPACING=0 CELLPADDING=5 COLS=1 WIDTH="100%" BGCOLOR="#606060" >
+<tr><td><center>
+<font face="Arial, Helvetica" color="#000000">
+login_page.java</font>
+</center></td></tr></table>
+<pre><span class="s0">import </span><span class="s1">javax.swing.*</span><span class="s0">;</span>
+<span class="s0">import </span><span class="s1">java.awt.Font</span><span class="s0">;</span>
+<span class="s0">import </span><span class="s1">java.awt.GridBagConstraints</span><span class="s0">;</span>
+<span class="s0">import </span><span class="s1">java.awt.GridBagLayout</span><span class="s0">;</span>
+<span class="s0">import </span><span class="s1">java.awt.event.ActionEvent</span><span class="s0">;</span>
+<span class="s0">import </span><span class="s1">java.awt.event.ActionListener</span><span class="s0">;</span>
+
+<span class="s0">public class </span><span class="s1">login_page </span><span class="s0">extends </span><span class="s1">JFrame {</span>
+
+    <span class="s0">public </span><span class="s1">JButton BACKButton</span><span class="s0">, </span><span class="s1">LOGINButton</span><span class="s0">;</span>
+
+    <span class="s0">public </span><span class="s1">login_page() {</span>
+        <span class="s0">super</span><span class="s1">(</span><span class="s2">&quot;Swing App&quot;</span><span class="s1">)</span><span class="s0">;</span>
+
+        <span class="s1">JPanel panel = </span><span class="s0">new </span><span class="s1">JPanel()</span><span class="s0">;</span>
+        <span class="s1">panel.setLayout(</span><span class="s0">new </span><span class="s1">GridBagLayout())</span><span class="s0">;</span>
+
+        <span class="s1">JLabel loginLabel = </span><span class="s0">new </span><span class="s1">JLabel(</span><span class="s2">&quot;LOGIN&quot;</span><span class="s1">)</span><span class="s0">;</span>
+        <span class="s1">loginLabel.setFont(</span><span class="s0">new </span><span class="s1">Font(</span><span class="s2">&quot;Arial&quot;</span><span class="s0">, </span><span class="s1">Font.BOLD</span><span class="s0">, </span><span class="s3">24</span><span class="s1">))</span><span class="s0">;</span>
+        <span class="s1">GridBagConstraints gbcLoginLabel = </span><span class="s0">new </span><span class="s1">GridBagConstraints()</span><span class="s0">;</span>
+        <span class="s1">gbcLoginLabel.gridx = </span><span class="s3">0</span><span class="s0">;</span>
+        <span class="s1">gbcLoginLabel.gridy = </span><span class="s3">0</span><span class="s0">;</span>
+        <span class="s1">gbcLoginLabel.gridwidth = </span><span class="s3">2</span><span class="s0">;</span>
+        <span class="s1">gbcLoginLabel.anchor = GridBagConstraints.CENTER</span><span class="s0">;</span>
+        <span class="s1">gbcLoginLabel.fill = GridBagConstraints.NONE</span><span class="s0">;</span>
+        <span class="s1">gbcLoginLabel.insets.top = </span><span class="s3">20</span><span class="s0">;</span>
+        <span class="s1">gbcLoginLabel.insets.left = </span><span class="s3">20</span><span class="s0">;</span>
+        <span class="s1">gbcLoginLabel.insets.right = </span><span class="s3">20</span><span class="s0">;</span>
+        <span class="s1">panel.add(loginLabel</span><span class="s0">, </span><span class="s1">gbcLoginLabel)</span><span class="s0">;</span>
+
+        <span class="s1">JLabel usernameLabel = </span><span class="s0">new </span><span class="s1">JLabel(</span><span class="s2">&quot;username&quot;</span><span class="s1">)</span><span class="s0">;</span>
+        <span class="s1">GridBagConstraints gbcUsernameLabel = </span><span class="s0">new </span><span class="s1">GridBagConstraints()</span><span class="s0">;</span>
+        <span class="s1">gbcUsernameLabel.gridx = </span><span class="s3">0</span><span class="s0">;</span>
+        <span class="s1">gbcUsernameLabel.gridy = </span><span class="s3">1</span><span class="s0">;</span>
+        <span class="s1">gbcUsernameLabel.anchor = GridBagConstraints.WEST</span><span class="s0">;</span>
+        <span class="s1">gbcUsernameLabel.fill = GridBagConstraints.NONE</span><span class="s0">;</span>
+        <span class="s1">gbcUsernameLabel.insets.top = </span><span class="s3">10</span><span class="s0">;</span>
+        <span class="s1">gbcUsernameLabel.insets.left = </span><span class="s3">20</span><span class="s0">;</span>
+        <span class="s1">gbcUsernameLabel.insets.bottom = </span><span class="s3">10</span><span class="s0">;</span>
+        <span class="s1">panel.add(usernameLabel</span><span class="s0">, </span><span class="s1">gbcUsernameLabel)</span><span class="s0">;</span>
+
+        <span class="s1">JTextField usernameField = </span><span class="s0">new </span><span class="s1">JTextField(</span><span class="s3">20</span><span class="s1">)</span><span class="s0">;</span>
+        <span class="s1">GridBagConstraints gbcUsernameField = </span><span class="s0">new </span><span class="s1">GridBagConstraints()</span><span class="s0">;</span>
+        <span class="s1">gbcUsernameField.gridx = </span><span class="s3">1</span><span class="s0">;</span>
+        <span class="s1">gbcUsernameField.gridy = </span><span class="s3">1</span><span class="s0">;</span>
+        <span class="s1">gbcUsernameField.anchor = GridBagConstraints.WEST</span><span class="s0">;</span>
+        <span class="s1">gbcUsernameField.fill = GridBagConstraints.HORIZONTAL</span><span class="s0">;</span>
+        <span class="s1">gbcUsernameField.insets.top = </span><span class="s3">10</span><span class="s0">;</span>
+        <span class="s1">gbcUsernameField.insets.left = </span><span class="s3">0</span><span class="s0">;</span>
+        <span class="s1">gbcUsernameField.insets.bottom = </span><span class="s3">10</span><span class="s0">;</span>
+        <span class="s1">panel.add(usernameField</span><span class="s0">, </span><span class="s1">gbcUsernameField)</span><span class="s0">;</span>
+
+        <span class="s1">JLabel passwordLabel = </span><span class="s0">new </span><span class="s1">JLabel(</span><span class="s2">&quot;password&quot;</span><span class="s1">)</span><span class="s0">;</span>
+        <span class="s1">GridBagConstraints gbcPasswordLabel = </span><span class="s0">new </span><span class="s1">GridBagConstraints()</span><span class="s0">;</span>
+        <span class="s1">gbcPasswordLabel.gridx = </span><span class="s3">0</span><span class="s0">;</span>
+        <span class="s1">gbcPasswordLabel.gridy = </span><span class="s3">2</span><span class="s0">;</span>
+        <span class="s1">gbcPasswordLabel.anchor = GridBagConstraints.WEST</span><span class="s0">;</span>
+        <span class="s1">gbcPasswordLabel.fill = GridBagConstraints.NONE</span><span class="s0">;</span>
+        <span class="s1">gbcPasswordLabel.insets.top = </span><span class="s3">10</span><span class="s0">;</span>
+        <span class="s1">gbcPasswordLabel.insets.left = </span><span class="s3">20</span><span class="s0">;</span>
+        <span class="s1">gbcPasswordLabel.insets.bottom = </span><span class="s3">10</span><span class="s0">;</span>
+        <span class="s1">panel.add(passwordLabel</span><span class="s0">, </span><span class="s1">gbcPasswordLabel)</span><span class="s0">;</span>
+
+        <span class="s1">JPasswordField passwordField = </span><span class="s0">new </span><span class="s1">JPasswordField(</span><span class="s3">20</span><span class="s1">)</span><span class="s0">;</span>
+        <span class="s1">GridBagConstraints gbcPasswordField = </span><span class="s0">new </span><span class="s1">GridBagConstraints()</span><span class="s0">;</span>
+        <span class="s1">gbcPasswordField.gridx = </span><span class="s3">1</span><span class="s0">;</span>
+        <span class="s1">gbcPasswordField.gridy = </span><span class="s3">2</span><span class="s0">;</span>
+        <span class="s1">gbcPasswordField.anchor = GridBagConstraints.WEST</span><span class="s0">;</span>
+        <span class="s1">gbcPasswordField.fill = GridBagConstraints.HORIZONTAL</span><span class="s0">;</span>
+        <span class="s1">gbcPasswordField.insets.top = </span><span class="s3">10</span><span class="s0">;</span>
+        <span class="s1">gbcPasswordField.insets.left = </span><span class="s3">0</span><span class="s0">;</span>
+        <span class="s1">gbcPasswordField.insets.bottom = </span><span class="s3">10</span><span class="s0">;</span>
+        <span class="s1">panel.add(passwordField</span><span class="s0">, </span><span class="s1">gbcPasswordField)</span><span class="s0">;</span>
+
+        <span class="s1">BACKButton = </span><span class="s0">new </span><span class="s1">JButton(</span><span class="s2">&quot;BACK&quot;</span><span class="s1">)</span><span class="s0">;</span>
+        <span class="s1">GridBagConstraints gbcBackButton = </span><span class="s0">new </span><span class="s1">GridBagConstraints()</span><span class="s0">;</span>
+        <span class="s1">gbcBackButton.gridx = </span><span class="s3">0</span><span class="s0">;</span>
+        <span class="s1">gbcBackButton.gridy = </span><span class="s3">3</span><span class="s0">;</span>
+        <span class="s1">gbcBackButton.anchor = GridBagConstraints.CENTER</span><span class="s0">;</span>
+        <span class="s1">gbcBackButton.fill = GridBagConstraints.HORIZONTAL</span><span class="s0">;</span>
+        <span class="s1">gbcBackButton.insets.top = </span><span class="s3">10</span><span class="s0">;</span>
+        <span class="s1">gbcBackButton.insets.left = </span><span class="s3">20</span><span class="s0">;</span>
+        <span class="s1">gbcBackButton.insets.right = </span><span class="s3">10</span><span class="s0">;</span>
+        <span class="s1">panel.add(BACKButton</span><span class="s0">, </span><span class="s1">gbcBackButton)</span><span class="s0">;</span>
+
+        <span class="s1">LOGINButton = </span><span class="s0">new </span><span class="s1">JButton(</span><span class="s2">&quot;LOGIN&quot;</span><span class="s1">)</span><span class="s0">;</span>
+        <span class="s1">GridBagConstraints gbcLoginButton = </span><span class="s0">new </span><span class="s1">GridBagConstraints()</span><span class="s0">;</span>
+        <span class="s1">gbcLoginButton.gridx = </span><span class="s3">1</span><span class="s0">;</span>
+        <span class="s1">gbcLoginButton.gridy = </span><span class="s3">3</span><span class="s0">;</span>
+        <span class="s1">gbcLoginButton.anchor = GridBagConstraints.CENTER</span><span class="s0">;</span>
+        <span class="s1">gbcLoginButton.fill = GridBagConstraints.HORIZONTAL</span><span class="s0">;</span>
+        <span class="s1">gbcLoginButton.insets.top = </span><span class="s3">10</span><span class="s0">;</span>
+        <span class="s1">gbcLoginButton.insets.left = </span><span class="s3">10</span><span class="s0">;</span>
+        <span class="s1">gbcLoginButton.insets.right = </span><span class="s3">20</span><span class="s0">;</span>
+        <span class="s1">panel.add(LOGINButton</span><span class="s0">, </span><span class="s1">gbcLoginButton)</span><span class="s0">;</span>
+
+        <span class="s1">getContentPane().add(panel)</span><span class="s0">;</span>
+
+        <span class="s1">setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE)</span><span class="s0">;</span>
+        <span class="s1">pack()</span><span class="s0">;</span>
+        <span class="s1">setLocationRelativeTo(</span><span class="s0">null</span><span class="s1">)</span><span class="s0">;</span>
+
+        <span class="s1">setTitle(</span><span class="s2">&quot;looogggg&quot;</span><span class="s1">)</span><span class="s0">;</span>
+        <span class="s1">setContentPane(panel)</span><span class="s0">;</span>
+        <span class="s1">setSize(</span><span class="s3">700</span><span class="s0">, </span><span class="s3">400</span><span class="s1">)</span><span class="s0">;</span>
+        <span class="s1">setVisible(</span><span class="s0">true</span><span class="s1">)</span><span class="s0">;</span>
+
+
+        <span class="s1">BACKButton.addActionListener(</span><span class="s0">new </span><span class="s1">ActionListener() {</span>
+            <span class="s1">@Override</span>
+            <span class="s0">public void </span><span class="s1">actionPerformed(ActionEvent e) {</span>
+                <span class="s1">firstPage f = </span><span class="s0">new </span><span class="s1">firstPage()</span><span class="s0">;</span>
+                <span class="s1">dispose()</span><span class="s0">;</span>
+
+            <span class="s1">}</span>
+        <span class="s1">})</span><span class="s0">;</span>
+        <span class="s1">LOGINButton.addActionListener(</span><span class="s0">new </span><span class="s1">ActionListener() {</span>
+            <span class="s1">@Override</span>
+            <span class="s0">public void </span><span class="s1">actionPerformed(ActionEvent e) {</span>
+                <span class="s1">String user = usernameField.getText()</span><span class="s0">;</span>
+                <span class="s1">String pass = passwordField.getText()</span><span class="s0">;</span>
+
+                <span class="s0">if </span><span class="s1">((user.equals(</span><span class="s2">&quot;bassant&quot;</span><span class="s1">) &amp;&amp; pass.equals(</span><span class="s2">&quot;bassant&quot;</span><span class="s1">)) ||</span>
+                        <span class="s1">(user.equals(</span><span class="s2">&quot;hisham&quot;</span><span class="s1">) &amp;&amp; pass.equals(</span><span class="s2">&quot;hisham&quot;</span><span class="s1">)) ||</span>
+                        <span class="s1">(user.equals(</span><span class="s2">&quot;meram&quot;</span><span class="s1">) &amp;&amp; pass.equals(</span><span class="s2">&quot;meram&quot;</span><span class="s1">)) ||</span>
+                        <span class="s1">(user.equals(</span><span class="s2">&quot;judy&quot;</span><span class="s1">) &amp;&amp; pass.equals(</span><span class="s2">&quot;judy&quot;</span><span class="s1">)) ||</span>
+                        <span class="s1">(user.equals(</span><span class="s2">&quot;adham&quot;</span><span class="s1">) &amp;&amp; pass.equals(</span><span class="s2">&quot;adham&quot;</span><span class="s1">))) {</span>
+
+                    <span class="s1">JOptionPane.showMessageDialog(</span><span class="s0">null, </span><span class="s2">&quot;helloooo!&quot;</span><span class="s1">)</span><span class="s0">;</span>
+                    <span class="s1">System.out.println(</span><span class="s2">&quot;logged in page!!&quot;</span><span class="s1">)</span><span class="s0">;</span>
+                    <span class="s1">dispose()</span><span class="s0">;</span>
+                    <span class="s0">new </span><span class="s1">Main_jr()</span><span class="s0">;</span>
+                <span class="s1">}</span>
+            <span class="s1">}</span>
+        <span class="s1">})</span><span class="s0">;</span>
+    <span class="s1">}</span>
+<span class="s1">}</span></pre>
+</body>
+</html>

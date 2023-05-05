@@ -1,0 +1,217 @@
+<html>
+<head>
+<title>game.java</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<style type="text/css">
+.s0 { color: #cc7832;}
+.s1 { color: #a9b7c6;}
+.s2 { color: #6897bb;}
+.s3 { color: #808080;}
+.s4 { color: #6a8759;}
+</style>
+</head>
+<body bgcolor="#2b2b2b">
+<table CELLSPACING=0 CELLPADDING=5 COLS=1 WIDTH="100%" BGCOLOR="#606060" >
+<tr><td><center>
+<font face="Arial, Helvetica" color="#000000">
+game.java</font>
+</center></td></tr></table>
+<pre><span class="s0">import </span><span class="s1">javax.swing.JFrame</span><span class="s0">;</span>
+<span class="s0">import </span><span class="s1">javax.swing.*</span><span class="s0">;</span>
+<span class="s0">import </span><span class="s1">java.awt.*</span><span class="s0">;</span>
+<span class="s0">import </span><span class="s1">java.awt.event.ActionEvent</span><span class="s0">;</span>
+<span class="s0">import </span><span class="s1">java.awt.event.ActionListener</span><span class="s0">;</span>
+<span class="s0">import </span><span class="s1">java.awt.GridLayout</span><span class="s0">;</span>
+<span class="s0">import </span><span class="s1">java.awt.event.ComponentAdapter</span><span class="s0">;</span>
+<span class="s0">import </span><span class="s1">java.awt.event.ComponentEvent</span><span class="s0">;</span>
+
+
+<span class="s0">public class </span><span class="s1">game </span><span class="s0">extends </span><span class="s1">JFrame {</span>
+    <span class="s0">private static final int </span><span class="s1">boardSize = </span><span class="s2">400</span><span class="s0">;</span>
+    <span class="s0">private static final int </span><span class="s1">squareSize = boardSize / </span><span class="s2">8</span><span class="s0">;</span>
+    <span class="s0">public static </span><span class="s1">JPanel board</span><span class="s0">;</span>
+    <span class="s0">public static </span><span class="s1">square[][] squares</span><span class="s0">;</span>
+
+    <span class="s3">//    method to set margins</span>
+    <span class="s0">private int </span><span class="s1">calculateMarginSize() {</span>
+        <span class="s0">int </span><span class="s1">marginSize = </span><span class="s2">0</span><span class="s0">;</span>
+        <span class="s0">int </span><span class="s1">width = getWidth()</span><span class="s0">;</span>
+        <span class="s0">int </span><span class="s1">height = getHeight()</span><span class="s0">;</span>
+
+        <span class="s0">if </span><span class="s1">(width &gt; height) {</span>
+            <span class="s1">marginSize = (width - height) / </span><span class="s2">2</span><span class="s0">;</span>
+        <span class="s1">}</span>
+
+        <span class="s0">return </span><span class="s1">marginSize</span><span class="s0">;</span>
+    <span class="s1">}</span>
+
+
+    <span class="s1">game() {</span>
+
+        <span class="s0">this</span><span class="s1">.setTitle(</span><span class="s4">&quot;Arwash Chess Game&quot;</span><span class="s1">)</span><span class="s0">;</span>
+        <span class="s0">this</span><span class="s1">.setVisible(</span><span class="s0">true</span><span class="s1">)</span><span class="s0">;</span>
+        <span class="s0">this</span><span class="s1">.setResizable(</span><span class="s0">true</span><span class="s1">)</span><span class="s0">;</span>
+        <span class="s0">this</span><span class="s1">.setSize(</span><span class="s2">600</span><span class="s0">, </span><span class="s2">600</span><span class="s1">)</span><span class="s0">;</span>
+        <span class="s0">this</span><span class="s1">.setLayout(</span><span class="s0">new </span><span class="s1">BorderLayout())</span><span class="s0">;</span>
+        <span class="s0">this</span><span class="s1">.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE)</span><span class="s0">;</span>
+        <span class="s0">this</span><span class="s1">.getMinimumSize()</span><span class="s0">;</span>
+        <span class="s0">this</span><span class="s1">.getContentPane().setBackground(</span><span class="s0">new </span><span class="s1">Color(</span><span class="s2">255</span><span class="s0">, </span><span class="s2">255</span><span class="s0">, </span><span class="s2">255</span><span class="s1">))</span><span class="s0">;</span>
+        <span class="s1">board = </span><span class="s0">new </span><span class="s1">JPanel(</span><span class="s0">new </span><span class="s1">GridLayout(</span><span class="s2">8</span><span class="s0">, </span><span class="s2">8</span><span class="s1">))</span><span class="s0">;</span>
+        <span class="s1">JPanel whiteOut = </span><span class="s0">new </span><span class="s1">JPanel()</span><span class="s0">;</span>
+        <span class="s1">JPanel blackOut = </span><span class="s0">new </span><span class="s1">JPanel()</span><span class="s0">;</span>
+        <span class="s1">JPanel player1 = </span><span class="s0">new </span><span class="s1">JPanel()</span><span class="s0">;</span>
+        <span class="s1">JPanel player2 = </span><span class="s0">new </span><span class="s1">JPanel()</span><span class="s0">;</span>
+        <span class="s1">JLabel name1 = </span><span class="s0">new </span><span class="s1">JLabel(</span><span class="s4">&quot;player1 name&quot;</span><span class="s1">)</span><span class="s0">;</span>
+        <span class="s1">JLabel name2 = </span><span class="s0">new </span><span class="s1">JLabel(</span><span class="s4">&quot;player2 name&quot;</span><span class="s1">)</span><span class="s0">;</span>
+        <span class="s1">JLabel timer1 = </span><span class="s0">new </span><span class="s1">JLabel(</span><span class="s4">&quot;timer 1&quot;</span><span class="s1">)</span><span class="s0">;</span>
+        <span class="s1">JLabel timer2 = </span><span class="s0">new </span><span class="s1">JLabel(</span><span class="s4">&quot;timer 2&quot;</span><span class="s1">)</span><span class="s0">;</span>
+        <span class="s1">player1.add(name1)</span><span class="s0">;</span>
+        <span class="s1">player1.add(timer1)</span><span class="s0">;</span>
+        <span class="s1">player2.add(timer2)</span><span class="s0">;</span>
+        <span class="s1">player2.add(name2)</span><span class="s0">;</span>
+        <span class="s1">board.setBackground(</span><span class="s0">new </span><span class="s1">Color(</span><span class="s2">255</span><span class="s0">, </span><span class="s2">255</span><span class="s0">, </span><span class="s2">255</span><span class="s1">))</span><span class="s0">;</span>
+        <span class="s1">whiteOut.setBackground(Color.black)</span><span class="s0">;</span>
+        <span class="s1">blackOut.setBackground(</span><span class="s0">new </span><span class="s1">Color(</span><span class="s2">255</span><span class="s0">, </span><span class="s2">255</span><span class="s0">, </span><span class="s2">255</span><span class="s1">))</span><span class="s0">;</span>
+        <span class="s1">player1.setBackground(</span><span class="s0">new </span><span class="s1">Color(</span><span class="s2">128</span><span class="s0">, </span><span class="s2">128</span><span class="s0">, </span><span class="s2">128</span><span class="s1">))</span><span class="s0">;</span>
+        <span class="s1">player2.setBackground(</span><span class="s0">new </span><span class="s1">Color(</span><span class="s2">128</span><span class="s0">, </span><span class="s2">128</span><span class="s0">, </span><span class="s2">128</span><span class="s1">))</span><span class="s0">;</span>
+        <span class="s1">board.setPreferredSize(</span><span class="s0">new </span><span class="s1">Dimension(</span><span class="s2">400</span><span class="s0">, </span><span class="s2">400</span><span class="s1">))</span><span class="s0">;</span>
+        <span class="s1">whiteOut.setPreferredSize(</span><span class="s0">new </span><span class="s1">Dimension(</span><span class="s2">50</span><span class="s0">, </span><span class="s2">50</span><span class="s1">))</span><span class="s0">;</span>
+        <span class="s1">blackOut.setPreferredSize(</span><span class="s0">new </span><span class="s1">Dimension(</span><span class="s2">50</span><span class="s0">, </span><span class="s2">50</span><span class="s1">))</span><span class="s0">;</span>
+        <span class="s1">player1.setPreferredSize(</span><span class="s0">new </span><span class="s1">Dimension(</span><span class="s2">50</span><span class="s0">, </span><span class="s2">50</span><span class="s1">))</span><span class="s0">;</span>
+        <span class="s1">player2.setPreferredSize(</span><span class="s0">new </span><span class="s1">Dimension(</span><span class="s2">50</span><span class="s0">, </span><span class="s2">50</span><span class="s1">))</span><span class="s0">;</span>
+        <span class="s0">this</span><span class="s1">.add(board</span><span class="s0">, </span><span class="s1">BorderLayout.CENTER)</span><span class="s0">;</span>
+        <span class="s0">this</span><span class="s1">.add(whiteOut</span><span class="s0">, </span><span class="s1">BorderLayout.WEST)</span><span class="s0">;</span>
+        <span class="s0">this</span><span class="s1">.add(blackOut</span><span class="s0">, </span><span class="s1">BorderLayout.EAST)</span><span class="s0">;</span>
+        <span class="s0">this</span><span class="s1">.add(player1</span><span class="s0">, </span><span class="s1">BorderLayout.SOUTH)</span><span class="s0">;</span>
+        <span class="s0">this</span><span class="s1">.add(player2</span><span class="s0">, </span><span class="s1">BorderLayout.NORTH)</span><span class="s0">;</span>
+        <span class="s1">squares = </span><span class="s0">new </span><span class="s1">square[</span><span class="s2">8</span><span class="s1">][</span><span class="s2">8</span><span class="s1">]</span><span class="s0">;</span>
+        <span class="s0">for </span><span class="s1">(</span><span class="s0">int </span><span class="s1">i = </span><span class="s2">0</span><span class="s0">; </span><span class="s1">i &lt; </span><span class="s2">8</span><span class="s0">; </span><span class="s1">i++) {</span>
+            <span class="s0">for </span><span class="s1">(</span><span class="s0">int </span><span class="s1">j = </span><span class="s2">0</span><span class="s0">; </span><span class="s1">j &lt; </span><span class="s2">8</span><span class="s0">; </span><span class="s1">j++) {</span>
+                <span class="s1">squares[i][j] = </span><span class="s0">new </span><span class="s1">square(i</span><span class="s0">, </span><span class="s1">j)</span><span class="s0">;</span>
+                <span class="s1">squares[i][j].setPreferredSize(</span><span class="s0">new </span><span class="s1">Dimension(squareSize</span><span class="s0">, </span><span class="s1">squareSize))</span><span class="s0">;</span>
+                <span class="s0">if </span><span class="s1">(i == </span><span class="s2">6</span><span class="s1">) {</span>
+                    <span class="s1">squares[i][j] = </span><span class="s0">new </span><span class="s1">square(</span><span class="s0">new </span><span class="s1">Pawn(</span><span class="s4">&quot;black&quot;</span><span class="s0">, </span><span class="s1">j</span><span class="s0">, </span><span class="s1">i))</span><span class="s0">;</span>
+                <span class="s1">} </span><span class="s0">else if </span><span class="s1">(i == </span><span class="s2">7</span><span class="s1">) {</span>
+                    <span class="s0">if </span><span class="s1">(j == </span><span class="s2">3</span><span class="s1">)</span>
+                        <span class="s1">squares[i][j] = </span><span class="s0">new </span><span class="s1">square(</span><span class="s0">new </span><span class="s1">Queen(</span><span class="s4">&quot;black&quot;</span><span class="s0">, </span><span class="s2">3</span><span class="s0">, </span><span class="s1">i))</span><span class="s0">;</span>
+                    <span class="s0">if </span><span class="s1">(j == </span><span class="s2">4</span><span class="s1">)</span>
+                        <span class="s1">squares[i][j] = </span><span class="s0">new </span><span class="s1">square(</span><span class="s0">new </span><span class="s1">King(</span><span class="s4">&quot;black&quot;</span><span class="s0">, </span><span class="s2">4</span><span class="s0">, </span><span class="s1">i))</span><span class="s0">;</span>
+                    <span class="s0">if </span><span class="s1">(j == </span><span class="s2">1</span><span class="s1">)</span>
+                        <span class="s1">squares[i][j] = </span><span class="s0">new </span><span class="s1">square(</span><span class="s0">new </span><span class="s1">Knight(</span><span class="s4">&quot;black&quot;</span><span class="s0">, </span><span class="s2">1</span><span class="s0">, </span><span class="s1">i))</span><span class="s0">;</span>
+                    <span class="s0">if </span><span class="s1">(j == </span><span class="s2">6</span><span class="s1">)</span>
+                        <span class="s1">squares[i][j] = </span><span class="s0">new </span><span class="s1">square(</span><span class="s0">new </span><span class="s1">Knight(</span><span class="s4">&quot;black&quot;</span><span class="s0">, </span><span class="s2">6</span><span class="s0">, </span><span class="s1">i))</span><span class="s0">;</span>
+                    <span class="s0">if </span><span class="s1">(j == </span><span class="s2">2</span><span class="s1">)</span>
+                        <span class="s1">squares[i][j] = </span><span class="s0">new </span><span class="s1">square(</span><span class="s0">new </span><span class="s1">Bishop(</span><span class="s4">&quot;black&quot;</span><span class="s0">, </span><span class="s2">2</span><span class="s0">, </span><span class="s1">i))</span><span class="s0">;</span>
+                    <span class="s0">if </span><span class="s1">(j == </span><span class="s2">5</span><span class="s1">)</span>
+                        <span class="s1">squares[i][j] = </span><span class="s0">new </span><span class="s1">square(</span><span class="s0">new </span><span class="s1">Bishop(</span><span class="s4">&quot;black&quot;</span><span class="s0">, </span><span class="s2">5</span><span class="s0">, </span><span class="s1">i))</span><span class="s0">;</span>
+                    <span class="s0">if </span><span class="s1">(j == </span><span class="s2">0</span><span class="s1">)</span>
+                        <span class="s1">squares[i][j] = </span><span class="s0">new </span><span class="s1">square(</span><span class="s0">new </span><span class="s1">Rock(</span><span class="s4">&quot;black&quot;</span><span class="s0">, </span><span class="s2">0</span><span class="s0">, </span><span class="s1">i))</span><span class="s0">;</span>
+                    <span class="s0">if </span><span class="s1">(j == </span><span class="s2">7</span><span class="s1">)</span>
+                        <span class="s1">squares[i][j] = </span><span class="s0">new </span><span class="s1">square(</span><span class="s0">new </span><span class="s1">Rock(</span><span class="s4">&quot;black&quot;</span><span class="s0">, </span><span class="s2">7</span><span class="s0">, </span><span class="s1">i))</span><span class="s0">;</span>
+                <span class="s1">} </span><span class="s0">else if </span><span class="s1">(i == </span><span class="s2">1</span><span class="s1">) {</span>
+                    <span class="s1">squares[i][j] = </span><span class="s0">new </span><span class="s1">square(</span><span class="s0">new </span><span class="s1">Pawn(</span><span class="s4">&quot;white&quot;</span><span class="s0">, </span><span class="s1">j</span><span class="s0">, </span><span class="s1">i))</span><span class="s0">;</span>
+                <span class="s1">} </span><span class="s0">else if </span><span class="s1">(i == </span><span class="s2">0</span><span class="s1">) {</span>
+                    <span class="s0">if </span><span class="s1">(j == </span><span class="s2">3</span><span class="s1">)</span>
+                        <span class="s1">squares[i][j] = </span><span class="s0">new </span><span class="s1">square(</span><span class="s0">new </span><span class="s1">Queen(</span><span class="s4">&quot;white&quot;</span><span class="s0">, </span><span class="s2">3</span><span class="s0">, </span><span class="s1">i))</span><span class="s0">;</span>
+                    <span class="s0">if </span><span class="s1">(j == </span><span class="s2">4</span><span class="s1">)</span>
+                        <span class="s1">squares[i][j] = </span><span class="s0">new </span><span class="s1">square(</span><span class="s0">new </span><span class="s1">King(</span><span class="s4">&quot;white&quot;</span><span class="s0">, </span><span class="s2">4</span><span class="s0">, </span><span class="s1">i))</span><span class="s0">;</span>
+                    <span class="s0">if </span><span class="s1">(j == </span><span class="s2">1</span><span class="s1">)</span>
+                        <span class="s1">squares[i][j] = </span><span class="s0">new </span><span class="s1">square(</span><span class="s0">new </span><span class="s1">Knight(</span><span class="s4">&quot;white&quot;</span><span class="s0">, </span><span class="s2">1</span><span class="s0">, </span><span class="s1">i))</span><span class="s0">;</span>
+                    <span class="s0">if </span><span class="s1">(j == </span><span class="s2">6</span><span class="s1">)</span>
+                        <span class="s1">squares[i][j] = </span><span class="s0">new </span><span class="s1">square(</span><span class="s0">new </span><span class="s1">Knight(</span><span class="s4">&quot;white&quot;</span><span class="s0">, </span><span class="s2">6</span><span class="s0">, </span><span class="s1">i))</span><span class="s0">;</span>
+                    <span class="s0">if </span><span class="s1">(j == </span><span class="s2">2</span><span class="s1">)</span>
+                        <span class="s1">squares[i][j] = </span><span class="s0">new </span><span class="s1">square(</span><span class="s0">new </span><span class="s1">Bishop(</span><span class="s4">&quot;white&quot;</span><span class="s0">, </span><span class="s2">2</span><span class="s0">, </span><span class="s1">i))</span><span class="s0">;</span>
+                    <span class="s0">if </span><span class="s1">(j == </span><span class="s2">5</span><span class="s1">)</span>
+                        <span class="s1">squares[i][j] = </span><span class="s0">new </span><span class="s1">square(</span><span class="s0">new </span><span class="s1">Bishop(</span><span class="s4">&quot;white&quot;</span><span class="s0">, </span><span class="s2">5</span><span class="s0">, </span><span class="s1">i))</span><span class="s0">;</span>
+                    <span class="s0">if </span><span class="s1">(j == </span><span class="s2">0</span><span class="s1">)</span>
+                        <span class="s1">squares[i][j] = </span><span class="s0">new </span><span class="s1">square(</span><span class="s0">new </span><span class="s1">Rock(</span><span class="s4">&quot;white&quot;</span><span class="s0">, </span><span class="s2">0</span><span class="s0">, </span><span class="s1">i))</span><span class="s0">;</span>
+                    <span class="s0">if </span><span class="s1">(j == </span><span class="s2">7</span><span class="s1">)</span>
+                        <span class="s1">squares[i][j] = </span><span class="s0">new </span><span class="s1">square(</span><span class="s0">new </span><span class="s1">Rock(</span><span class="s4">&quot;white&quot;</span><span class="s0">, </span><span class="s2">7</span><span class="s0">, </span><span class="s1">i))</span><span class="s0">;</span>
+                <span class="s1">}</span>
+                <span class="s0">int </span><span class="s1">row = i</span><span class="s0">;</span>
+                <span class="s0">int </span><span class="s1">col = j</span><span class="s0">;</span>
+                <span class="s0">if </span><span class="s1">((i + j) % </span><span class="s2">2 </span><span class="s1">== </span><span class="s2">0</span><span class="s1">) {</span>
+                    <span class="s1">squares[i][j].setBackground(</span><span class="s0">new </span><span class="s1">Color(</span><span class="s2">0</span><span class="s0">, </span><span class="s2">0</span><span class="s0">, </span><span class="s2">0</span><span class="s1">))</span><span class="s0">;</span>
+                <span class="s1">} </span><span class="s0">else </span><span class="s1">{</span>
+                    <span class="s1">squares[i][j].setBackground(</span><span class="s0">new </span><span class="s1">Color(</span><span class="s2">219</span><span class="s0">, </span><span class="s2">107</span><span class="s0">, </span><span class="s2">107</span><span class="s1">))</span><span class="s0">;</span>
+                <span class="s1">}</span>
+                <span class="s1">board.add(squares[i][j])</span><span class="s0">;</span>
+
+
+            <span class="s1">}</span>
+        <span class="s1">}</span>
+        <span class="s3">// add component listener to maintain square ratio of board</span>
+        <span class="s1">addComponentListener(</span><span class="s0">new </span><span class="s1">ComponentAdapter() {</span>
+            <span class="s1">@Override</span>
+            <span class="s0">public void </span><span class="s1">componentResized(ComponentEvent e) {</span>
+                <span class="s0">int </span><span class="s1">marginSize = calculateMarginSize()</span><span class="s0">;</span>
+                <span class="s1">whiteOut.setPreferredSize(</span><span class="s0">new </span><span class="s1">Dimension(marginSize</span><span class="s0">, </span><span class="s2">0</span><span class="s1">))</span><span class="s0">;</span>
+                <span class="s1">blackOut.setPreferredSize(</span><span class="s0">new </span><span class="s1">Dimension(marginSize</span><span class="s0">, </span><span class="s2">0</span><span class="s1">))</span><span class="s0">;</span>
+                <span class="s1">revalidate()</span><span class="s0">;</span>
+            <span class="s1">}</span>
+        <span class="s1">})</span><span class="s0">;</span>
+
+    <span class="s1">}</span>
+
+    <span class="s0">public static void </span><span class="s1">paintComp(square[][] squares) {</span>
+        <span class="s0">if</span><span class="s1">(square.oldPiece != </span><span class="s0">null </span><span class="s1">) {</span>
+            <span class="s0">for </span><span class="s1">(</span><span class="s0">int </span><span class="s1">i = </span><span class="s2">0</span><span class="s0">; </span><span class="s1">i &lt; </span><span class="s2">8</span><span class="s0">; </span><span class="s1">i++) {</span>
+                <span class="s0">for </span><span class="s1">(</span><span class="s0">int </span><span class="s1">j = </span><span class="s2">0</span><span class="s0">; </span><span class="s1">j &lt; </span><span class="s2">8</span><span class="s0">; </span><span class="s1">j++) {</span>
+
+                    <span class="s0">if </span><span class="s1">(isValidMove(square.oldPiece</span><span class="s0">,</span><span class="s1">squares</span><span class="s0">, </span><span class="s1">i</span><span class="s0">, </span><span class="s1">j)) {</span>
+<span class="s3">//                        if(square.oldPiece.isSameTeam(square.oldPiece , squares[i][j].piece))</span>
+<span class="s3">//                            squares[i][j].setBackground(new Color(255, 0, 0));</span>
+                        <span class="s0">if</span><span class="s1">(squares[i][j].piece == </span><span class="s0">null</span><span class="s1">)</span>
+                            <span class="s1">squares[i][j].setBackground(</span><span class="s0">new </span><span class="s1">Color(</span><span class="s2">12</span><span class="s0">, </span><span class="s2">253</span><span class="s0">, </span><span class="s2">1</span><span class="s1">))</span><span class="s0">;</span>
+                        <span class="s0">else</span>
+                            <span class="s1">squares[i][j].setBackground(</span><span class="s0">new </span><span class="s1">Color(</span><span class="s2">253</span><span class="s0">, </span><span class="s2">240</span><span class="s0">, </span><span class="s2">1</span><span class="s1">))</span><span class="s0">;</span>
+                    <span class="s1">}</span>
+                    <span class="s3">// color same team pieces with red</span>
+                 <span class="s0">else if</span><span class="s1">(square.oldPiece.isValidMovement(i</span><span class="s0">,</span><span class="s1">j) &amp;&amp; square.oldPiece.isSameTeam(square.oldPiece </span><span class="s0">, </span><span class="s1">squares[i][j].piece))</span>
+                    <span class="s1">squares[i][j].setBackground(</span><span class="s0">new </span><span class="s1">Color(</span><span class="s2">253</span><span class="s0">, </span><span class="s2">0</span><span class="s0">, </span><span class="s2">2</span><span class="s1">))</span><span class="s0">;</span>
+                <span class="s1">}</span>
+
+            <span class="s1">}</span>
+
+        <span class="s1">}</span>
+    <span class="s1">}</span>
+
+
+
+
+    <span class="s0">public static void </span><span class="s1">getBack(square[][] squares) {</span>
+        <span class="s0">for </span><span class="s1">(</span><span class="s0">int </span><span class="s1">i = </span><span class="s2">0</span><span class="s0">; </span><span class="s1">i &lt; </span><span class="s2">8</span><span class="s0">; </span><span class="s1">i++) {</span>
+            <span class="s0">for </span><span class="s1">(</span><span class="s0">int </span><span class="s1">j = </span><span class="s2">0</span><span class="s0">; </span><span class="s1">j &lt; </span><span class="s2">8</span><span class="s0">; </span><span class="s1">j++) {</span>
+                <span class="s0">if </span><span class="s1">((i + j) % </span><span class="s2">2 </span><span class="s1">== </span><span class="s2">0</span><span class="s1">) {</span>
+                    <span class="s1">squares[i][j].setBackground(</span><span class="s0">new </span><span class="s1">Color(</span><span class="s2">0</span><span class="s0">, </span><span class="s2">0</span><span class="s0">, </span><span class="s2">0</span><span class="s1">))</span><span class="s0">;</span>
+                <span class="s1">} </span><span class="s0">else </span><span class="s1">{</span>
+                    <span class="s1">squares[i][j].setBackground(</span><span class="s0">new </span><span class="s1">Color(</span><span class="s2">219</span><span class="s0">, </span><span class="s2">107</span><span class="s0">, </span><span class="s2">107</span><span class="s1">))</span><span class="s0">;</span>
+                <span class="s1">}</span>
+
+            <span class="s1">}</span>
+        <span class="s1">}</span>
+
+    <span class="s1">}</span>
+    <span class="s0">public static boolean </span><span class="s1">isValidMove(Piece oldPiece </span><span class="s0">,</span><span class="s1">square[][] squares</span><span class="s0">, int </span><span class="s1">x</span><span class="s0">, int </span><span class="s1">y){</span>
+        <span class="s0">if</span><span class="s1">(oldPiece.isSameTeam(oldPiece</span><span class="s0">,</span><span class="s1">squares[x][y].piece)){</span>
+
+            <span class="s0">return false ;</span>
+        <span class="s1">}</span>
+        <span class="s0">if</span><span class="s1">(!oldPiece.isValidMovement(x</span><span class="s0">,</span><span class="s1">y)) {</span>
+            <span class="s0">return false;</span>
+        <span class="s1">}</span>
+        <span class="s0">if</span><span class="s1">(oldPiece.moveCanEat(x</span><span class="s0">,</span><span class="s1">y))</span>
+            <span class="s0">return false;</span>
+        <span class="s0">return true ;</span>
+    <span class="s1">}</span>
+
+
+
+
+<span class="s1">}</span>
+
+
+
+</pre>
+</body>
+</html>

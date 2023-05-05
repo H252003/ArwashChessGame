@@ -1,0 +1,425 @@
+<html>
+<head>
+<title>Piece.java</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<style type="text/css">
+.s0 { color: #cc7832;}
+.s1 { color: #a9b7c6;}
+.s2 { color: #808080;}
+.s3 { color: #6a8759;}
+.s4 { color: #6897bb;}
+</style>
+</head>
+<body bgcolor="#2b2b2b">
+<table CELLSPACING=0 CELLPADDING=5 COLS=1 WIDTH="100%" BGCOLOR="#606060" >
+<tr><td><center>
+<font face="Arial, Helvetica" color="#000000">
+Piece.java</font>
+</center></td></tr></table>
+<pre><span class="s0">import </span><span class="s1">javax.swing.*</span><span class="s0">;</span>
+<span class="s0">import </span><span class="s1">java.awt.*</span><span class="s0">;</span>
+<span class="s0">import </span><span class="s1">java.awt.event.MouseListener</span><span class="s0">;</span>
+<span class="s0">import </span><span class="s1">java.util.ArrayList</span><span class="s0">;</span>
+<span class="s0">import </span><span class="s1">java.util.List</span><span class="s0">;</span>
+<span class="s0">import </span><span class="s1">java.util.Objects</span><span class="s0">;</span>
+
+
+<span class="s0">public abstract class </span><span class="s1">Piece {</span>
+    <span class="s0">public </span><span class="s1">String color</span><span class="s0">;</span>
+    <span class="s0">public int </span><span class="s1">x</span><span class="s0">;</span>
+    <span class="s0">public int </span><span class="s1">y</span><span class="s0">;</span>
+    <span class="s0">public </span><span class="s1">Icon icon</span><span class="s0">;</span>
+
+    <span class="s0">public boolean </span><span class="s1">isFirst_move = </span><span class="s0">true;</span>
+<span class="s2">//public boolean isFirstMove=true;</span>
+
+    <span class="s0">public </span><span class="s1">Piece(String color</span><span class="s0">, int </span><span class="s1">x</span><span class="s0">, int </span><span class="s1">y) {</span>
+        <span class="s0">this</span><span class="s1">.color = color</span><span class="s0">;</span>
+        <span class="s0">this</span><span class="s1">.x = y</span><span class="s0">;</span>
+        <span class="s0">this</span><span class="s1">.y = x</span><span class="s0">;</span>
+        <span class="s2">//this.isFirst_move = true;</span>
+
+
+    <span class="s1">}</span>
+    <span class="s0">public static boolean </span><span class="s1">isSameTeam(Piece p1</span><span class="s0">, </span><span class="s1">Piece p2)</span>
+    <span class="s1">{</span>
+        <span class="s0">if</span><span class="s1">(p1 == </span><span class="s0">null </span><span class="s1">|| p2 == </span><span class="s0">null</span><span class="s1">)</span>
+            <span class="s0">return false;</span>
+        <span class="s0">return </span><span class="s1">p1.color.equals(p2.color)</span><span class="s0">;</span>
+    <span class="s1">}</span>
+    <span class="s0">public boolean </span><span class="s1">moveCanEat(</span><span class="s0">int </span><span class="s1">newX</span><span class="s0">, int </span><span class="s1">newY){</span>
+
+        <span class="s0">return false;</span>
+    <span class="s1">}</span>
+
+
+    <span class="s0">public </span><span class="s1">String getColor() {</span>
+        <span class="s0">return </span><span class="s1">color</span><span class="s0">;</span>
+    <span class="s1">}</span>
+
+    <span class="s0">public int </span><span class="s1">getX() {</span>
+        <span class="s0">return </span><span class="s1">x</span><span class="s0">;</span>
+    <span class="s1">}</span>
+
+    <span class="s0">public int </span><span class="s1">getY() {</span>
+        <span class="s0">return </span><span class="s1">y</span><span class="s0">;</span>
+    <span class="s1">}</span>
+
+    <span class="s0">public void </span><span class="s1">setX(</span><span class="s0">int </span><span class="s1">x) {</span>
+        <span class="s0">this</span><span class="s1">.x = x</span><span class="s0">;</span>
+    <span class="s1">}</span>
+
+    <span class="s0">public void </span><span class="s1">setY(</span><span class="s0">int </span><span class="s1">y) {</span>
+        <span class="s0">this</span><span class="s1">.y = y</span><span class="s0">;</span>
+    <span class="s1">}</span>
+
+    <span class="s0">public abstract boolean </span><span class="s1">isValidMovement(</span><span class="s0">int </span><span class="s1">newX</span><span class="s0">, int </span><span class="s1">newY)</span><span class="s0">;</span>
+<span class="s1">}</span>
+
+<span class="s0">class </span><span class="s1">Pawn </span><span class="s0">extends </span><span class="s1">Piece {</span>
+    <span class="s0">private boolean </span><span class="s1">hasMoved = </span><span class="s0">true;</span>
+    <span class="s0">public static int </span><span class="s1">colorIndex</span><span class="s0">;</span>
+
+    <span class="s0">public </span><span class="s1">Pawn(String color</span><span class="s0">, int </span><span class="s1">x</span><span class="s0">, int </span><span class="s1">y) {</span>
+        <span class="s0">super</span><span class="s1">(color</span><span class="s0">, </span><span class="s1">x</span><span class="s0">, </span><span class="s1">y)</span><span class="s0">;</span>
+        <span class="s1">hasMoved = </span><span class="s0">false;</span>
+        <span class="s0">try </span><span class="s1">{</span>
+            <span class="s0">if </span><span class="s1">(color == </span><span class="s3">&quot;white&quot;</span><span class="s1">) {</span>
+                <span class="s1">icon = </span><span class="s0">new </span><span class="s1">ImageIcon(getClass().getClassLoader().getResource(</span><span class="s3">&quot;resources/chess_white_pawn-removebg-preview (1).png&quot;</span><span class="s1">))</span><span class="s0">;</span>
+
+
+            <span class="s1">} </span><span class="s0">else </span><span class="s1">{</span>
+                <span class="s1">icon = </span><span class="s0">new </span><span class="s1">ImageIcon(Objects.requireNonNull(getClass().getClassLoader().getResource(</span><span class="s3">&quot;resources/black_pawn-removebg-preview (1).png&quot;</span><span class="s1">)))</span><span class="s0">;</span>
+            <span class="s1">}</span>
+        <span class="s1">} </span><span class="s0">catch </span><span class="s1">(Exception Ignored) {</span>
+            <span class="s1">icon = </span><span class="s0">null;</span>
+        <span class="s1">}</span>
+    <span class="s1">}</span>
+
+
+    <span class="s0">public boolean </span><span class="s1">isValidMovement(</span><span class="s0">int </span><span class="s1">newX</span><span class="s0">, int </span><span class="s1">newY) {</span>
+        <span class="s0">if </span><span class="s1">(</span><span class="s0">this</span><span class="s1">.color.equals(</span><span class="s3">&quot;white&quot;</span><span class="s1">))</span>
+            <span class="s1">colorIndex = -</span><span class="s4">1</span><span class="s0">;</span>
+        <span class="s0">else </span><span class="s1">colorIndex = </span><span class="s4">1</span><span class="s0">;</span>
+
+            <span class="s2">//push pawn 1</span>
+        <span class="s0">if</span><span class="s1">(</span><span class="s0">this</span><span class="s1">.y == newY &amp;&amp; newX == </span><span class="s0">this</span><span class="s1">.x - colorIndex ) </span><span class="s2">//&amp;&amp; game.squares[newX][newY].piece == null</span>
+                <span class="s0">return true;</span>
+
+        <span class="s2">//push pawn 2</span>
+        <span class="s0">if </span><span class="s1">(isFirst_move &amp;&amp; </span><span class="s0">this</span><span class="s1">.y == newY &amp;&amp; newX == </span><span class="s0">this</span><span class="s1">.x - colorIndex * </span><span class="s4">2 </span><span class="s1">&amp;&amp; game.squares[newX + colorIndex][newY].piece == </span><span class="s0">null</span><span class="s1">) </span><span class="s2">//&amp;&amp; game.squares[newX][newY].piece == null</span>
+            <span class="s0">return true;</span>
+
+        <span class="s2">//capture left</span>
+        <span class="s0">if</span><span class="s1">(</span><span class="s0">this</span><span class="s1">.y == newY - </span><span class="s4">1 </span><span class="s1">&amp;&amp; newX == </span><span class="s0">this</span><span class="s1">.x - colorIndex &amp;&amp; game.squares[newX][newY].piece != </span><span class="s0">null</span><span class="s1">)</span>
+            <span class="s0">return true;</span>
+
+        <span class="s2">//capture right</span>
+        <span class="s0">if</span><span class="s1">(</span><span class="s0">this</span><span class="s1">.y == newY + </span><span class="s4">1 </span><span class="s1">&amp;&amp; newX == </span><span class="s0">this</span><span class="s1">.x - colorIndex &amp;&amp; game.squares[newX][newY].piece != </span><span class="s0">null</span><span class="s1">)</span>
+            <span class="s0">return true;</span>
+
+
+
+
+            <span class="s0">return false;</span>
+    <span class="s1">}</span>
+<span class="s2">//            if ((this.x - newX == 1) &amp;&amp; (this.y - newY == 0))</span>
+<span class="s2">//            if ((this.x - newX == 2) &amp;&amp; (this.y - newY == 0))</span>
+<span class="s2">//                return true;</span>
+<span class="s2">//            else return false;</span>
+<span class="s2">//        } else {</span>
+
+        <span class="s0">public boolean </span><span class="s1">moveCanEat ( </span><span class="s0">int </span><span class="s1">newX</span><span class="s0">, int </span><span class="s1">newY)</span>
+        <span class="s1">{</span>
+
+            <span class="s0">return false;</span>
+        <span class="s1">}</span>
+
+    <span class="s1">}</span>
+
+
+<span class="s0">class </span><span class="s1">Knight </span><span class="s0">extends </span><span class="s1">Piece {</span>
+    <span class="s0">private boolean </span><span class="s1">hasMoved</span><span class="s0">;</span>
+
+    <span class="s0">public </span><span class="s1">Knight(String color</span><span class="s0">, int </span><span class="s1">x</span><span class="s0">, int </span><span class="s1">y) {</span>
+        <span class="s0">super</span><span class="s1">(color</span><span class="s0">, </span><span class="s1">x</span><span class="s0">, </span><span class="s1">y)</span><span class="s0">;</span>
+        <span class="s1">hasMoved = </span><span class="s0">false;</span>
+        <span class="s0">try </span><span class="s1">{</span>
+            <span class="s0">if </span><span class="s1">(color == </span><span class="s3">&quot;white&quot;</span><span class="s1">) {</span>
+
+                <span class="s1">icon = </span><span class="s0">new </span><span class="s1">ImageIcon(getClass().getClassLoader().getResource(</span><span class="s3">&quot;resources/chess-white-knight-removebg-preview (2).png&quot;</span><span class="s1">))</span><span class="s0">;</span>
+
+            <span class="s1">} </span><span class="s0">else </span><span class="s1">{</span>
+                <span class="s1">icon= </span><span class="s0">new </span><span class="s1">ImageIcon(getClass().getClassLoader().getResource(</span><span class="s3">&quot;resources/black_knight-removebg-preview (1) (1).png&quot;</span><span class="s1">))</span><span class="s0">;</span>
+            <span class="s1">}</span>
+        <span class="s1">} </span><span class="s0">catch </span><span class="s1">(Exception Ignored) {</span>
+            <span class="s1">icon = </span><span class="s0">null;</span>
+        <span class="s1">}</span>
+    <span class="s1">}</span>
+
+    <span class="s0">public boolean </span><span class="s1">isValidMovement(</span><span class="s0">int </span><span class="s1">newX</span><span class="s0">, int </span><span class="s1">newY) {</span>
+        <span class="s0">if</span><span class="s1">(Math.abs(newX-</span><span class="s0">this</span><span class="s1">.x) == </span><span class="s4">1 </span><span class="s1">|| Math.abs(newY-</span><span class="s0">this</span><span class="s1">.y) ==</span><span class="s4">1</span><span class="s1">)</span>
+            <span class="s0">return false;</span>
+
+        <span class="s0">return </span><span class="s1">Math.abs(newX-</span><span class="s0">this</span><span class="s1">.x)*Math.abs(newY-</span><span class="s0">this</span><span class="s1">.y)==</span><span class="s4">6</span><span class="s0">;</span>
+    <span class="s1">}</span>
+<span class="s1">}</span>
+
+
+
+
+<span class="s0">class </span><span class="s1">Bishop </span><span class="s0">extends </span><span class="s1">Piece {</span>
+    <span class="s0">private boolean </span><span class="s1">hasMoved</span><span class="s0">;</span>
+
+    <span class="s0">public </span><span class="s1">Bishop(String color</span><span class="s0">, int </span><span class="s1">x</span><span class="s0">, int </span><span class="s1">y) {</span>
+        <span class="s0">super</span><span class="s1">(color</span><span class="s0">, </span><span class="s1">x</span><span class="s0">, </span><span class="s1">y)</span><span class="s0">;</span>
+        <span class="s1">hasMoved = </span><span class="s0">false;</span>
+        <span class="s0">try </span><span class="s1">{</span>
+            <span class="s0">if </span><span class="s1">(color == </span><span class="s3">&quot;white&quot;</span><span class="s1">) {</span>
+                <span class="s1">icon = </span><span class="s0">new </span><span class="s1">ImageIcon(getClass().getClassLoader().getResource(</span><span class="s3">&quot;resources/wwhite_bishop-removebg-preview (1).png&quot;</span><span class="s1">))</span><span class="s0">;</span>
+
+
+            <span class="s1">} </span><span class="s0">else </span><span class="s1">{</span>
+                <span class="s1">icon = </span><span class="s0">new </span><span class="s1">ImageIcon(getClass().getClassLoader().getResource(</span><span class="s3">&quot;resources/bblack_bishop-removebg-preview (1).png&quot;</span><span class="s1">))</span><span class="s0">;</span>
+            <span class="s1">}</span>
+        <span class="s1">} </span><span class="s0">catch </span><span class="s1">(Exception Ignored) {</span>
+            <span class="s1">icon = </span><span class="s0">null;</span>
+        <span class="s1">}</span>
+    <span class="s1">}</span>
+
+    <span class="s0">public boolean </span><span class="s1">isValidMovement(</span><span class="s0">int </span><span class="s1">newX</span><span class="s0">, int </span><span class="s1">newY) {</span>
+        <span class="s2">// Check if move is valid for bishop</span>
+        <span class="s0">if</span><span class="s1">(Math.abs(</span><span class="s0">this</span><span class="s1">.x - newX) &lt;= </span><span class="s4">3</span><span class="s1">)</span>
+        <span class="s1">{</span>
+            <span class="s0">if</span><span class="s1">(</span><span class="s0">this</span><span class="s1">.x == newX)</span>
+                <span class="s0">return </span><span class="s1">Math.abs(</span><span class="s0">this</span><span class="s1">.y - newY) == </span><span class="s4">1</span><span class="s0">;</span>
+
+            <span class="s0">return </span><span class="s1">Math.abs(</span><span class="s0">this</span><span class="s1">.x - newX) ==  Math.abs(</span><span class="s0">this</span><span class="s1">.y - newY)</span><span class="s0">;</span>
+        <span class="s1">}</span>
+
+
+            <span class="s2">//return game.squares[newX][newY].piece == null ; //||</span>
+        <span class="s0">return false;</span>
+    <span class="s1">}</span>
+<span class="s1">}</span>
+<span class="s0">class </span><span class="s1">Rock </span><span class="s0">extends </span><span class="s1">Piece {</span>
+    <span class="s0">private boolean </span><span class="s1">hasMoved</span><span class="s0">;</span>
+
+    <span class="s0">public </span><span class="s1">Rock(String color</span><span class="s0">, int </span><span class="s1">x</span><span class="s0">, int </span><span class="s1">y) {</span>
+        <span class="s0">super</span><span class="s1">(color</span><span class="s0">, </span><span class="s1">x</span><span class="s0">, </span><span class="s1">y)</span><span class="s0">;</span>
+        <span class="s1">hasMoved = </span><span class="s0">false;</span>
+        <span class="s0">try </span><span class="s1">{</span>
+            <span class="s0">if </span><span class="s1">(color == </span><span class="s3">&quot;white&quot;</span><span class="s1">) {</span>
+                <span class="s1">icon= </span><span class="s0">new </span><span class="s1">ImageIcon(getClass().getClassLoader().getResource(</span><span class="s3">&quot;resources/rock_white-removebg-preview (2).png&quot;</span><span class="s1">))</span><span class="s0">;</span>
+
+            <span class="s1">} </span><span class="s0">else </span><span class="s1">{</span>
+                <span class="s1">icon= </span><span class="s0">new </span><span class="s1">ImageIcon(getClass().getClassLoader().getResource(</span><span class="s3">&quot;resources/rock_black-removebg-preview (1).png&quot;</span><span class="s1">))</span><span class="s0">;</span>
+            <span class="s1">}</span>
+        <span class="s1">} </span><span class="s0">catch </span><span class="s1">(Exception Ignored) {</span>
+            <span class="s1">icon = </span><span class="s0">null;</span>
+        <span class="s1">}</span>
+    <span class="s1">}</span>
+
+    <span class="s0">public boolean </span><span class="s1">isValidMovement(</span><span class="s0">int </span><span class="s1">newX</span><span class="s0">, int </span><span class="s1">newY) {</span>
+        <span class="s2">// Check if move is valid for rook</span>
+        <span class="s0">return this</span><span class="s1">.x == newX || </span><span class="s0">this</span><span class="s1">.y == newY</span><span class="s0">;</span>
+
+
+    <span class="s1">}</span>
+
+    <span class="s0">public boolean </span><span class="s1">moveCanEat(</span><span class="s0">int </span><span class="s1">newX</span><span class="s0">, int </span><span class="s1">newY)</span>
+    <span class="s1">{</span>
+        <span class="s2">//left</span>
+        <span class="s0">if</span><span class="s1">(</span><span class="s0">this</span><span class="s1">.y &gt; newY)</span>
+        <span class="s1">{</span>
+            <span class="s0">for </span><span class="s1">(</span><span class="s0">int </span><span class="s1">ya = </span><span class="s0">this</span><span class="s1">.y - </span><span class="s4">1</span><span class="s0">; </span><span class="s1">ya &gt; newY</span><span class="s0">;</span><span class="s1">ya--)</span>
+            <span class="s1">{</span>
+                <span class="s0">if</span><span class="s1">(game.squares[</span><span class="s0">this</span><span class="s1">.x][ya].piece != </span><span class="s0">null</span><span class="s1">)</span>
+                    <span class="s0">return true;</span>
+            <span class="s1">}</span>
+        <span class="s1">}</span>
+        <span class="s2">//right</span>
+        <span class="s0">if</span><span class="s1">(</span><span class="s0">this</span><span class="s1">.y &lt; newY)</span>
+        <span class="s1">{</span>
+            <span class="s0">for </span><span class="s1">(</span><span class="s0">int </span><span class="s1">ya = </span><span class="s0">this</span><span class="s1">.y + </span><span class="s4">1</span><span class="s0">; </span><span class="s1">ya &lt; newY</span><span class="s0">;</span><span class="s1">ya++)</span>
+            <span class="s1">{</span>
+                <span class="s0">if</span><span class="s1">(game.squares[</span><span class="s0">this</span><span class="s1">.x][ya].piece != </span><span class="s0">null</span><span class="s1">)</span>
+                    <span class="s0">return true;</span>
+            <span class="s1">}</span>
+        <span class="s1">}</span>
+        <span class="s2">//up</span>
+        <span class="s0">if</span><span class="s1">(</span><span class="s0">this</span><span class="s1">.x &gt; newX)</span>
+        <span class="s1">{</span>
+            <span class="s0">for </span><span class="s1">(</span><span class="s0">int </span><span class="s1">xa = </span><span class="s0">this</span><span class="s1">.x - </span><span class="s4">1</span><span class="s0">; </span><span class="s1">xa &gt; newX</span><span class="s0">;</span><span class="s1">xa--)</span>
+            <span class="s1">{</span>
+                <span class="s0">if</span><span class="s1">(game.squares[xa][</span><span class="s0">this</span><span class="s1">.y].piece != </span><span class="s0">null</span><span class="s1">)</span>
+                    <span class="s0">return true;</span>
+            <span class="s1">}</span>
+        <span class="s1">}</span>
+        <span class="s2">//down</span>
+        <span class="s0">if</span><span class="s1">(</span><span class="s0">this</span><span class="s1">.x &lt; newX)</span>
+        <span class="s1">{</span>
+            <span class="s0">for </span><span class="s1">(</span><span class="s0">int </span><span class="s1">xa = </span><span class="s0">this</span><span class="s1">.x + </span><span class="s4">1</span><span class="s0">; </span><span class="s1">xa &lt; newX</span><span class="s0">;</span><span class="s1">xa++)</span>
+            <span class="s1">{</span>
+                <span class="s0">if</span><span class="s1">(game.squares[xa][</span><span class="s0">this</span><span class="s1">.y].piece != </span><span class="s0">null</span><span class="s1">)</span>
+                    <span class="s0">return true;</span>
+            <span class="s1">}</span>
+        <span class="s1">}</span>
+
+        <span class="s0">return false;</span>
+    <span class="s1">}</span>
+<span class="s1">}</span>
+<span class="s0">class </span><span class="s1">King </span><span class="s0">extends </span><span class="s1">Piece {</span>
+    <span class="s0">private boolean </span><span class="s1">hasMoved=</span><span class="s0">true;</span>
+
+    <span class="s0">public </span><span class="s1">King(String color</span><span class="s0">, int </span><span class="s1">x</span><span class="s0">, int </span><span class="s1">y) {</span>
+        <span class="s0">super</span><span class="s1">(color</span><span class="s0">, </span><span class="s1">x</span><span class="s0">, </span><span class="s1">y)</span><span class="s0">;</span>
+        <span class="s1">hasMoved = </span><span class="s0">false;</span>
+        <span class="s0">try </span><span class="s1">{</span>
+            <span class="s0">if </span><span class="s1">(color == </span><span class="s3">&quot;white&quot;</span><span class="s1">) {</span>
+                <span class="s1">icon=</span><span class="s0">new </span><span class="s1">ImageIcon(getClass().getClassLoader().getResource(</span><span class="s3">&quot;resources/white_king2-removebg-preview (2).png&quot;</span><span class="s1">))</span><span class="s0">;</span>
+
+
+            <span class="s1">} </span><span class="s0">else </span><span class="s1">{</span>
+                <span class="s1">icon=</span><span class="s0">new </span><span class="s1">ImageIcon(getClass().getClassLoader().getResource(</span><span class="s3">&quot;resources/kingo-removebg-preview (1).png&quot;</span><span class="s1">))</span><span class="s0">;</span>
+            <span class="s1">}</span>
+        <span class="s1">} </span><span class="s0">catch </span><span class="s1">(Exception Ignored) {</span>
+            <span class="s1">icon = </span><span class="s0">null;</span>
+        <span class="s1">}</span>
+    <span class="s1">}</span>
+
+
+    <span class="s0">public boolean </span><span class="s1">isValidMovement(</span><span class="s0">int </span><span class="s1">newX</span><span class="s0">, int </span><span class="s1">newY) {</span>
+        <span class="s2">// Check if move is valid for pawn</span>
+        <span class="s2">// if(Math.abs(this.x - newX) &lt;= 3)</span>
+        <span class="s0">if </span><span class="s1">(Math.abs((</span><span class="s0">this</span><span class="s1">.x - newX)*(</span><span class="s0">this</span><span class="s1">.y-newY))==</span><span class="s4">1 </span><span class="s1">||Math.abs(newY-</span><span class="s0">this</span><span class="s1">.y)+ Math.abs( newX-</span><span class="s0">this</span><span class="s1">.x)==</span><span class="s4">1</span><span class="s1">)</span>
+            <span class="s0">return true;</span>
+        <span class="s0">else return false;</span>
+    <span class="s1">}</span>
+<span class="s1">}</span>
+<span class="s0">class </span><span class="s1">Queen </span><span class="s0">extends </span><span class="s1">Piece {</span>
+    <span class="s0">private boolean </span><span class="s1">hasMoved</span><span class="s0">;</span>
+
+    <span class="s0">public </span><span class="s1">Queen(String color</span><span class="s0">, int </span><span class="s1">x</span><span class="s0">, int </span><span class="s1">y) {</span>
+        <span class="s0">super</span><span class="s1">(color</span><span class="s0">, </span><span class="s1">x</span><span class="s0">, </span><span class="s1">y)</span><span class="s0">;</span>
+        <span class="s1">hasMoved = </span><span class="s0">false;</span>
+        <span class="s0">try </span><span class="s1">{</span>
+            <span class="s0">if </span><span class="s1">(color == </span><span class="s3">&quot;white&quot;</span><span class="s1">) {</span>
+                <span class="s1">icon = </span><span class="s0">new </span><span class="s1">ImageIcon(getClass().getClassLoader().getResource(</span><span class="s3">&quot;resources/chess-white-queen-removebg-preview (2).png&quot;</span><span class="s1">))</span><span class="s0">;</span>
+
+
+            <span class="s1">} </span><span class="s0">else </span><span class="s1">{</span>
+                <span class="s1">icon = </span><span class="s0">new </span><span class="s1">ImageIcon(getClass().getClassLoader().getResource(</span><span class="s3">&quot;resources/queen_black-removebg-preview (3).png&quot;</span><span class="s1">))</span><span class="s0">;</span>
+            <span class="s1">}</span>
+        <span class="s1">} </span><span class="s0">catch </span><span class="s1">(Exception Ignored) {</span>
+            <span class="s1">icon = </span><span class="s0">null;</span>
+        <span class="s1">}</span>
+    <span class="s1">}</span>
+
+    <span class="s0">public boolean </span><span class="s1">isValidMovement(</span><span class="s0">int </span><span class="s1">newX</span><span class="s0">, int </span><span class="s1">newY) {</span>
+        <span class="s2">// Check if move is valid for pawn</span>
+        <span class="s0">return </span><span class="s1">(</span><span class="s0">this</span><span class="s1">.x == newX || </span><span class="s0">this</span><span class="s1">.y == newY) || (Math.abs(</span><span class="s0">this</span><span class="s1">.x - newX) ==  Math.abs(</span><span class="s0">this</span><span class="s1">.y - newY))</span><span class="s0">;</span>
+
+    <span class="s1">}</span>
+    <span class="s0">public boolean </span><span class="s1">moveCanEat(</span><span class="s0">int </span><span class="s1">newX</span><span class="s0">, int </span><span class="s1">newY)</span>
+    <span class="s1">{</span>
+        <span class="s0">if</span><span class="s1">(</span><span class="s0">this</span><span class="s1">.x == newX || </span><span class="s0">this</span><span class="s1">.y == newY) {</span>
+            <span class="s2">//left like rook</span>
+            <span class="s0">if </span><span class="s1">(</span><span class="s0">this</span><span class="s1">.y &gt; newY) {</span>
+                <span class="s0">for </span><span class="s1">(</span><span class="s0">int </span><span class="s1">ya = </span><span class="s0">this</span><span class="s1">.y - </span><span class="s4">1</span><span class="s0">; </span><span class="s1">ya &gt; newY</span><span class="s0">; </span><span class="s1">ya--) {</span>
+                    <span class="s0">if </span><span class="s1">(game.squares[</span><span class="s0">this</span><span class="s1">.x][ya].piece != </span><span class="s0">null</span><span class="s1">)</span>
+                        <span class="s0">return true;</span>
+                <span class="s1">}</span>
+            <span class="s1">}</span>
+            <span class="s2">//right like rook</span>
+            <span class="s0">if </span><span class="s1">(</span><span class="s0">this</span><span class="s1">.y &lt; newY) {</span>
+                <span class="s0">for </span><span class="s1">(</span><span class="s0">int </span><span class="s1">ya = </span><span class="s0">this</span><span class="s1">.y + </span><span class="s4">1</span><span class="s0">; </span><span class="s1">ya &lt; newY</span><span class="s0">; </span><span class="s1">ya++) {</span>
+                    <span class="s0">if </span><span class="s1">(game.squares[</span><span class="s0">this</span><span class="s1">.x][ya].piece != </span><span class="s0">null</span><span class="s1">)</span>
+                        <span class="s0">return true;</span>
+                <span class="s1">}</span>
+            <span class="s1">}</span>
+            <span class="s2">//up like rook</span>
+            <span class="s0">if </span><span class="s1">(</span><span class="s0">this</span><span class="s1">.x &gt; newX) {</span>
+                <span class="s0">for </span><span class="s1">(</span><span class="s0">int </span><span class="s1">xa = </span><span class="s0">this</span><span class="s1">.x - </span><span class="s4">1</span><span class="s0">; </span><span class="s1">xa &gt; newX</span><span class="s0">; </span><span class="s1">xa--) {</span>
+                    <span class="s0">if </span><span class="s1">(game.squares[xa][</span><span class="s0">this</span><span class="s1">.y].piece != </span><span class="s0">null</span><span class="s1">)</span>
+                        <span class="s0">return true;</span>
+                <span class="s1">}</span>
+            <span class="s1">}</span>
+            <span class="s2">//down like rook</span>
+            <span class="s0">if </span><span class="s1">(</span><span class="s0">this</span><span class="s1">.x &lt; newX) {</span>
+                <span class="s0">for </span><span class="s1">(</span><span class="s0">int </span><span class="s1">xa = </span><span class="s0">this</span><span class="s1">.x + </span><span class="s4">1</span><span class="s0">; </span><span class="s1">xa &lt; newX</span><span class="s0">; </span><span class="s1">xa++) {</span>
+                    <span class="s0">if </span><span class="s1">(game.squares[xa][</span><span class="s0">this</span><span class="s1">.y].piece != </span><span class="s0">null</span><span class="s1">)</span>
+                        <span class="s0">return true;</span>
+                <span class="s1">}</span>
+            <span class="s1">}</span>
+        <span class="s1">}</span>
+        <span class="s0">else </span><span class="s1">{</span>
+            <span class="s2">//up left like bishop</span>
+            <span class="s0">if </span><span class="s1">(</span><span class="s0">this</span><span class="s1">.y &gt; newY &amp;&amp; </span><span class="s0">this</span><span class="s1">.x &gt; newX)</span>
+                <span class="s0">for </span><span class="s1">(</span><span class="s0">int </span><span class="s1">i = </span><span class="s4">1</span><span class="s0">; </span><span class="s1">i &lt; Math.abs(</span><span class="s0">this</span><span class="s1">.y - newY)</span><span class="s0">; </span><span class="s1">i++)</span>
+                    <span class="s0">if </span><span class="s1">(game.squares[</span><span class="s0">this</span><span class="s1">.x - i][</span><span class="s0">this</span><span class="s1">.y - i].piece != </span><span class="s0">null</span><span class="s1">)</span>
+                        <span class="s0">return true;</span>
+
+            <span class="s2">//up right like bishop</span>
+            <span class="s0">if </span><span class="s1">(</span><span class="s0">this</span><span class="s1">.y &lt; newY &amp;&amp; </span><span class="s0">this</span><span class="s1">.x &gt; newX)</span>
+                <span class="s0">for </span><span class="s1">(</span><span class="s0">int </span><span class="s1">i = </span><span class="s4">1</span><span class="s0">; </span><span class="s1">i &lt; Math.abs(</span><span class="s0">this</span><span class="s1">.y - newY)</span><span class="s0">; </span><span class="s1">i++)</span>
+                    <span class="s0">if </span><span class="s1">(game.squares[</span><span class="s0">this</span><span class="s1">.x - i][</span><span class="s0">this</span><span class="s1">.y + i].piece != </span><span class="s0">null</span><span class="s1">)</span>
+                        <span class="s0">return true;</span>
+
+            <span class="s2">//down left like bishop</span>
+            <span class="s0">if </span><span class="s1">(</span><span class="s0">this</span><span class="s1">.y &gt; newY &amp;&amp; </span><span class="s0">this</span><span class="s1">.x &lt; newX)</span>
+                <span class="s0">for </span><span class="s1">(</span><span class="s0">int </span><span class="s1">i = </span><span class="s4">1</span><span class="s0">; </span><span class="s1">i &lt; Math.abs(</span><span class="s0">this</span><span class="s1">.y - newY)</span><span class="s0">; </span><span class="s1">i++)</span>
+                    <span class="s0">if </span><span class="s1">(game.squares[</span><span class="s0">this</span><span class="s1">.x + i][</span><span class="s0">this</span><span class="s1">.y - i].piece != </span><span class="s0">null</span><span class="s1">)</span>
+                        <span class="s0">return true;</span>
+
+            <span class="s2">//down right like bishop</span>
+            <span class="s0">if </span><span class="s1">(</span><span class="s0">this</span><span class="s1">.y &lt; newY &amp;&amp; </span><span class="s0">this</span><span class="s1">.x &lt; newX)</span>
+                <span class="s0">for </span><span class="s1">(</span><span class="s0">int </span><span class="s1">i = </span><span class="s4">1</span><span class="s0">; </span><span class="s1">i &lt; Math.abs(</span><span class="s0">this</span><span class="s1">.y - newY)</span><span class="s0">; </span><span class="s1">i++)</span>
+                    <span class="s0">if </span><span class="s1">(game.squares[</span><span class="s0">this</span><span class="s1">.x + i][</span><span class="s0">this</span><span class="s1">.y + i].piece != </span><span class="s0">null</span><span class="s1">)</span>
+                        <span class="s0">return true;</span>
+        <span class="s1">}</span>
+
+        <span class="s0">return false;</span>
+    <span class="s1">}</span>
+<span class="s1">}</span>
+
+
+<span class="s0">class </span><span class="s1">ChessGame {</span>
+    <span class="s0">private </span><span class="s1">Piece[][] board</span><span class="s0">;</span>
+    <span class="s0">private </span><span class="s1">List&lt;Piece&gt; whitePieces</span><span class="s0">;</span>
+    <span class="s0">private </span><span class="s1">List&lt;Piece&gt; blackPieces</span><span class="s0">;</span>
+
+    <span class="s0">public </span><span class="s1">ChessGame() {</span>
+        <span class="s1">board = </span><span class="s0">new </span><span class="s1">Piece[</span><span class="s4">8</span><span class="s1">][</span><span class="s4">8</span><span class="s1">]</span><span class="s0">;</span>
+        <span class="s1">whitePieces = </span><span class="s0">new </span><span class="s1">ArrayList&lt;&gt;()</span><span class="s0">;</span>
+        <span class="s1">blackPieces = </span><span class="s0">new </span><span class="s1">ArrayList&lt;&gt;()</span><span class="s0">;</span>
+        <span class="s1">initializeBoard()</span><span class="s0">;</span>
+    <span class="s1">}</span>
+
+    <span class="s0">private void </span><span class="s1">initializeBoard() {</span>
+        <span class="s2">// Place pieces on the board</span>
+        <span class="s2">// ...</span>
+    <span class="s1">}</span>
+
+<span class="s2">//    public void movePiece(Piece piece, int newX, int newY) {</span>
+<span class="s2">//        if (piece.isValidMove(newX, newY)) {</span>
+<span class="s2">//            board[piece.getX()][piece.getY()] = null;</span>
+<span class="s2">//            piece.setX(newX);</span>
+<span class="s2">//            piece.setY(newY);</span>
+<span class="s2">//            board[newX][newY] = piece;</span>
+<span class="s2">//        }</span>
+
+
+    <span class="s0">public boolean </span><span class="s1">isCheckmate() {</span>
+        <span class="s2">// Check if a player is in checkmate</span>
+        <span class="s2">// ...</span>
+
+        <span class="s0">return false;</span>
+    <span class="s1">}</span>
+
+<span class="s1">}</span>
+
+
+</pre>
+</body>
+</html>
