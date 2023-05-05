@@ -100,7 +100,7 @@ public class square extends JButton implements ActionListener {
 
     public static void main (String args[])
     {
-        new game();
+        new firstPage();
     }
 
 }

@@ -28,7 +28,7 @@ public class game extends JFrame {
     }
 
 
-    game() {
+    game(String time) {
 
         this.setTitle("Arwash Chess Game");
         this.setVisible(true);
@@ -133,6 +133,8 @@ public class game extends JFrame {
             }
         });
 
+        TimerLabel Timer1 = new TimerLabel(timer1,time);
+        TimerLabel Timer2 = new TimerLabel(timer2,time);
     }
 
     public static void paintComp(square[][] squares) {
@@ -188,10 +190,7 @@ public class game extends JFrame {
     }
 
 
-    public static void main (String args[])
-    {
-        new game();
-    }
+
 
 }
 

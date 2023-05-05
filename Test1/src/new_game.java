@@ -118,7 +118,7 @@ public class new_game extends JFrame {
                     System.out.println("Black player is: " + new_game.this.black_name.getText());
                     System.out.println("Time allowed is: " + timer);
                     dispose();
-                    game Game = new game();
+                    game Game = new game(timer);
                 }
             }
         });
