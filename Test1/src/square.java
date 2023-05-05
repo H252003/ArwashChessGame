@@ -64,6 +64,7 @@ public class square extends JButton implements ActionListener {
             for (int i = 0; i < 8; i++) {
                 for (int j = 0; j < 8; j++) {
 
+
                     if (game.isValidMove(square.oldPiece, game.squares, i, j))
                         if(this.col == i && this.row == j){
 

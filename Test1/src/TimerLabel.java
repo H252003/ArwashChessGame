@@ -19,8 +19,8 @@ public class TimerLabel extends JLabel {
     }
 
     public void countdownTimer(JLabel timerLabel, int time) {
-        minute=time/60;
-        second=time%60;
+        minute=time;
+        second=00;
         timer = new Timer(1000, new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -36,8 +36,8 @@ public class TimerLabel extends JLabel {
                     ddSecond = dFormat.format(second);
                     ddMinute = dFormat.format(minute);
                     timerLabel.setText(ddMinute + ":" + ddSecond);
-                    System.out.println(ddMinute);
-                    System.out.println(ddSecond);
+                    //System.out.println(ddMinute);
+                    //System.out.println(ddSecond);
 
                 if(minute == 0 && second == 0) {
                     timer.stop();

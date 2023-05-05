@@ -11,6 +11,7 @@ public abstract class Piece {
     public int x;
     public int y;
     public Icon icon;
+    public boolean checked=false;
 
     public boolean isFirst_move = true;
 //public boolean isFirstMove=true;
@@ -54,9 +55,10 @@ public abstract class Piece {
     public void setY(int y) {
         this.y = y;
     }
-
+public abstract boolean nextMoveEat(int newX, int newY,int kingX, int kingY );
     public abstract boolean isValidMovement(int newX, int newY);
 }
+
 
 class Pawn extends Piece {
     private boolean hasMoved = true;
@@ -100,22 +102,64 @@ class Pawn extends Piece {
         if(this.y == newY + 1 && newX == this.x - colorIndex && game.squares[newX][newY].piece != null)
             return true;
 
-
-
-
             return false;
     }
-//            if ((this.x - newX == 1) && (this.y - newY == 0))
-//            if ((this.x - newX == 2) && (this.y - newY == 0))
-//                return true;
-//            else return false;
-//        } else {
+    /*if (this.color.equals("white"))
+    colorIndex=7;
+            else colorIndex=0;
+           /* if(newX==colorIndex){
+                promotedPawn(newX,newY);
+            }*/
+
+//
 
         public boolean moveCanEat ( int newX, int newY)
         {
 
             return false;
+        } @Override
+    public boolean nextMoveEat(int newX, int newY,int kingX, int kingY) {
+        if (this.color.equals("white"))
+            colorIndex = -1;
+        else colorIndex = 1;
+
+        //push pawn 1
+        if(newY == kingY && kingX == newX - colorIndex ) {
+            checked=true;
+            System.out.println(checked);
+
+            //game.squares[kingX][kingY].piece.
+            return true;
+
         }
+
+        //push pawn 2
+        if (isFirst_move && newY == kingY && kingX == newX - colorIndex * 2 && game.squares[kingX + colorIndex][kingY].piece == null){
+            checked=true;
+            System.out.println(checked);
+            return true;//&& game.squares[newX][newY].piece == null
+        }
+
+
+        //capture left
+        if(newY == kingY - 1 && kingX == newX - colorIndex && game.squares[kingX][kingY].piece != null){
+            checked=true;
+            System.out.println(checked);
+            return true;
+
+        }
+
+        //capture right
+        if(newY == kingY + 1 && kingX == newX - colorIndex && game.squares[kingX][kingY].piece != null){
+            checked=true;
+            System.out.println(checked);
+            return true;
+
+        }
+
+
+        return false;
+    }
 
     }
 
@@ -138,6 +182,10 @@ class Knight extends Piece {
             icon = null;
         }
     }
+
+    @Override
+    public boolean nextMoveEat(int newX, int newY, int kingX, int kingY) {
+        return false;}
 
     public boolean isValidMovement(int newX, int newY) {
         if(Math.abs(newX-this.x) == 1 || Math.abs(newY-this.y) ==1)
@@ -167,6 +215,11 @@ class Bishop extends Piece {
         } catch (Exception Ignored) {
             icon = null;
         }
+    }
+
+    @Override
+    public boolean nextMoveEat(int newX, int newY, int kingX, int kingY) {
+        return false;
     }
 
     public boolean isValidMovement(int newX, int newY) {
@@ -250,9 +303,16 @@ class Rock extends Piece {
 
         return false;
     }
+
+    @Override
+    public boolean nextMoveEat(int newX, int newY, int kingX, int kingY) {
+        return false;
+    }
 }
 class King extends Piece {
     private boolean hasMoved=true;
+     public int kingX= this.x;
+    public int kingY= this.y;
 
     public King(String color, int x, int y) {
         super(color, x, y);
@@ -270,12 +330,24 @@ class King extends Piece {
         }
     }
 
+    @Override
+    public boolean nextMoveEat(int newX, int newY, int kingX, int kingY) {
+        return false;
+    }
+//public boolean checked(){
+        //if(nextMoveEat()==true)
+
 
     public boolean isValidMovement(int newX, int newY) {
         // Check if move is valid for pawn
         // if(Math.abs(this.x - newX) <= 3)
-        if (Math.abs((this.x - newX)*(this.y-newY))==1 ||Math.abs(newY-this.y)+ Math.abs( newX-this.x)==1)
+        if (Math.abs((this.x - newX)*(this.y-newY))==1 ||Math.abs(newY-this.y)+ Math.abs( newX-this.x)==1){
+            kingX= this.x;
+             kingY= this.y;
+
             return true;
+
+        }
         else return false;
     }
 }
@@ -361,6 +433,11 @@ class Queen extends Piece {
                         return true;
         }
 
+        return false;
+    }
+
+    @Override
+    public boolean nextMoveEat(int newX, int newY, int kingX, int kingY) {
         return false;
     }
 }
