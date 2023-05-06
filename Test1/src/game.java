@@ -213,7 +213,10 @@ public class game extends JFrame {
         return true ;
     }
 
+public static void main(String args[]){
+    game g = new game("2");
 
+}
 
 
 }

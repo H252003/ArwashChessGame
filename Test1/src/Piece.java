@@ -15,6 +15,8 @@ public abstract class Piece {
     public boolean checked=false;
 
     public boolean isFirst_move = true;
+
+    public boolean inLastRow = false;
 //public boolean isFirstMove=true;
 
     public Piece(String color, int x, int y) {
@@ -58,19 +60,46 @@ public abstract class Piece {
     }
 public abstract boolean nextMoveEat(int newX, int newY,int kingX, int kingY );
     public abstract boolean isValidMovement(int newX, int newY);
+
+    public square promotedPawn(square[][] squares, int newX, int newY){
+        //String promotedPiece= null;
+        String[] options = {"queen", "knight", "bishop","rook"};
+        String piece = (String) JOptionPane.showInputDialog(null, "Choose a piece:", "mabrooooook", JOptionPane.PLAIN_MESSAGE,null,options,options[0]);
+        if (piece == "rook") {
+            return squares[newX][newY] = new square(new Rock(color,newY,newX));
+
+        }
+
+        else if (piece == "bishop") {
+            return squares[newX][newY] = new square(new Bishop(color, newY, newX));
+
+        } else if (piece=="queen") {
+            return squares[newX][newY] = new square(new Queen(color, newY, newX));
+        }
+        else if (piece== "knight" ){
+            return squares[newX][newY] = new square(new Knight(color, newY, newX));
+        }
+        game.board.revalidate();
+        game.board.repaint();
+        return null;
+    }
 }
+
 
 
 class Pawn extends Piece {
     private boolean hasMoved = true;
+    public boolean isPromoted = false;
     public static int colorIndex;
     public static int colorIndex2;
+
+
 
     public  String color =this.getColor();
 
     public Pawn(String color, int x, int y) {
         super(color, x, y);
-        hasMoved = false;
+        isPromoted = false;
         try {
             if (color == "white") {
                 icon = new ImageIcon(getClass().getClassLoader().getResource("resources/chess_white_pawn-removebg-preview (1).png"));
@@ -88,19 +117,23 @@ class Pawn extends Piece {
     public boolean isValidMovement(int newX, int newY) {
         if (this.color.equals("white")){
             colorIndex = -1;
-            colorIndex2=7;
+            colorIndex2=6;
         }
 
         else {
             colorIndex = 1;
-            colorIndex2=0;
+            colorIndex2=1;
         }
         //this.icon== new ImageIcon(getClass().getClassLoader().getResource("resources/chess_white_pawn-removebg-preview (1).png"))
         //                ||this.icon==new ImageIcon(getClass().getClassLoader().getResource("resources/black_pawn-removebg-preview (1).png")))
         // promotion
-        if (this.x==colorIndex2&& game.squares[this.x][this.y].piece.icon==new ImageIcon(getClass().getClassLoader().getResource("resources/chess_white_pawn-removebg-preview (1).png"))
-               || game.squares[this.x][this.y].piece.icon==new ImageIcon(getClass().getClassLoader().getResource("resources/black_pawn-removebg-preview (1).png")))
-            promotedPawn(game.squares,this.x,this.y);
+        //&& game.squares[this.x][this.y].piece.icon==new ImageIcon(getClass().getClassLoader().getResource("resources/chess_white_pawn-removebg-preview (1).png"))
+        //               || game.squares[this.x][this.y].piece.icon==new ImageIcon(getClass().getClassLoader().getResource("resources/black_pawn-removebg-preview (1).png"))
+        if (this.x==colorIndex2 && !isPromoted) {
+           // promotedPawn(game.squares, this.x, this.y); //square.oldPiece =
+            this.isPromoted = true;
+            this.inLastRow = true;
+        }
 
             //push pawn 1
         if(this.y == newY && newX == this.x - colorIndex ) //&& game.squares[newX][newY].piece == null
@@ -123,25 +156,7 @@ class Pawn extends Piece {
    /* if(color=="white")
     colorIndex=7;
         else colorIndex=0;*/
-        private void promotedPawn(square[][] squares, int newX, int newY){
-            //String promotedPiece= null;
-            String[] options = {"queen", "knight", "bishop","rook"};
-            String piece = (String) JOptionPane.showInputDialog(null, "Choose a piece:", "mabrooooook", JOptionPane.PLAIN_MESSAGE,null,options,options[0]);
-            if (piece == "rook") {
-                squares[newX][newY] = new square(new Rock(color,newY,newX));
-            }
 
-            else if (piece == "bishop") {
-                squares[newX][newY] = new square(new Bishop(color, newY, newX));
-
-            } else if (piece=="queen") {
-                squares[newX][newY] = new square(new Queen(color, newY, newX));
-            }
-            else if (piece== "knight" ){
-                squares[newX][newY] = new square(new Knight(color, newY, newX));
-            }
-
-        }
 
 
 

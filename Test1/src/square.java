@@ -67,13 +67,19 @@ public class square extends JButton implements ActionListener {
 
                     if (game.isValidMove(square.oldPiece, game.squares, i, j))
                         if(this.col == i && this.row == j){
+                            //check it is a pawn
 
-                        this.piece = oldPiece;
+                                this.piece = oldPiece;
+
+
 
                         // add to panel but check whether white or black
-
+//                            if(this.piece.promotedPawn(game.squares,this.row,this.col) != null)
+//                            this.piece =  this.piece.promotedPawn(game.squares,this.row,this.col).piece;
+                       // this.piece.isValidMovement(this.row,this.col);
 
                         game.squares[oldPiece.x][oldPiece.y].piece = null;
+                          //  this.piece = .piece;
 
 
                         this.piece.y = row;
@@ -89,6 +95,13 @@ public class square extends JButton implements ActionListener {
                         System.out.println(this.row);
                         begin_move = false;
 
+                        //check if pawn in last row to promotes
+                            if(piece.inLastRow)
+                                this.piece = this.piece.promotedPawn(game.squares, this.col, this.row).piece;
+
+                        game.board.repaint();
+                        game.board.revalidate();
+
                         //change player turn
                         TimerLabel.whiteTurn = !TimerLabel.whiteTurn;
 
@@ -103,8 +116,6 @@ public class square extends JButton implements ActionListener {
                             game.Timer2.stopTimer();
                         }
 
-                        game.board.repaint();
-                        game.board.revalidate();
                     }
 
 
