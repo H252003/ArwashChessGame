@@ -108,7 +108,7 @@ public class new_game extends JFrame {
 
                 if(isNotNumeric(timer))         // check if timer is numbers only
                 {
-                    System.out.println("input correct timer");
+                    System.out.println("Input correct timer");
                     JOptionPane.showMessageDialog(null, "input correct timer");
 
                 }
@@ -118,7 +118,7 @@ public class new_game extends JFrame {
                     System.out.println("Black player is: " + new_game.this.black_name.getText());
                     System.out.println("Time allowed is: " + timer);
                     dispose();
-                    game Game = new game(timer);
+                    game Game = new game(white_name.getText(), black_name.getText(), timer);
                 }
             }
         });

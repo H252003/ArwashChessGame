@@ -27,6 +27,8 @@ public class TimerLabel extends JLabel {
     public void countdownTimer(JLabel timerLabel, int time) {
         minute=time;
         second=00;
+
+
         timer = new Timer(1000, new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {

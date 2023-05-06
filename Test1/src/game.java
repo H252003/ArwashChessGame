@@ -30,7 +30,7 @@ public class game extends JFrame {
     }
 
 
-    game(String time) {
+    game(String whiteName, String blackName, String time) {
 
         this.setTitle("Arwash Chess Game");
         this.setVisible(true);
@@ -138,6 +138,8 @@ public class game extends JFrame {
 
         Timer1 = new TimerLabel(timer1,time);
         Timer2 = new TimerLabel(timer2,time);
+        NameLabel WhiteName = new NameLabel(name1, whiteName);
+        NameLabel BlackName = new NameLabel(name2, blackName);
 
         if(TimerLabel.whiteTurn){
             Timer2.startTimer();
@@ -214,7 +216,7 @@ public class game extends JFrame {
     }
 
 public static void main(String args[]){
-    game g = new game("2");
+    game g = new game("A", "B", "3");
 
 }
 
