@@ -8,7 +8,16 @@ public class TimerLabel extends JLabel {
 
     public static boolean whiteTurn = true;
     private Timer timer;
-    private int second, minute;
+
+    public int getSecond() {
+        return second;
+    }
+    public int getMinute(){
+        return minute;
+    }
+
+    private int second;
+    private int minute;
     private String ddSecond, ddMinute;
     private DecimalFormat dFormat = new DecimalFormat("00");
 

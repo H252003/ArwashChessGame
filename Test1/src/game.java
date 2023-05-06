@@ -7,7 +7,7 @@ import java.awt.GridLayout;
 import java.awt.event.ComponentAdapter;
 import java.awt.event.ComponentEvent;
 
-
+import javax.swing.JOptionPane;
 public class game extends JFrame {
     private static final int boardSize = 400;
     private static final int squareSize = boardSize / 8;
@@ -136,20 +136,42 @@ public class game extends JFrame {
         });
 
 
-        Timer1 = new TimerLabel(timer1,time);
-        Timer2 = new TimerLabel(timer2,time);
+        Timer1 = new TimerLabel(timer1, time);
+        Timer2 = new TimerLabel(timer2, time);
         NameLabel WhiteName = new NameLabel(name1, whiteName);
         NameLabel BlackName = new NameLabel(name2, blackName);
 
-        if(TimerLabel.whiteTurn){
-            Timer2.startTimer();
-            Timer1.stopTimer();
+        while (true) {
+            // Check if it's the white player's turn
+            if (TimerLabel.whiteTurn) {
+                Timer2.startTimer();
+                Timer1.stopTimer();
+                // Check if the time has run out for the black player
+                if (Timer2.getSecond() == 0 && Timer2.getMinute() == 0) {
+                    JOptionPane.showMessageDialog(null, "Black wins");
+                    endGame();
+                }
+            }
+            // Check if it's the black player's turn
+            else {
+                Timer1.startTimer();
+                Timer2.stopTimer();
+                // Check if the time has run out for the white player
+                if (Timer1.getSecond() == 0 && Timer1.getMinute() == 0) {
+                    JOptionPane.showMessageDialog(null, "White wins");
+                    endGame();                }
+            }
         }
-        else {
-            Timer1.startTimer();
-            Timer2.stopTimer();
-        }
+
     }
+public void endGame(){
+        JOptionPane.showMessageDialog(null, "Game Over");
+        setVisible(false);
+        dispose();
+        this.setDefaultCloseOperation(EXIT_ON_CLOSE);
+}
+
+
 
     Piece getKing(Icon icon)
     {
@@ -216,7 +238,7 @@ public class game extends JFrame {
     }
 
 public static void main(String args[]){
-    game g = new game("A", "B", "3");
+    game g = new game("A", "B", "1");
 
 }
 

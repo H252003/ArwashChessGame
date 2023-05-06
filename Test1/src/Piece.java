@@ -328,6 +328,7 @@ class Rock extends Piece {
         return (this.x == newX && this.y != newY) || (this.x != newX && this.y == newY);
 
 
+
     }
 
     public boolean moveCanEat(int newX, int newY)
@@ -376,6 +377,7 @@ class Rock extends Piece {
     public boolean nextMoveEat(int newX, int newY, int kingX, int kingY) {
         return false;
     }
+
 }
 class King extends Piece {
     private boolean hasMoved=true;
