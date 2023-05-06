@@ -31,7 +31,7 @@ public class game extends JFrame {
         return marginSize;
     }
 
-    public  chckScan checkKing = new chckScan(this);
+    public static chckScan checkKing = new chckScan();
     game(String whiteName, String blackName, String time) {
 
         this.setTitle("Arwash Chess Game");
@@ -71,6 +71,7 @@ public class game extends JFrame {
         this.add(player1, BorderLayout.SOUTH);
         this.add(player2, BorderLayout.NORTH);
         squares = new square[8][8];
+
         for (int i = 0; i < 8; i++) {
             for (int j = 0; j < 8; j++) {
                 squares[i][j] = new square(i, j);
@@ -103,14 +104,14 @@ public class game extends JFrame {
                         squares[i][j] = new square(new King("white", 4, i));
                     if (j == 1)
                         squares[i][j] = new square(new Knight("white", 1, i));
+                    if (j == 0)
+                        squares[i][j] = new square(new Rock("white", j, i));
                     if (j == 6)
                         squares[i][j] = new square(new Knight("white", 6, i));
                     if (j == 2)
                         squares[i][j] = new square(new Bishop("white", 2, i));
                     if (j == 5)
                         squares[i][j] = new square(new Bishop("white", 5, i));
-                    if (j == 0)
-                        squares[i][j] = new square(new Rock("white", 0, i));
                     if (j == 7)
                         squares[i][j] = new square(new Rock("white", 7, i));
                 }
@@ -180,10 +181,10 @@ System.exit(0);}
 //            }
 //        return null;
 //    }
-    public square findKing(boolean isWhite  ) {
+    public static square findKing(boolean isWhite  ) {
         for (int i = 0; i < 8; i++) {
             for (int j = 0; j < 8; j++) {
-                if ((isWhite == Piece.isWhite(game.squares[i][j].piece.color)) && (game.squares[i][j].piece.equals("King")))
+                if (game.squares[i][j].piece != null && (isWhite == Piece.isWhite(game.squares[i][j].piece.color)) && (game.squares[i][j].piece.getClass() == King.class))
                 {
                     System.out.println("The king is here" + i + j );
                     return game.squares[i][j];
@@ -242,8 +243,8 @@ System.exit(0);}
         }
         if(oldPiece.moveCanEat(x,y))
             return false;
-//        if(CheckScan.isKingChecked(squares[0][4].piece,x,y))
-//        return false;
+        if(checkKing.isKingChecked(squares[x][y],x,y))
+        return false;
 
         return true ;
     }
