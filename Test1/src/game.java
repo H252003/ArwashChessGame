@@ -15,6 +15,8 @@ public class game extends JFrame {
     public static square[][] squares;
     public static TimerLabel Timer1 = new TimerLabel();
     public static TimerLabel Timer2 = new TimerLabel();
+//    public static chckScan CheckScan = new chckScan(this);
+
 
     //    method to set margins
     private int calculateMarginSize() {
@@ -141,29 +143,24 @@ public class game extends JFrame {
         NameLabel WhiteName = new NameLabel(name1, whiteName);
         NameLabel BlackName = new NameLabel(name2, blackName);
 
-        while (true) {
             // Check if it's the white player's turn
             if (TimerLabel.whiteTurn) {
                 Timer2.startTimer();
                 Timer1.stopTimer();
                 // Check if the time has run out for the black player
-                if (Timer2.getSecond() == 0 && Timer2.getMinute() == 0) {
-                    JOptionPane.showMessageDialog(null, "Black wins");
-                    endGame();
+
                 }
-            }
+
             // Check if it's the black player's turn
             else {
                 Timer1.startTimer();
                 Timer2.stopTimer();
                 // Check if the time has run out for the white player
-                if (Timer1.getSecond() == 0 && Timer1.getMinute() == 0) {
-                    JOptionPane.showMessageDialog(null, "White wins");
-                    endGame();                }
+                          }
             }
-        }
 
-    }
+
+
 public void endGame(){
         JOptionPane.showMessageDialog(null, "Game Over");
         setVisible(false);
@@ -233,6 +230,9 @@ System.exit(0);}
         }
         if(oldPiece.moveCanEat(x,y))
             return false;
+//        if(CheckScan.isKingChecked(squares[0][4].piece,x,y))
+//        return false;
+
         return true ;
     }
 

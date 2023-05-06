@@ -414,10 +414,11 @@ class King extends Piece {
         if (Math.abs((this.x - newX)*(this.y-newY))==1 ||Math.abs(newY-this.y)+ Math.abs( newX-this.x)==1){
             kingX= this.x;
              kingY= this.y;
+             return true;}
 
-            return true;
 
-        }
+
+
         else return false;
     }
 }
