@@ -31,7 +31,7 @@ public class game extends JFrame {
         return marginSize;
     }
 
-
+    public  chckScan checkKing = new chckScan(this);
     game(String whiteName, String blackName, String time) {
 
         this.setTitle("Arwash Chess Game");
@@ -169,15 +169,27 @@ System.exit(0);}
 
 
 
-    Piece getKing(Icon icon)
-    {
+//    Piece getKing(Icon icon)
+//    {
+//        for (int i = 0; i < 8; i++) {
+//            for (int j = 0; j < 8; j++) {
+//
+//                if(squares[i][j].piece.icon == icon)
+//                    return squares[i][j].piece;
+//            }
+//            }
+//        return null;
+//    }
+    public square findKing(boolean isWhite  ) {
         for (int i = 0; i < 8; i++) {
             for (int j = 0; j < 8; j++) {
-
-                if(squares[i][j].piece.icon == icon)
-                    return squares[i][j].piece;
+                if ((isWhite == Piece.isWhite(game.squares[i][j].piece.color)) && (game.squares[i][j].piece.equals("King")))
+                {
+                    System.out.println("The king is here" + i + j );
+                    return game.squares[i][j];
+                }
             }
-            }
+        }
         return null;
     }
 

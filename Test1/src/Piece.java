@@ -27,6 +27,11 @@ public abstract class Piece {
 
 
     }
+    public static boolean isWhite(String color){
+        if(color == "white"){return true ;
+        }
+        return false; }
+
     public static boolean isSameTeam(Piece p1, Piece p2)
     {
         if(p1 == null || p2 == null)
@@ -367,6 +372,10 @@ class Rock extends Piece {
 
 }
 class King extends Piece {
+    @Override
+    public String toString(){
+        return "King";
+    }
     private boolean hasMoved=true;
      public int kingX= this.x;
     public int kingY= this.y;
