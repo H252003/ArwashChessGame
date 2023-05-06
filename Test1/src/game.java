@@ -168,8 +168,7 @@ public void endGame(){
         JOptionPane.showMessageDialog(null, "Game Over");
         setVisible(false);
         dispose();
-        this.setDefaultCloseOperation(EXIT_ON_CLOSE);
-}
+System.exit(0);}
 
 
 
