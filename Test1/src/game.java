@@ -11,6 +11,8 @@ public class game extends JFrame {
     private static final int boardSize = 400;
     private static final int squareSize = boardSize / 8;
     public static JPanel board;
+    public static JPanel whiteOut;
+    public static JPanel blackOut;
     public static square[][] squares;
     public static TimerLabel Timer1 = new TimerLabel();
     public static TimerLabel Timer2 = new TimerLabel();
@@ -36,14 +38,14 @@ public class game extends JFrame {
         this.setTitle("Arwash Chess Game");
         this.setVisible(true);
         this.setResizable(true);
-        this.setSize(600, 600);
+        this.setSize(900, 900);
         this.setLayout(new BorderLayout());
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         this.getMinimumSize();
         this.getContentPane().setBackground(new Color(255, 255, 255));
         board = new JPanel(new GridLayout(8, 8));
-        JPanel whiteOut = new JPanel(new GridLayout(8 , 2));
-        JPanel blackOut = new JPanel(new GridLayout(8 , 2));
+        whiteOut = new JPanel(new GridLayout(8 , 2));
+        blackOut = new JPanel(new GridLayout(8 , 2));
         JPanel player1 = new JPanel();
         JPanel player2 = new JPanel();
         JLabel name1 = new JLabel("player1 name");
