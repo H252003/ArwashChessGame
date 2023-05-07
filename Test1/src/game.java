@@ -1,11 +1,13 @@
 import javax.swing.JFrame;
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.awt.GridLayout;
 import java.awt.event.ComponentAdapter;
 import java.awt.event.ComponentEvent;
+import java.awt.image.BufferedImage;
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.swing.JOptionPane;
 public class game extends JFrame {
@@ -32,7 +34,7 @@ public class game extends JFrame {
     }
 
     public static chckScan checkKing = new chckScan();
-    game(String whiteName, String blackName, String time) {
+    game(String whiteName, String blackName, String time) throws IOException {
 
         this.setTitle("Arwash Chess Game");
         this.setVisible(true);
@@ -43,8 +45,8 @@ public class game extends JFrame {
         this.getMinimumSize();
         this.getContentPane().setBackground(new Color(255, 255, 255));
         board = new JPanel(new GridLayout(8, 8));
-        JPanel whiteOut = new JPanel();
-        JPanel blackOut = new JPanel();
+        JPanel whiteOut = new JPanel(new GridLayout(8 , 2));
+        JPanel blackOut = new JPanel(new GridLayout(8 , 2));
         JPanel player1 = new JPanel();
         JPanel player2 = new JPanel();
         JLabel name1 = new JLabel("player1 name");
@@ -248,7 +250,7 @@ System.exit(0);}
         return true ;
     }
 
-public static void main(String args[]){
+public static void main(String args[]) throws IOException {
     game g = new game("A", "B", "4");
 
 }

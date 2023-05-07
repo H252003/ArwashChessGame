@@ -1,6 +1,10 @@
+import javax.imageio.ImageIO;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.MouseListener;
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
@@ -27,6 +31,7 @@ public abstract class Piece {
 
 
     }
+
     public static boolean isWhite(String color){
         if(color == "white"){return true ;
         }
@@ -103,7 +108,7 @@ class Pawn extends Piece {
 
     public  String color =this.getColor();
 
-    public Pawn(String color, int x, int y) {
+    public Pawn(String color, int x, int y) throws IOException {
         super(color, x, y);
         isPromoted = false;
 

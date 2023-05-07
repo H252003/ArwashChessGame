@@ -30,10 +30,11 @@ public class chckScan {
                 hitByBishop(newY, newX, king, kingCol, kingRow,1,1) || // down right
                 hitByBishop(newY, newX, king, kingCol, kingRow,-1,1) || //down left
 
-              //  eatByBishop(newY, newX, king, kingCol, kingRow) ||
 
+                hitByKnight(newY, newX, king, kingCol, kingRow) || // down left
+                hitByPawn(newY, newX, king, kingCol, kingRow) ||
+                hitByKing(king,kingCol,kingRow);
 
-                hitByKnight(newY, newX, king, kingCol, kingRow); // down left
     }
 
     private boolean hitByRook(int col, int row, square king, int kingCol, int kingRow, int colVal, int rowVal) {
@@ -132,7 +133,70 @@ public class chckScan {
         return res1 || res2 || res3 || res4 || res5 || res6 || res7 || res8;
 
          }
+    private boolean checkKing(Piece p, square king){
 
+        return p!= null && !Piece.isSameTeam(p,king.piece) && p.getClass() == King.class ;
+    }
+
+    private boolean hitByKing( square king, int kingCol, int kingRow) {
+        boolean res1 = false,res2 = false,res3= false,res4 = false,res5 = false,res6 = false,res7 = false, res8 = false;
+        if(kingCol - 1 > -1 && kingRow - 1 > -1)
+            res1 = checkKing(game.squares[kingRow-1][kingCol-1].piece, king) ;
+        if(kingCol +1 < 8 && kingRow - 1 > -1)
+            res2 = checkKing(game.squares[kingRow-1][kingCol+1].piece, king) ;
+        if(kingCol < 8 && kingCol>-1 && kingRow - 1 > -1)
+            res3 =   checkKing(game.squares[kingRow-1][kingCol].piece, king) ;
+        if(kingCol -1 > -1 && kingRow < 8 && kingRow>-1)
+            res4 =  checkKing(game.squares[kingRow][kingCol-1].piece, king) ;
+        if(kingCol + 1 < 8 && kingRow < 8 && kingRow>-1)
+            res5 =    checkKing(game.squares[kingRow][kingCol+1].piece, king);
+        if(kingCol - 1 > -1 && kingRow + 1 < 8)
+            res6 =     checkKing(game.squares[kingRow+1][kingCol-1].piece, king);
+        if(kingCol +1 < 8 && kingRow + 1< 8)
+            res7 =     checkKing(game.squares[kingRow+1][kingCol+1].piece, king) ;
+        if(kingCol > -1 && kingCol<8 && kingRow +1 <8 )
+            res8 =    checkKing(game.squares[kingRow+1][kingCol].piece, king) ;
+
+        return res1 || res2 || res3 || res4 || res5 || res6 || res7 || res8;
+
+    }
+    private  boolean hitByPawn(int col, int row, square king, int kingCol, int kingRow){
+        int colorVal ;
+        boolean res1 = false ;
+        boolean res2 = false ;
+        boolean res3 = false ;
+        if(King.isWhite(king.piece.color)){
+            colorVal = 1 ;
+        }
+        else {
+            colorVal = -1 ;}
+
+        if(kingCol +1 <8 ){
+
+                if(kingRow+colorVal>-1 && kingRow+colorVal<8){
+                    res1 = checkPawn(game.squares[kingRow+colorVal][kingCol+1].piece, king, col, row) ;
+                }
+
+
+        }
+        if(kingCol -1 > -1 ){
+                if(kingRow+colorVal>-1 && kingRow+colorVal<8){
+                    res2 = checkPawn(game.squares[kingRow+colorVal][kingCol-1].piece, king, col, row) ;
+                }
+
+
+        }
+        if(kingRow+colorVal>-1 && kingRow+colorVal<8 && kingCol==col){
+            res3 = checkPawn(game.squares[kingRow+colorVal][kingCol].piece, king, col, row) ;
+        }
+
+        return res1||res2||res3;
+
+    }
+    private boolean checkPawn(Piece p, square king,int col , int row){
+
+        return p!= null && !Piece.isSameTeam(p,king.piece) && p.getClass() == Pawn.class ;
+    }
 }
 
 

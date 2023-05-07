@@ -2,6 +2,7 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.IOException;
 
 public class new_game extends JFrame {
 
@@ -118,7 +119,11 @@ public class new_game extends JFrame {
                     System.out.println("Black player is: " + new_game.this.black_name.getText());
                     System.out.println("Time allowed is: " + timer);
                     dispose();
-                    game Game = new game(white_name.getText(), black_name.getText(), timer);
+                    try {
+                        game Game = new game(white_name.getText(), black_name.getText(), timer);
+                    } catch (IOException ex) {
+                        throw new RuntimeException(ex);
+                    }
                 }
             }
         });
