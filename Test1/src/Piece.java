@@ -1,13 +1,7 @@
-import javax.imageio.ImageIO;
 import javax.swing.*;
-import java.awt.*;
-import java.awt.event.MouseListener;
-import java.awt.image.BufferedImage;
-import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Objects;
 
 
 public abstract class Piece {
@@ -43,7 +37,7 @@ public abstract class Piece {
             return false;
         return p1.color.equals(p2.color);
     }
-    public boolean moveCanEat(int newX, int newY){
+    public boolean moveHitPiece(int newX, int newY){
 
         return false;
     }
@@ -177,7 +171,7 @@ class Pawn extends Piece {
 
 //
 
-        public boolean moveCanEat ( int newX, int newY)
+        public boolean moveHitPiece(int newX, int newY)
         {
 
             return false;
@@ -328,7 +322,7 @@ class Rock extends Piece {
 
     }
 
-    public boolean moveCanEat(int newX, int newY)
+    public boolean moveHitPiece(int newX, int newY)
     {
         //left
         if(this.y > newY)
@@ -449,7 +443,7 @@ class Queen extends Piece {
         return ((this.x == newX && this.y != newY) || (this.x != newX && this.y == newY)) || (Math.abs(this.x - newX) ==  Math.abs(this.y - newY));
 
     }
-    public boolean moveCanEat(int newX, int newY)
+    public boolean moveHitPiece(int newX, int newY)
     {
         if(this.x == newX || this.y == newY) {
             //left like rook

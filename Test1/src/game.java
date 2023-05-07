@@ -4,10 +4,7 @@ import java.awt.*;
 import java.awt.GridLayout;
 import java.awt.event.ComponentAdapter;
 import java.awt.event.ComponentEvent;
-import java.awt.image.BufferedImage;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
 
 import javax.swing.JOptionPane;
 public class game extends JFrame {
@@ -242,7 +239,7 @@ System.exit(0);}
         if(!oldPiece.isValidMovement(x,y)) {
             return false;
         }
-        if(oldPiece.moveCanEat(x,y))
+        if(oldPiece.moveHitPiece(x,y))
             return false;
         if(checkKing.isKingChecked(squares[x][y],x,y))
         return false;
