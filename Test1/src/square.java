@@ -42,7 +42,7 @@ public class square extends JButton implements ActionListener {
     @Override
     public void actionPerformed(ActionEvent e) {
 
-        if (this.piece != null && !begin_move && (TimerLabel.whiteTurn && this.piece.color.equals("white") || !TimerLabel.whiteTurn && this.piece.color.equals("black"))) {
+        if (this.piece != null && !begin_move && ((TimerLabel.whiteTurn && this.piece.color.equals("white")) || (!TimerLabel.whiteTurn && this.piece.color.equals("black")))) {
             begin_move = true;
             oldPiece = this.piece;
             System.out.println("first presseed!");
@@ -75,9 +75,8 @@ public class square extends JButton implements ActionListener {
 
 
                         // add to panel but check whether white or black
-//                            if(this.piece.promotedPawn(game.squares,this.row,this.col) != null)
-//                            this.piece =  this.piece.promotedPawn(game.squares,this.row,this.col).piece;
-                       // this.piece.isValidMovement(this.row,this.col);
+//
+
 
                         game.squares[oldPiece.x][oldPiece.y].piece = null;
                           //  this.piece = .piece;

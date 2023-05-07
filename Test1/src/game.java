@@ -141,8 +141,8 @@ public class game extends JFrame {
 
         Timer1 = new TimerLabel(timer1, time);
         Timer2 = new TimerLabel(timer2, time);
-        NameLabel WhiteName = new NameLabel(name1, whiteName);
-        NameLabel BlackName = new NameLabel(name2, blackName);
+        NameLabel WhiteName = new NameLabel(name2, whiteName);
+        NameLabel BlackName = new NameLabel(name1, blackName);
 
             // Check if it's the white player's turn
             if (TimerLabel.whiteTurn) {
@@ -186,7 +186,6 @@ System.exit(0);}
             for (int j = 0; j < 8; j++) {
                 if (game.squares[i][j].piece != null && (isWhite == Piece.isWhite(game.squares[i][j].piece.color)) && (game.squares[i][j].piece.getClass() == King.class))
                 {
-                    System.out.println("The king is here" + i + j );
                     return game.squares[i][j];
                 }
             }
@@ -250,7 +249,7 @@ System.exit(0);}
     }
 
 public static void main(String args[]){
-    game g = new game("A", "B", "1");
+    game g = new game("A", "B", "4");
 
 }
 
