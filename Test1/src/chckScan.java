@@ -6,7 +6,7 @@ public class chckScan {
     public chckScan() {
     }
 
-    public boolean isKingChecked(square squares, int newX, int newY) {
+    public boolean isKingChecked(square squares, int newX, int newY, boolean virtualKingIsMoving) {
         square king = game.findKing(TimerLabel.whiteTurn);
         assert king != null;
 
@@ -20,15 +20,22 @@ public class chckScan {
 
         }
 
-        return hitByRook(newY, newX, king, kingCol, kingRow, 0, 1) || //up
-                hitByRook(newY, newX, king, kingCol, kingRow, 1, 0) ||  //right
-                hitByRook(newY, newX, king, kingCol, kingRow, 0, -1) ||  //down
-                hitByRook(newY, newX, king, kingCol, kingRow, -1, 0) || //left
+        /////////////////
 
-                hitByBishop(newY, newX, king, kingCol, kingRow,-1,-1) || // up left
-                hitByBishop(newY,newX, king, kingCol, kingRow,1,-1) || // up right
-                hitByBishop(newY, newX, king, kingCol, kingRow,1,1) || // down right
-                hitByBishop(newY, newX, king, kingCol, kingRow,-1,1) || //down left
+        if(virtualKingIsMoving) {
+            kingRow = newX;
+            kingCol = newY;
+        }
+
+        return hitByRook(newY, newX, king, kingCol, kingRow, 0, 1, virtualKingIsMoving) || //up
+                hitByRook(newY, newX, king, kingCol, kingRow, 1, 0, virtualKingIsMoving) ||  //right
+                hitByRook(newY, newX, king, kingCol, kingRow, 0, -1, virtualKingIsMoving) ||  //down
+                hitByRook(newY, newX, king, kingCol, kingRow, -1, 0, virtualKingIsMoving) || //left
+
+                hitByBishop(newY, newX, king, kingCol, kingRow,-1,-1, virtualKingIsMoving) || // up left
+                hitByBishop(newY,newX, king, kingCol, kingRow,1,-1, virtualKingIsMoving) || // up right
+                hitByBishop(newY, newX, king, kingCol, kingRow,1,1, virtualKingIsMoving) || // down right
+                hitByBishop(newY, newX, king, kingCol, kingRow,-1,1, virtualKingIsMoving) || //down left
 
                 eatByBishop(newY, newX, king, kingCol, kingRow) ||
 
@@ -39,15 +46,17 @@ public class chckScan {
 
     }
 
-    private boolean hitByRook(int col, int row, square king, int kingCol, int kingRow, int colVal, int rowVal) {
+    private boolean hitByRook(int col, int row, square king, int kingCol, int kingRow, int colVal, int rowVal,boolean virtualKing) {
         for (int i = 1; i < 8; i++) {
             if (kingCol + (i * colVal) == col && kingRow + (i * rowVal) == row)
                 break;
             if (kingCol + (i * colVal) > -1 && kingCol + (i * colVal) < 8 && kingRow + (i * rowVal) > -1 && kingRow + (i * rowVal) < 8) {
                 Piece piece = game.squares[kingRow + (i * rowVal)][kingCol + (i * colVal)].piece;
-                if (piece != null && piece != square.oldPiece) {
+                if (piece != null ) {//&& piece != square.oldPiece
                     if (!Piece.isSameTeam(piece, king.piece) && (piece.getClass() == Rock.class || piece.getClass() == Queen.class))
                         return true;
+                    else if(virtualKing && piece.getClass() == King.class && Piece.isSameTeam(piece, king.piece))
+                        continue;
                     break;
                 }
             }
@@ -56,15 +65,17 @@ public class chckScan {
     }
 
 
-    private boolean hitByBishop(int col, int row, square king, int kingCol, int kingRow, int colVal, int rowVal) {
+    private boolean hitByBishop(int col, int row, square king, int kingCol, int kingRow, int colVal, int rowVal, boolean virtualKing) {
         for (int i = 1; i < 8; i++) {
             if (kingCol - (i * colVal) == col && kingRow - (i * rowVal) == row)
                 break;
             if (kingCol - (i * colVal) > -1 && kingCol - (i * colVal) < 8 && kingRow - (i * rowVal) > -1 && kingRow - (i * rowVal) < 8) {
                 Piece piece = game.squares[kingRow - (i * rowVal)][kingCol - (i * colVal)].piece;
-                if (piece != null && piece != square.oldPiece) {
+                if (piece != null ) {//&& piece != square.oldPiece
                     if (!Piece.isSameTeam(piece, king.piece) && (piece.getClass() == Queen.class)) //piece.getClass() == Bishop.class ||
                         return true;
+                    else if(virtualKing && piece.getClass() == King.class && Piece.isSameTeam(piece, king.piece))
+                        continue;
                     break;
                 }
             }

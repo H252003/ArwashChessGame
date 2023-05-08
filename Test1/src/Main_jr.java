@@ -34,7 +34,7 @@ public class Main_jr extends JFrame implements ActionListener {
         frame.add(logout_btn);
         frame.add(label);
         frame.setVisible(true);
-        setDefaultCloseOperation(EXIT_ON_CLOSE);
+        frame.setDefaultCloseOperation(EXIT_ON_CLOSE);
     }
     @Override
     public void actionPerformed(ActionEvent e) {

@@ -77,6 +77,16 @@ public class game extends JFrame {
             for (int j = 0; j < 8; j++) {
                 squares[i][j] = new square(i, j);
                 squares[i][j].setPreferredSize(new Dimension(squareSize, squareSize));
+
+//                if(i==7 && j==7)
+//                    squares[i][j] = new square(new King("black", j, i));
+//                if(i==6 && j==5)
+//                    squares[i][j] = new square(new Queen("white", j, i));
+//                if(i==5 && j==6)
+//                    squares[i][j] = new square(new Pawn("white", j, i));
+//                if(i==0 && j==0)
+//                    squares[i][j] = new square(new King("white", j, i));
+
                 if (i == 6) {
                     squares[i][j] = new square(new Pawn("black", j, i));
                 } else if (i == 7) {
@@ -163,11 +173,9 @@ public class game extends JFrame {
 
 
 
-public void endGame(){
+public static void endGame(){
         JOptionPane.showMessageDialog(null, "Game Over");
-        setVisible(false);
-        dispose();
-System.exit(0);}
+        }
 
 
 
@@ -243,11 +251,23 @@ System.exit(0);}
         }
         if(oldPiece.moveHitPiece(x,y))
             return false;
-        if(checkKing.isKingChecked(squares[x][y],x,y))
+        if(checkKing.isKingChecked(squares[x][y],x,y, oldPiece.getClass() == King.class))
         return false;
 
         return true ;
     }
+
+    public static boolean validity(square[][] squares, int x, int y, String color) {
+        boolean valid = false;
+        for (int i = 0; i < 8; i++) {
+            for (int j = 0; j < 8; j++) {
+
+                if (isValidMove(squares[x][y].piece,squares,i ,j)) {
+                    return true;
+                }
+            }}
+    return false;}
+
 
 public static void main(String args[]) throws IOException {
     game g = new game("A", "B", "4");

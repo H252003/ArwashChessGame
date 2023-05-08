@@ -9,6 +9,7 @@ public class square extends JButton implements ActionListener {
         addActionListener(this);
         col = p.getX();
         row = p.getY();
+       // this.setBorderPainted(false);
 
     }
 
@@ -16,11 +17,12 @@ public class square extends JButton implements ActionListener {
         addActionListener(this);
         this.col = col;
         this.row = row;
+//        this.setBorderPainted(false);
     }
 
     public square() {
         addActionListener(this);
-
+//        this.setBorderPainted(false);
     }
 
     public int col;
@@ -37,6 +39,30 @@ public class square extends JButton implements ActionListener {
             return piece.icon;
         return null;
     }
+
+    public void hasValidMoves(String is_white) {
+        boolean checkMate = true;
+
+        for (int i = 0; i < 8; i++) {
+            for (int j = 0; j < 8; j++) {
+
+                if (game.squares[i][j].piece != null && game.squares[i][j].piece.color.equals(is_white)) {
+
+                    if (game.validity(game.squares, i, j, is_white)) {
+                        checkMate = false;
+
+                    }
+
+                }
+
+            }
+        }
+        if(checkMate)
+        {
+            game.endGame();
+        }
+    }
+
 
 
     @Override
@@ -69,7 +95,7 @@ public class square extends JButton implements ActionListener {
                     if (game.isValidMove(square.oldPiece, game.squares, i, j)) {
 
                         if (this.col == i && this.row == j) {
-                            //check it is a pawn
+                            //get pieces out
                             if (!oldPiece.isSameTeam(this.piece, oldPiece)&&this.piece!=null) {
                                 if (game.squares[this.piece.x][this.piece.y].piece.color.equals("white"))
                                     game.whiteOut.add(new JLabel(game.squares[this.piece.x][this.piece.y].piece.icon));
@@ -126,6 +152,16 @@ public class square extends JButton implements ActionListener {
 
                             //change player turn
                             TimerLabel.whiteTurn = !TimerLabel.whiteTurn;
+
+                            //if no moves available
+
+                            if(TimerLabel.whiteTurn)
+                                hasValidMoves("white");
+                            else
+                                hasValidMoves("black");
+                            //endGame
+
+
 
                             //start timer
                             if (TimerLabel.whiteTurn) {
