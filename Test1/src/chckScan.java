@@ -178,7 +178,7 @@ public class chckScan {
         boolean res1 = false ;
         boolean res2 = false ;
         boolean res3 = false ;
-        if(King.isWhite(king.piece.color)){
+        if(king.piece.color=="white"){
             colorVal = 1 ;
         }
         else {
