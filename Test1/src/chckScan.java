@@ -10,8 +10,8 @@ public class chckScan {
         square king = game.findKing(TimerLabel.whiteTurn);
         assert king != null;
 
-        int kingCol = king.col;
-        int kingRow = king.row;
+        int kingCol = king.row;
+        int kingRow = king.col;
 
 
         if (square.oldPiece != null && square.oldPiece.getClass() == King.class) {
