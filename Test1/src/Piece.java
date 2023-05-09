@@ -375,13 +375,14 @@ class King extends Piece {
     public String toString(){
         return "King";
     }
-    private boolean hasMoved=true;
+    public static boolean canCastleRight = false;
+    public static boolean canCastleLeft = false;
      public int kingX= this.x;
     public int kingY= this.y;
 
     public King(String color, int x, int y) {
         super(color, x, y);
-        hasMoved = false;
+
         try {
             if (color == "white") {
                 icon=new ImageIcon(getClass().getClassLoader().getResource("resources/white_king2-removebg-preview (2).png"));
@@ -404,17 +405,33 @@ class King extends Piece {
 
 
     public boolean isValidMovement(int newX, int newY) {
-        // Check if move is valid for pawn
-        // if(Math.abs(this.x - newX) <= 3)
+        // Check if move is valid for king
         if (Math.abs((this.x - newX)*(this.y-newY))==1 ||Math.abs(newY-this.y)+ Math.abs( newX-this.x)==1){
             kingX= this.x;
              kingY= this.y;
              return true;}
 
+        if(newX == this.x && isFirst_move) {
+            //check right castle
+            if (game.squares[this.x][6].piece == null && game.squares[this.x][5].piece == null &&
+                    isSameTeam(this, game.squares[this.x][7].piece) && game.squares[this.x][7].piece.getClass() == Rock.class) {
+                canCastleRight = true;
+                return true;
+            }
+            if(game.squares[this.x][3].piece == null &&game.squares[this.x][2].piece == null &&
+                    isSameTeam(this, game.squares[this.x][0].piece) && game.squares[this.x][0].piece.getClass() == Rock.class) {
+                if(newY == 1 && game.squares[this.x][newY].piece == null) {
+                    canCastleLeft = true;
+                    return false;
+                }
+                return true;
+            }
+        }
 
 
 
-        else return false;
+
+        return false;
     }
 }
 class Queen extends Piece {

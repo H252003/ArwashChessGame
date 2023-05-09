@@ -1,5 +1,4 @@
 import javax.swing.*;
-import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
@@ -39,6 +38,7 @@ public class square extends JButton implements ActionListener {
             return piece.icon;
         return null;
     }
+    chckScan check = new chckScan();
 
     public void hasValidMoves(String is_white) {
         boolean checkMate = true;
@@ -61,6 +61,11 @@ public class square extends JButton implements ActionListener {
         {
             game.endGame();
         }
+    }
+
+    public boolean canCastle(){
+        return this.piece.getClass() == King.class && piece.isFirst_move && game.squares[this.row][6].piece == null&&
+                game.squares[this.row][5].piece == null && game.squares[this.row][7].piece.getClass() == Rock.class;
     }
 
 
@@ -105,6 +110,7 @@ public class square extends JButton implements ActionListener {
 
 
                             }
+
                             this.piece = oldPiece;
 
 
@@ -121,8 +127,23 @@ public class square extends JButton implements ActionListener {
 
                             this.piece.y = row;
                             this.piece.x = col;
-                            this.piece.isFirst_move = false;
 
+                            //check king castle && not its original moves
+                            if(this.piece.getClass() == King.class && this.piece.isFirst_move)
+                            {
+                                if(King.canCastleRight && this.piece.y != 5 )
+                                {
+                                    game.squares[this.piece.x][5].piece = game.squares[this.piece.x][7].piece;
+                                    game.squares[this.piece.x][7].piece = null;
+                                }
+                                if(King.canCastleLeft && this.piece.y !=3)
+                                {
+                                    game.squares[this.piece.x][3].piece = game.squares[this.piece.x][0].piece;
+                                    game.squares[this.piece.x][0].piece = null;
+                                }
+                            }
+
+                            this.piece.isFirst_move = false;
 
                             //oldPiece = null;
                             System.out.println("moove!");
