@@ -123,66 +123,64 @@ public class square extends JButton implements ActionListener {
 
 
             //make it move on only green
+            for(int i = 0; i < 8 ; i++) {
+                for (int j = 0; j < 8; j++) {
+
+//                    if (game.isValidMove(square.oldPiece, game.squares, i, j)) {
+                        if (oldPiece.isValidMove(game.squares, this.col, this.row)) {
+
+                            //get pieces out
+                            if (!oldPiece.isSameTeam(this.piece) && this.piece != null) {
+                                if (game.squares[this.piece.x][this.piece.y].piece.color.equals("white"))
+                                    game.whiteOut.add(new JLabel(game.squares[this.piece.x][this.piece.y].piece.icon));
+                                else {
+                                    game.blackOut.add(new JLabel(game.squares[this.piece.x][this.piece.y].piece.icon));
+                                }
 
 
-
-            if (oldPiece.isValidMove( game.squares, this.col, this.row)) {
-
-                //get pieces out
-                if (!oldPiece.isSameTeam(this.piece)&&this.piece!=null) {
-                    if (game.squares[this.piece.x][this.piece.y].piece.color.equals("white"))
-                        game.whiteOut.add(new JLabel(game.squares[this.piece.x][this.piece.y].piece.icon));
-                    else {
-                        game.blackOut.add(new JLabel(game.squares[this.piece.x][this.piece.y].piece.icon));
-                    }
+                            }
+                            this.piece = oldPiece;
 
 
-                }
-                this.piece = oldPiece;
-
-
-                // add to panel but check whether white or black
+                            // add to panel but check whether white or black
 //
 
 
-                game.squares[oldPiece.x][oldPiece.y].piece = null;
+                            game.squares[oldPiece.x][oldPiece.y].piece = null;
 
 
-                //  this.piece = .piece;
+                            //  this.piece = .piece;
 
 
-                this.piece.y = row;
-                this.piece.x = col;
+                            this.piece.y = row;
+                            this.piece.x = col;
 
-                //check king castle && not its original moves
-                if(this.piece.getClass() == King.class && this.piece.isFirst_move)
-                {
-                    if(King.canCastleRight && this.piece.y != 5 )
-                    {
-                        game.squares[this.piece.x][5].piece = game.squares[this.piece.x][7].piece;
-                        game.squares[this.piece.x][7].piece = null;
-                    }
-                    if(King.canCastleLeft && this.piece.y !=3)
-                    {
-                        game.squares[this.piece.x][3].piece = game.squares[this.piece.x][0].piece;
-                        game.squares[this.piece.x][0].piece = null;
-                    }
-                }
+                            //check king castle && not its original moves
+                            if (this.piece.getClass() == King.class && this.piece.isFirst_move) {
+                                if (King.canCastleRight && this.piece.y != 5) {
+                                    game.squares[this.piece.x][5].piece = game.squares[this.piece.x][7].piece;
+                                    game.squares[this.piece.x][7].piece = null;
+                                }
+                                if (King.canCastleLeft && this.piece.y != 3) {
+                                    game.squares[this.piece.x][3].piece = game.squares[this.piece.x][0].piece;
+                                    game.squares[this.piece.x][0].piece = null;
+                                }
+                            }
 
-                this.piece.isFirst_move = false;
+                            this.piece.isFirst_move = false;
 
 
-                //oldPiece = null;
-                System.out.println("moove!");
-                game.getBack(game.squares);
-                System.out.println(this.col);
-                System.out.println(this.row);
-                begin_move = false;
+                            //oldPiece = null;
+                            System.out.println("moove!");
+                            game.getBack(game.squares);
+                            System.out.println(this.col);
+                            System.out.println(this.row);
+                            begin_move = false;
 
-                //check if pawn in last row to promotes
-                if (piece.inLastRow) {
-                    this.piece = this.piece.promotedPawn(game.squares, this.col, this.row);
-                }
+                            //check if pawn in last row to promotes
+                            if (piece.inLastRow) {
+                                this.piece = this.piece.promotedPawn(game.squares, this.col, this.row);
+                            }
 
 
 
@@ -195,37 +193,34 @@ public class square extends JButton implements ActionListener {
                                     game.squares[oldPiece.x][oldPiece.y].piece = null;
                                     System.out.println("ppp");
                                 }*/
-                game.board.repaint();
-                game.board.revalidate();
+                            game.board.repaint();
+                            game.board.revalidate();
 
-                //change player turn
-                TimerLabel.whiteTurn = !TimerLabel.whiteTurn;
+                            //change player turn
+                            TimerLabel.whiteTurn = !TimerLabel.whiteTurn;
 
-                //if no moves available
+                            //if no moves available
 
-                if(TimerLabel.whiteTurn)
-                    colorCanMove("white");
-                else
-                    colorCanMove("black");
-                //endGame
+                            if (TimerLabel.whiteTurn)
+                                colorCanMove("white");
+                            else
+                                colorCanMove("black");
+                            //endGame
 
 
-
-                //start timer
-                if (TimerLabel.whiteTurn) {
-                    game.Timer2.startTimer();
-                    game.Timer1.stopTimer();
-                } else {
-                    game.Timer1.startTimer();
-                    game.Timer2.stopTimer();
+                            //start timer
+                            if (TimerLabel.whiteTurn) {
+                                game.Timer2.startTimer();
+                                game.Timer1.stopTimer();
+                            } else {
+                                game.Timer1.startTimer();
+                                game.Timer2.stopTimer();
+                            }
+                        }
+                    }
                 }
-            }
 
-
-
-
-
-
+            //}
         }
     }
 
