@@ -186,7 +186,7 @@ public class chckScan {
 
         if(kingCol +1 <8 ){
 
-                if(kingRow+colorVal>-1 && kingRow+colorVal<8){
+                if(kingRow+colorVal > -1 && kingRow+colorVal < 8){
                     res1 = checkPawn(game.squares[kingRow+colorVal][kingCol+1].piece, king, col, row) ;
                 }
 
@@ -208,7 +208,7 @@ public class chckScan {
     }
     private boolean checkPawn(Piece p, square king,int col , int row){
 
-        return p!= null && !Piece.isSameTeam(p,king.piece) && p.getClass() == Pawn.class ;
+        return p!= null && !Piece.isSameTeam(p,king.piece) && p.getClass() == Pawn.class && !(p.y== col && p.x==row);
     }
 }
 

@@ -418,12 +418,13 @@ class King extends Piece {
                 canCastleRight = true;
                 return true;
             }
-            if(game.squares[this.x][3].piece == null &&game.squares[this.x][2].piece == null &&
+            //check left castle
+            if(game.squares[this.x][3].piece == null && game.squares[this.x][2].piece == null &&
                     isSameTeam(this, game.squares[this.x][0].piece) && game.squares[this.x][0].piece.getClass() == Rock.class) {
-                if(newY == 1 && game.squares[this.x][newY].piece == null) {
-                    canCastleLeft = true;
+                if(game.squares[this.x][1].piece != null || newY == 1) {
                     return false;
                 }
+                canCastleLeft = true;
                 return true;
             }
         }
