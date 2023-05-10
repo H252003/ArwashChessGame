@@ -15,6 +15,23 @@ public abstract class Piece {
     public boolean isFirst_move = true;
     public boolean isPromoted = false;
     public boolean inLastRow = false;
+
+public boolean isValidMove(square[][] squares, int x, int y){
+    if(this.isSameTeam(squares[x][y].piece)){
+
+        return false ;
+    }
+    if(!this.pieceCanMove(x,y)) {
+        return false;
+    }
+    if(this.moveHitPiece(x,y))
+        return false;
+    if(game.checkKing.isKingChecked(squares[x][y],x,y, this.getClass() == King.class))
+        return false;
+
+    return true ;
+}
+
 //public boolean isFirstMove=true;
 
     public Piece(String color, int x, int y) {
@@ -31,11 +48,11 @@ public abstract class Piece {
         }
         return false; }
 
-    public static boolean isSameTeam(Piece p1, Piece p2)
+    public boolean isSameTeam(Piece p2)
     {
-        if(p1 == null || p2 == null)
+        if( p2 == null)
             return false;
-        return p1.color.equals(p2.color);
+        return this.color.equals(p2.color);
     }
     public boolean moveHitPiece(int newX, int newY){
 
@@ -62,8 +79,8 @@ public abstract class Piece {
     public void setY(int y) {
         this.y = y;
     }
-public abstract boolean nextMoveEat(int newX, int newY,int kingX, int kingY );
-    public abstract boolean isValidMovement(int newX, int newY);
+    public abstract boolean nextMoveEat(int newX, int newY,int kingX, int kingY );
+    public abstract boolean pieceCanMove(int newX, int newY);
 
     public Piece promotedPawn(square[][] squares, int newX, int newY){
         //String promotedPiece= null;
@@ -120,7 +137,7 @@ class Pawn extends Piece {
     }
 
 
-    public boolean isValidMovement(int newX, int newY) {
+    public boolean pieceCanMove(int newX, int newY) {
         if (this.color.equals("white")){
             colorIndex = -1;
             colorIndex2=6;
@@ -136,15 +153,15 @@ class Pawn extends Piece {
         //&& game.squares[this.x][this.y].piece.icon==new ImageIcon(getClass().getClassLoader().getResource("resources/chess_white_pawn-removebg-preview (1).png"))
         //               || game.squares[this.x][this.y].piece.icon==new ImageIcon(getClass().getClassLoader().getResource("resources/black_pawn-removebg-preview (1).png"))
         if (this.x==colorIndex2 && !isPromoted) {
-           // promotedPawn(game.squares, this.x, this.y); //square.oldPiece =
+            // promotedPawn(game.squares, this.x, this.y); //square.oldPiece =
             this.isPromoted = true;
             this.inLastRow = true;
         }
 
 
-            //push pawn 1
+        //push pawn 1
         if(this.y == newY && newX == this.x - colorIndex ) //&& game.squares[newX][newY].piece == null
-                return true;
+            return true;
 
         //push pawn 2
         if (isFirst_move && this.y == newY && newX == this.x - colorIndex * 2 && game.squares[newX + colorIndex][newY].piece == null) //&& game.squares[newX][newY].piece == null
@@ -158,7 +175,7 @@ class Pawn extends Piece {
         if(this.y == newY + 1 && newX == this.x - colorIndex && game.squares[newX][newY].piece != null)
             return true;
 
-            return false;
+        return false;
     }
    /* if(color=="white")
     colorIndex=7;
@@ -171,11 +188,11 @@ class Pawn extends Piece {
 
 //
 
-        public boolean moveHitPiece(int newX, int newY)
-        {
+    public boolean moveHitPiece(int newX, int newY)
+    {
 
-            return false;
-        } @Override
+        return false;
+    } @Override
     public boolean nextMoveEat(int newX, int newY,int kingX, int kingY) {
         if (this.color.equals("white"))
             colorIndex = -1;
@@ -219,7 +236,7 @@ class Pawn extends Piece {
         return false;
     }
 
-    }
+}
 
 
 class Knight extends Piece {
@@ -245,7 +262,7 @@ class Knight extends Piece {
     public boolean nextMoveEat(int newX, int newY, int kingX, int kingY) {
         return false;}
 
-    public boolean isValidMovement(int newX, int newY) {
+    public boolean pieceCanMove(int newX, int newY) {
         if(Math.abs(newX-this.x) == 1 || Math.abs(newY-this.y) ==1)
             return false;
 
@@ -280,15 +297,15 @@ class Bishop extends Piece {
         return false;
     }
 
-    public boolean isValidMovement(int newX, int newY) {
+    public boolean pieceCanMove(int newX, int newY) {
         // Check if move is valid for bishop
         if(Math.abs(this.x - newX) <= 3)
         {
             //make it not eat its opposite when shifting colors
             if(this.x == newX)
-                if(game.squares[newX][newY].piece == null || isSameTeam(this,game.squares[newX][newY].piece))
+                if(game.squares[newX][newY].piece == null || isSameTeam(game.squares[newX][newY].piece))
 
-                return Math.abs(this.y - newY) == 1;
+                    return Math.abs(this.y - newY) == 1;
 
             return Math.abs(this.x - newX) ==  Math.abs(this.y - newY);
         }
@@ -314,7 +331,7 @@ class Rock extends Piece {
         }
     }
 
-    public boolean isValidMovement(int newX, int newY) {
+    public boolean pieceCanMove(int newX, int newY) {
         // Check if move is valid for rook
         return (this.x == newX && this.y != newY) || (this.x != newX && this.y == newY);
 
@@ -377,7 +394,7 @@ class King extends Piece {
     }
     public static boolean canCastleRight = false;
     public static boolean canCastleLeft = false;
-     public int kingX= this.x;
+    public int kingX= this.x;
     public int kingY= this.y;
 
     public King(String color, int x, int y) {
@@ -401,26 +418,26 @@ class King extends Piece {
         return false;
     }
 //public boolean checked(){
-        //if(nextMoveEat()==true)
+    //if(nextMoveEat()==true)
 
 
-    public boolean isValidMovement(int newX, int newY) {
+    public boolean pieceCanMove(int newX, int newY) {
         // Check if move is valid for king
         if (Math.abs((this.x - newX)*(this.y-newY))==1 ||Math.abs(newY-this.y)+ Math.abs( newX-this.x)==1){
             kingX= this.x;
-             kingY= this.y;
-             return true;}
+            kingY= this.y;
+            return true;}
 
         if(newX == this.x && isFirst_move) {
             //check right castle
             if (game.squares[this.x][6].piece == null && game.squares[this.x][5].piece == null &&
-                    isSameTeam(this, game.squares[this.x][7].piece) && game.squares[this.x][7].piece.getClass() == Rock.class) {
+                    isSameTeam( game.squares[this.x][7].piece) && game.squares[this.x][7].piece.getClass() == Rock.class) {
                 canCastleRight = true;
                 return true;
             }
             //check left castle
             if(game.squares[this.x][3].piece == null && game.squares[this.x][2].piece == null &&
-                    isSameTeam(this, game.squares[this.x][0].piece) && game.squares[this.x][0].piece.getClass() == Rock.class) {
+                    isSameTeam( game.squares[this.x][0].piece) && game.squares[this.x][0].piece.getClass() == Rock.class) {
                 if(game.squares[this.x][1].piece != null || newY == 1) {
                     return false;
                 }
@@ -454,7 +471,7 @@ class Queen extends Piece {
         }
     }
 
-    public boolean isValidMovement(int newX, int newY) {
+    public boolean pieceCanMove(int newX, int newY) {
         // Check if move is valid for pawn
         if(this.x == newX)
             return Math.abs(this.y - newY) >0;
@@ -563,5 +580,4 @@ class ChessGame {
     }
 
 }
-
 

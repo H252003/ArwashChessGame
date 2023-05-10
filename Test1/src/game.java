@@ -80,10 +80,10 @@ public class game extends JFrame {
 
 //                if(i==7 && j==7)
 //                    squares[i][j] = new square(new King("black", j, i));
-//                if(i==6 && j==5)
+//                if(i==5 && j==5)
 //                    squares[i][j] = new square(new Queen("white", j, i));
-//                if(i==5 && j==6)
-//                    squares[i][j] = new square(new Pawn("white", j, i));
+//                if(i==3 && j==6)
+//                    squares[i][j] = new square(new Rock("white", j, i));
 //                if(i==0 && j==0)
 //                    squares[i][j] = new square(new King("white", j, i));
 
@@ -155,31 +155,31 @@ public class game extends JFrame {
         NameLabel WhiteName = new NameLabel(name2, whiteName);
         NameLabel BlackName = new NameLabel(name1, blackName);
 
-            // Check if it's the white player's turn
-            if (TimerLabel.whiteTurn) {
-                Timer2.startTimer();
-                Timer1.stopTimer();
-                // Check if the time has run out for the black player
+        // Check if it's the white player's turn
+        if (TimerLabel.whiteTurn) {
+            Timer2.startTimer();
+            Timer1.stopTimer();
+            // Check if the time has run out for the black player
 
-                }
-
-            // Check if it's the black player's turn
-            else {
-                Timer1.startTimer();
-                Timer2.stopTimer();
-                // Check if the time has run out for the white player
-                          }
-            }
-
-
-
-public static void endGame(){
-        JOptionPane.showMessageDialog(null, "Game Over");
         }
 
+        // Check if it's the black player's turn
+        else {
+            Timer1.startTimer();
+            Timer2.stopTimer();
+            // Check if the time has run out for the white player
+        }
+    }
 
 
-//    Piece getKing(Icon icon)
+
+    public static void endGame(String sayIt){
+        JOptionPane.showMessageDialog(null, sayIt);
+    }
+
+
+
+    //    Piece getKing(Icon icon)
 //    {
 //        for (int i = 0; i < 8; i++) {
 //            for (int j = 0; j < 8; j++) {
@@ -207,7 +207,7 @@ public static void endGame(){
             for (int i = 0; i < 8; i++) {
                 for (int j = 0; j < 8; j++) {
 
-                    if (isValidMove(square.oldPiece,squares, i, j)) {
+                    if (square.oldPiece.isValidMove(squares, i, j)) {
 //                        if(square.oldPiece.isSameTeam(square.oldPiece , squares[i][j].piece))
 //                            squares[i][j].setBackground(new Color(255, 0, 0));
                         if(squares[i][j].piece == null)
@@ -216,8 +216,8 @@ public static void endGame(){
                             squares[i][j].setBackground(new Color(253, 240, 1));
                     }
                     // color same team pieces with red
-                 else if(square.oldPiece.isValidMovement(i,j) && square.oldPiece.isSameTeam(square.oldPiece , squares[i][j].piece))
-                    squares[i][j].setBackground(new Color(253, 0, 2));
+                    else if(square.oldPiece.pieceCanMove(i,j) && square.oldPiece.isSameTeam(squares[i][j].piece))
+                        squares[i][j].setBackground(new Color(253, 0, 2));
                 }
 
             }
@@ -241,38 +241,40 @@ public static void endGame(){
         }
 
     }
-    public static boolean isValidMove(Piece oldPiece ,square[][] squares, int x, int y){
-        if(oldPiece.isSameTeam(oldPiece,squares[x][y].piece)){
-
-            return false ;
-        }
-        if(!oldPiece.isValidMovement(x,y)) {
-            return false;
-        }
-        if(oldPiece.moveHitPiece(x,y))
-            return false;
-        if(checkKing.isKingChecked(squares[x][y],x,y, oldPiece.getClass() == King.class))
-        return false;
-
-        return true ;
-    }
+//    public static boolean isValidMove(Piece oldPiece ,square[][] squares, int x, int y){
+//        if(oldPiece.isSameTeam(oldPiece,squares[x][y].piece)){
+//
+//            return false ;
+//        }
+//        if(!oldPiece.pieceCanMove(x,y)) {
+//            return false;
+//        }
+//        if(oldPiece.moveHitPiece(x,y))
+//            return false;
+//        if(checkKing.isKingChecked(squares[x][y],x,y, oldPiece.getClass() == King.class))
+//        return false;
+//
+//        return true ;
+//    }
 
     public static boolean validity(square[][] squares, int x, int y, String color) {
-        boolean valid = false;
+
         for (int i = 0; i < 8; i++) {
             for (int j = 0; j < 8; j++) {
 
-                if (isValidMove(squares[x][y].piece,squares,i ,j)) {
+                if (squares[x][y].piece.isValidMove(squares, i, j)) {
                     return true;
                 }
-            }}
-    return false;}
+            }
+        }
+        return false;
+    }
 
 
-public static void main(String args[]) throws IOException {
-    game g = new game("A", "B", "4");
+    public static void main(String args[]) throws IOException {
+        game g = new game("A", "B", "4");
 
-}
+    }
 
 
 }

@@ -52,10 +52,10 @@ public class chckScan {
                 break;
             if (kingCol + (i * colVal) > -1 && kingCol + (i * colVal) < 8 && kingRow + (i * rowVal) > -1 && kingRow + (i * rowVal) < 8) {
                 Piece piece = game.squares[kingRow + (i * rowVal)][kingCol + (i * colVal)].piece;
-                if (piece != null ) {//&& piece != square.oldPiece
-                    if (!Piece.isSameTeam(piece, king.piece) && (piece.getClass() == Rock.class || piece.getClass() == Queen.class))
+                if (piece != null && piece != square.oldPiece) {//
+                    if (!piece.isSameTeam(king.piece) && (piece.getClass() == Rock.class || piece.getClass() == Queen.class))
                         return true;
-                    else if(virtualKing && piece.getClass() == King.class && Piece.isSameTeam(piece, king.piece))
+                    else if(virtualKing && piece.getClass() == King.class && piece.isSameTeam(king.piece))
                         continue;
                     break;
                 }
@@ -71,10 +71,10 @@ public class chckScan {
                 break;
             if (kingCol - (i * colVal) > -1 && kingCol - (i * colVal) < 8 && kingRow - (i * rowVal) > -1 && kingRow - (i * rowVal) < 8) {
                 Piece piece = game.squares[kingRow - (i * rowVal)][kingCol - (i * colVal)].piece;
-                if (piece != null ) {//&& piece != square.oldPiece
-                    if (!Piece.isSameTeam(piece, king.piece) && (piece.getClass() == Queen.class)) //piece.getClass() == Bishop.class ||
+                if (piece != null && piece != square.oldPiece) {//
+                    if (!piece.isSameTeam(king.piece) && (piece.getClass() == Queen.class)) //piece.getClass() == Bishop.class ||
                         return true;
-                    else if(virtualKing && piece.getClass() == King.class && Piece.isSameTeam(piece, king.piece))
+                    else if(virtualKing && piece.getClass() == King.class && piece.isSameTeam(king.piece))
                         continue;
                     break;
                 }
@@ -85,7 +85,7 @@ public class chckScan {
 
     private boolean checkBishop(Piece p, square king, int col , int row){
 
-        return p!= null && !Piece.isSameTeam(p,king.piece) && p.getClass() == Bishop.class && !(p.y== col && p.x==row);
+        return p!= null && !p.isSameTeam(king.piece) && p.getClass() == Bishop.class; //&& !(p.y== col && p.x==row);
     }
     private boolean eatByBishop(int col, int row, square king, int kingCol, int kingRow) {
         boolean res1 = false,res2 = false,res3= false,res4 = false,res5 = false,res6 = false,res7 = false, res8 = false,
@@ -121,7 +121,7 @@ public class chckScan {
 
     private boolean checkknight(Piece p, square king, int col , int row){
 
-            return p!= null && !Piece.isSameTeam(p,king.piece) && p.getClass() == Knight.class && !(p.y== col && p.x==row);
+        return p!= null && !p.isSameTeam(king.piece) && p.getClass() == Knight.class && !(p.y== col && p.x==row);
     }
 
     private boolean hitByKnight(int col, int row, square king, int kingCol, int kingRow) {
@@ -129,7 +129,7 @@ public class chckScan {
         if(kingCol - 3 > -1 && kingRow - 2 > -1)
             res1 = checkknight(game.squares[kingRow-2][kingCol-3].piece, king, col, row) ;
         if(kingCol + 3 < 8 && kingRow - 2 > -1)
-             res2 = checkknight(game.squares[kingRow-2][kingCol+3].piece, king, col, row) ;
+            res2 = checkknight(game.squares[kingRow-2][kingCol+3].piece, king, col, row) ;
         if(kingCol + 2 < 8 && kingRow - 3 > -1)
             res3 =   checkknight(game.squares[kingRow-3][kingCol+2].piece, king, col, row) ;
         if(kingCol + 2 < 8 && kingRow + 3 < 8)
@@ -145,10 +145,10 @@ public class chckScan {
 
         return res1 || res2 || res3 || res4 || res5 || res6 || res7 || res8;
 
-         }
+    }
     private boolean checkKing(Piece p, square king){
 
-        return p!= null && !Piece.isSameTeam(p,king.piece) && p.getClass() == King.class ;
+        return p!= null && !p.isSameTeam(king.piece) && p.getClass() == King.class ;
     }
 
     private boolean hitByKing( square king, int kingCol, int kingRow) {
@@ -186,20 +186,20 @@ public class chckScan {
 
         if(kingCol +1 <8 ){
 
-                if(kingRow+colorVal > -1 && kingRow+colorVal < 8){
-                    res1 = checkPawn(game.squares[kingRow+colorVal][kingCol+1].piece, king, col, row) ;
-                }
+            if(kingRow+colorVal>-1 && kingRow+colorVal<8){
+                res1 = checkPawn(game.squares[kingRow+colorVal][kingCol+1].piece, king, col, row) ;
+            }
 
 
         }
         if(kingCol -1 > -1 ){
-                if(kingRow+colorVal>-1 && kingRow+colorVal<8){
-                    res2 = checkPawn(game.squares[kingRow+colorVal][kingCol-1].piece, king, col, row) ;
-                }
+            if(kingRow+colorVal>-1 && kingRow+colorVal<8){
+                res2 = checkPawn(game.squares[kingRow+colorVal][kingCol-1].piece, king, col, row) ;
+            }
 
 
         }
-        if(kingRow+colorVal>-1 && kingRow+colorVal<8 && kingCol==col){
+        if(kingRow+colorVal>-1 && kingRow+colorVal<8 ){  //&& kingCol==col
             res3 = checkPawn(game.squares[kingRow+colorVal][kingCol].piece, king, col, row) ;
         }
 
@@ -208,7 +208,7 @@ public class chckScan {
     }
     private boolean checkPawn(Piece p, square king,int col , int row){
 
-        return p!= null && !Piece.isSameTeam(p,king.piece) && p.getClass() == Pawn.class && !(p.y== col && p.x==row);
+        return p!= null && !p.isSameTeam(king.piece) && p.getClass() == Pawn.class && !(p.y== col && p.x==row)  ; //
     }
 }
 
