@@ -16,21 +16,21 @@ public abstract class Piece {
     public boolean isPromoted = false;
     public boolean inLastRow = false;
 
-public boolean isValidMove(square[][] squares, int x, int y){
-    if(this.isSameTeam(squares[x][y].piece)){
+    public boolean isValidMove(square[][] squares, int x, int y){
+        if(this.isSameTeam(squares[x][y].piece)){
 
-        return false ;
-    }
-    if(!this.pieceCanMove(x,y)) {
-        return false;
-    }
-    if(this.moveHitPiece(x,y))
-        return false;
-    if(game.checkKing.isKingChecked(squares[x][y],x,y, this.getClass() == King.class))
-        return false;
+            return false ;
+        }
+        if(!this.pieceCanMove(x,y)) {
+            return false;
+        }
+        if(this.moveHitPiece(x,y))
+            return false;
+        if(game.checkKing.isKingChecked(squares[x][y],x,y, this.getClass() == King.class))
+            return false;
 
-    return true ;
-}
+        return true ;
+    }
 
 //public boolean isFirstMove=true;
 

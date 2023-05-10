@@ -85,7 +85,7 @@ public class chckScan {
 
     private boolean checkBishop(Piece p, square king, int col , int row){
 
-        return p!= null && !p.isSameTeam(king.piece) && p.getClass() == Bishop.class; //&& !(p.y== col && p.x==row);
+        return p!= null && !p.isSameTeam(king.piece) && p.getClass() == Bishop.class && !(p.y== col && p.x==row); //&&
     }
     private boolean eatByBishop(int col, int row, square king, int kingCol, int kingRow) {
         boolean res1 = false,res2 = false,res3= false,res4 = false,res5 = false,res6 = false,res7 = false, res8 = false,
