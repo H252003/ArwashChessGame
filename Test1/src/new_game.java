@@ -26,6 +26,8 @@ public class new_game extends JFrame {
     private JTextField timer_value=new JTextField();
     private JButton start_btn=new JButton("Start");
     private JButton back_btn=new JButton("Back");
+    public static String gameData;
+
 
     public new_game(boolean if_guest)
     {
@@ -124,6 +126,12 @@ public class new_game extends JFrame {
                     } catch (IOException ex) {
                         throw new RuntimeException(ex);
                     }
+
+                    String whitePlayer = new_game.this.white_name.getText();
+                    String blackPlayer = new_game.this.black_name.getText();
+                    //   timer = new_game.this.timer_value.getText();
+                    gameData = whitePlayer + "%" + blackPlayer + "%" + "winner" +"%"+"timetaken";
+                    User.WriteToFile(gameData);// save data entered in the file of user
                 }
             }
         });

@@ -7,6 +7,8 @@ import java.awt.event.ActionListener;
 
 public class login_page extends JFrame {
 
+    public static String user;
+    public String pass ;
     public JButton BACKButton, LOGINButton;
 
     public login_page() {
@@ -117,14 +119,10 @@ public class login_page extends JFrame {
         LOGINButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                String user = usernameField.getText();
-                String pass = passwordField.getText();
+                user = usernameField.getText();
+                 pass = passwordField.getText();
 
-                if ((user.equals("bassant") && pass.equals("bassant")) ||
-                        (user.equals("hisham") && pass.equals("hisham")) ||
-                        (user.equals("meram") && pass.equals("meram")) ||
-                        (user.equals("judy") && pass.equals("judy")) ||
-                        (user.equals("adham") && pass.equals("adham"))) {
+                if (User.LogInData(user,pass)) {
 
                     JOptionPane.showMessageDialog(null, "helloooo!");
                     System.out.println("logged in page!!");

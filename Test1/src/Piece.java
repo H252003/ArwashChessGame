@@ -81,29 +81,49 @@ public abstract class Piece {
     }
     public abstract boolean nextMoveEat(int newX, int newY,int kingX, int kingY );
     public abstract boolean pieceCanMove(int newX, int newY);
+    //import javax.swing.JOptionPane;
+    //
+    //public class OptionDialogExample {
+    //    public static void main(String[] args) {
+    //        String[] options = {"Option 1", "Option 2", "Option 3", "Option 4"};
+    //        String selectedOption = (String) JOptionPane.showInputDialog(null, "Choose an option:", "Options",
+    //                JOptionPane.PLAIN_MESSAGE, null, options, options[0]);
+    //
+    //        if (selectedOption != null) {
+    //            JOptionPane.showMessageDialog(null, "You selected: " + selectedOption, "Selected Option",
+    //                    JOptionPane.INFORMATION_MESSAGE);
+    //        } else {
+    //            JOptionPane.showMessageDialog(null, "No option selected", "Selected Option",
+    //                    JOptionPane.WARNING_MESSAGE);
+    //        }
+    //    }
+    //}
+    //JOptionPane.showOptionDialog(null, "Choose an option:", "Options",
+    //                JOptionPane.DEFAULT_OPTION, JOptionPane.PLAIN_MESSAGE, null, options, options[0]);
 
-    public Piece promotedPawn(square[][] squares, int newX, int newY){
+    public  Piece promotedPawn(square[][] squares, int newX, int newY){
         //String promotedPiece= null;
-        String[] options = {"queen", "knight", "bishop","rook"};
-        String piece = (String) JOptionPane.showInputDialog(null, "Choose a piece:", "mabrooooook", JOptionPane.PLAIN_MESSAGE,null,options,options[0]);
-        if (piece == "rook") {
+        Object[] options = {"queen", "knight", "bishop","rook"};
+        int piece =  JOptionPane.showOptionDialog(null, "Choose a piece:", "mabrooooook",JOptionPane.PLAIN_MESSAGE, JOptionPane.PLAIN_MESSAGE,null,options,options[0]);
+        if (piece == 3) {
             return squares[newX][newY].piece = new Rock(color,newY,newX);
 
         }
 
-        else if (piece == "bishop") {
+        else if (piece == 2) {
 
-            return squares[newX][newY].piece = new Bishop(color, newY, newX);
+          return    squares[newX][newY].piece = new Bishop(color, newY, newX);
 
-        } else if (piece=="queen") {
-            return squares[newX][newY].piece = new Queen(color, newY, newX);
+        } else if (piece==0) {
+          return    squares[newX][newY].piece = new Queen(color, newY, newX);
         }
-        else if (piece== "knight" ){
-            return squares[newX][newY].piece = new Knight(color, newY, newX);
+        else if (piece== 1 ){
+           return   squares[newX][newY].piece = new Knight(color, newY, newX);
         }
         game.board.revalidate();
         game.board.repaint();
-        return null;
+        return  squares[newX][newY].piece = new Queen(color, newY, newX);
+
     }
 }
 

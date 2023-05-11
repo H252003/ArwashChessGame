@@ -181,7 +181,7 @@ public class square extends JButton implements ActionListener {
 
                 //check if pawn in last row to promotes
                 if (piece.inLastRow) {
-                    this.piece = this.piece.promotedPawn(game.squares, this.col, this.row);
+                  this.piece=  piece.promotedPawn(game.squares, this.col, this.row);
                 }
 
 

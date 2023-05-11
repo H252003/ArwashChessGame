@@ -17,10 +17,8 @@ public class Status extends JFrame implements ActionListener {
         label.setBounds(300, 200, 400, 100);
         label.setForeground(Color.white);
         label.setFont(new Font("B",Font.BOLD,48));
-        Object[][] data = {
-                {"Player1", 0, "00:00", "Playing..."},
-                {"Player2", 0, "00:00", "Playing..."},
-        };
+        User.ReadDataFromFile();// show data in the file as table
+        Object[][] data = User.GamesArray;
         String[] columnNames = {"Player", "Score", "Time", "Status"};
         JTable table = new JTable(data, columnNames);
         table.getColumnModel().getColumn(0).setPreferredWidth(100);
