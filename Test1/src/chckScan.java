@@ -10,8 +10,8 @@ public class chckScan {
         square king = game.findKing(TimerLabel.whiteTurn);
         assert king != null;
 
-        int kingCol = king.row;
-        int kingRow = king.col;
+        int kingCol = king.col;
+        int kingRow = king.row;
 
 
         if (square.oldPiece != null && square.oldPiece.getClass() == King.class) {
@@ -23,8 +23,8 @@ public class chckScan {
         /////////////////
 
         if(virtualKingIsMoving) {
-            kingRow = newX;
             kingCol = newY;
+            kingRow = newX;
         }
 
         return hitByRook(newY, newX, king, kingCol, kingRow, 0, 1, virtualKingIsMoving) || //up
@@ -48,7 +48,7 @@ public class chckScan {
 
     private boolean hitByRook(int col, int row, square king, int kingCol, int kingRow, int colVal, int rowVal,boolean virtualKing) {
         for (int i = 1; i < 8; i++) {
-            if (kingCol + (i * colVal) == col && kingRow + (i * rowVal) == row)
+            if (kingCol + (i * colVal) == col && kingRow + (i * rowVal) == row && !virtualKing)
                 break;
             if (kingCol + (i * colVal) > -1 && kingCol + (i * colVal) < 8 && kingRow + (i * rowVal) > -1 && kingRow + (i * rowVal) < 8) {
                 Piece piece = game.squares[kingRow + (i * rowVal)][kingCol + (i * colVal)].piece;
@@ -67,7 +67,7 @@ public class chckScan {
 
     private boolean hitByBishop(int col, int row, square king, int kingCol, int kingRow, int colVal, int rowVal, boolean virtualKing) {
         for (int i = 1; i < 8; i++) {
-            if (kingCol - (i * colVal) == col && kingRow - (i * rowVal) == row)
+            if (kingCol - (i * colVal) == col && kingRow - (i * rowVal) == row && !virtualKing)
                 break;
             if (kingCol - (i * colVal) > -1 && kingCol - (i * colVal) < 8 && kingRow - (i * rowVal) > -1 && kingRow - (i * rowVal) < 8) {
                 Piece piece = game.squares[kingRow - (i * rowVal)][kingCol - (i * colVal)].piece;
@@ -85,7 +85,7 @@ public class chckScan {
 
     private boolean checkBishop(Piece p, square king, int col , int row){
 
-        return p!= null && !p.isSameTeam(king.piece) && p.getClass() == Bishop.class && !(p.y== col && p.x==row); //&&
+        return p!= null && !p.isSameTeam(king.piece) && p.getClass() == Bishop.class && !(p.y== col && p.x==row); //
     }
     private boolean eatByBishop(int col, int row, square king, int kingCol, int kingRow) {
         boolean res1 = false,res2 = false,res3= false,res4 = false,res5 = false,res6 = false,res7 = false, res8 = false,
@@ -178,7 +178,7 @@ public class chckScan {
         boolean res1 = false ;
         boolean res2 = false ;
         boolean res3 = false ;
-        if(king.piece.color=="white"){
+        if(king.piece.color.equals("white")){
             colorVal = 1 ;
         }
         else {

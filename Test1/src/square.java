@@ -6,13 +6,13 @@ public class square extends JButton implements ActionListener {
     public square(Piece p) {
         piece = p;
         addActionListener(this);
-        col = p.getX();
-        row = p.getY();
+        col = p.y;
+        row = p.x;
         // this.setBorderPainted(false);
 
     }
 
-    public square(int col, int row) {
+    public square(int row, int col) {
         addActionListener(this);
         this.col = col;
         this.row = row;
@@ -41,8 +41,9 @@ public class square extends JButton implements ActionListener {
     chckScan check = new chckScan();
 
     public void colorCanMove(String color) {
-        boolean noMovesAval = true;
-        boolean inStale = false;
+//        boolean noMovesAvalKing = true;
+        boolean noMovesAvalAll = true;
+//        boolean inStale = false;
 
         for (int i = 0; i < 8; i++) {
             for (int j = 0; j < 8; j++) {
@@ -53,45 +54,46 @@ public class square extends JButton implements ActionListener {
                         kingIsMoving = true;
                     }
 
-//                    if (game.validity(game.squares, i, j, color)) {
-//                        return ;
-
-//
-//                    }
                     for (int x = 0; x < 8; x++) {
                         for (int y = 0; y < 8; y++) {
+                            ///////////////////////////
+                            Piece tmp = oldPiece;
+                            oldPiece = null;
+                            ///////////////////////
                             if (game.squares[i][j].piece.isValidMove(game.squares, x,y)) {
+
                                 if (kingIsMoving) {
-                                    Piece tmp = oldPiece;
-                                    oldPiece = null;
                                     if (game.checkKing.isKingChecked(game.squares[0][0], x, y, true)) {
                                         oldPiece = tmp;
                                         continue;
                                     }
+//                                    noMovesAvalKing = false;
 
                                 }
-//                    Piece kingoo = game.findKing(TimerLabel.whiteTurn).piece;
-//                    if(kingoo.pieceCanMove(i,j))
-//                        if (game.checkKing.isKingChecked(game.squares[0][0], i, j, false)) inStale = true;
-                                noMovesAval = false;
+
+                                oldPiece = tmp;
+                                noMovesAvalAll = false;
+                                break;
+
                             }
                         }
+                        if(!noMovesAvalAll) break;
                     }
 
                 }
 
             }
         }
-        if (noMovesAval) {
-            if (inStale){
-                game.endGame("staleMate");
-            } else {
-                game.endGame("checkMate");
-            }
-            //game.endGame("checkMate");//checkmate
-
+        if (noMovesAvalAll) {
+//            if (noMovesAvalKing){
+            game.endGame("checkMate");
+//            } else {
+//                game.endGame("staleMate");
         }
+        //game.endGame("checkMate");//checkmate
+
     }
+//        }
 
     public boolean canCastle(){
         return this.piece.getClass() == King.class && piece.isFirst_move && game.squares[this.row][6].piece == null&&
@@ -126,7 +128,7 @@ public class square extends JButton implements ActionListener {
 
 
 
-            if (oldPiece.isValidMove( game.squares, this.col, this.row)) {
+            if (oldPiece.isValidMove( game.squares, this.row, this.col)) {
 
                 //get pieces out
                 if (!oldPiece.isSameTeam(this.piece)&&this.piece!=null) {
@@ -151,8 +153,8 @@ public class square extends JButton implements ActionListener {
                 //  this.piece = .piece;
 
 
-                this.piece.y = row;
-                this.piece.x = col;
+                this.piece.y = col;
+                this.piece.x = row;
 
                 //check king castle && not its original moves
                 if(this.piece.getClass() == King.class && this.piece.isFirst_move)
@@ -175,8 +177,8 @@ public class square extends JButton implements ActionListener {
                 //oldPiece = null;
                 System.out.println("moove!");
                 game.getBack(game.squares);
-                System.out.println(this.col);
                 System.out.println(this.row);
+                System.out.println(this.col);
                 begin_move = false;
 
                 //check if pawn in last row to promotes
@@ -186,15 +188,6 @@ public class square extends JButton implements ActionListener {
 
 
 
-
-
-
-
-
-                               /* if (piece.isPromoted){
-                                    game.squares[oldPiece.x][oldPiece.y].piece = null;
-                                    System.out.println("ppp");
-                                }*/
                 game.board.repaint();
                 game.board.revalidate();
 
