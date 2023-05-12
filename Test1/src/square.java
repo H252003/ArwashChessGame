@@ -159,14 +159,16 @@ public class square extends JButton implements ActionListener {
                 //check king castle && not its original moves
                 if(this.piece.getClass() == King.class && this.piece.isFirst_move)
                 {
-                    if(King.canCastleRight && this.piece.y != 5 )
+                    if(King.canCastleRight && this.piece.y == 6 )
                     {
                         game.squares[this.piece.x][5].piece = game.squares[this.piece.x][7].piece;
+                        game.squares[this.piece.x][5].piece.y = 5;
                         game.squares[this.piece.x][7].piece = null;
                     }
-                    if(King.canCastleLeft && this.piece.y !=3)
+                    if(King.canCastleLeft && this.piece.y == 2)
                     {
                         game.squares[this.piece.x][3].piece = game.squares[this.piece.x][0].piece;
+                        game.squares[this.piece.x][3].piece.y = 3;
                         game.squares[this.piece.x][0].piece = null;
                     }
                 }
@@ -183,7 +185,7 @@ public class square extends JButton implements ActionListener {
 
                 //check if pawn in last row to promotes
                 if (piece.inLastRow) {
-                  this.piece=  piece.promotedPawn(game.squares, this.col, this.row);
+                  this.piece=  piece.promotedPawn(game.squares, this.row, this.col);
                 }
 
 

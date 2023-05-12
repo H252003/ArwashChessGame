@@ -89,20 +89,20 @@ public abstract class Piece {
         Object[] options = {"queen", "knight", "bishop","rook"};
         int piece =  JOptionPane.showOptionDialog(null, "Choose a piece:", "mabrooooook",JOptionPane.PLAIN_MESSAGE, JOptionPane.PLAIN_MESSAGE,null,options,options[0]);
         if (piece == 3) {
-            return squares[newX][newY].piece = new Rock(color,newY,newX);
+            return squares[newX][newY].piece = new Rock(color,newX,newY);
         }
         else if (piece == 2) {
-          return    squares[newX][newY].piece = new Bishop(color, newY, newX);
+          return    squares[newX][newY].piece = new Bishop(color, newX, newY);
 
         } else if (piece==0) {
-          return    squares[newX][newY].piece = new Queen(color, newY, newX);
+          return    squares[newX][newY].piece = new Queen(color, newX, newY);
         }
         else if (piece== 1 ){
-           return   squares[newX][newY].piece = new Knight(color, newY, newX);
+           return   squares[newX][newY].piece = new Knight(color, newX, newY);
         }
         game.board.revalidate();
         game.board.repaint();
-        return  squares[newX][newY].piece = new Queen(color, newY, newX);
+        return  squares[newX][newY].piece = new Queen(color, newX, newY);
 
     }
 }
@@ -428,19 +428,19 @@ class King extends Piece {
             kingY= this.y;
             return true;}
 
-        if(newX == this.x && isFirst_move) {
+        if(newX == this.x && isFirst_move && !game.checkKing.isKingChecked(game.squares[0][0], this.x, 4, false)) {
             //check right castle
-            if (game.squares[this.x][6].piece == null && game.squares[this.x][5].piece == null &&
+            if (game.squares[this.x][6].piece == null && game.squares[this.x][5].piece == null && (newY == 5 || newY == 6) &&
                     isSameTeam( game.squares[this.x][7].piece) && game.squares[this.x][7].piece.getClass() == Rock.class) {
                 canCastleRight = true;
                 return true;
             }
             //check left castle
-            if(game.squares[this.x][3].piece == null && game.squares[this.x][2].piece == null &&
-                    isSameTeam( game.squares[this.x][0].piece) && game.squares[this.x][0].piece.getClass() == Rock.class) {
-                if(game.squares[this.x][1].piece != null || newY == 1) {
-                    return false;
-                }
+            if(game.squares[this.x][3].piece == null && game.squares[this.x][2].piece == null && game.squares[this.x][1].piece == null &&
+                    (newY == 3 || newY == 2) && isSameTeam( game.squares[this.x][0].piece) && game.squares[this.x][0].piece.getClass() == Rock.class) {
+//                if(game.squares[this.x][1].piece == null || newY == 1) {
+//                    return false;
+//                }
                 canCastleLeft = true;
                 return true;
             }

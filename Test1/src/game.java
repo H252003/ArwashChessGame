@@ -90,6 +90,21 @@ public class game extends JFrame {
 //                if(i==0 && j==0)
 //                    squares[i][j] = new square(new King("white", i, j));
 
+
+
+                // stoleMate check
+//                if(i==7 && j==7)
+//                    squares[i][j] = new square(new King("black", i, j));
+//                if(i==5 && j==5)
+//                    squares[i][j] = new square(new Queen("white", i, j));
+//                if(i==3 && j==6)
+//                    squares[i][j] = new square(new Rock("white", i, j));
+//                if(i==0 && j==0)
+//                    squares[i][j] = new square(new King("white", i, j));
+//                if(i==5 && j==3)
+//                    squares[i][j] = new square(new Pawn("white", i, j));
+
+
                 if (i == 6) {
                     squares[i][j] = new square(new Pawn("black", i, j));
                 } else if (i == 7) {
@@ -227,7 +242,7 @@ public class game extends JFrame {
                             squares[i][j].setBackground(new Color(253, 240, 1));
                     }
                     // color same team pieces with red
-                    else if(square.oldPiece.pieceCanMove(i,j) && square.oldPiece.isSameTeam(squares[i][j].piece))
+                    else if(square.oldPiece.pieceCanMove(i,j) && square.oldPiece.isSameTeam(squares[i][j].piece)) // && squares[i][j].piece.moveHitPiece(i,j)
                         squares[i][j].setBackground(new Color(253, 0, 2));
                 }
 
