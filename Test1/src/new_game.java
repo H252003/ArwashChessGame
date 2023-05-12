@@ -32,11 +32,11 @@ public class new_game extends JFrame {
     private JButton start_btn=new JButton("Start");
     private JButton back_btn=new JButton("Back");
     public static String gameData;
+    public static boolean guest;
 
 
     public new_game(boolean if_guest)
     {
-
         // Set up the JFrame
         setTitle("New Game");
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -48,6 +48,7 @@ public class new_game extends JFrame {
         mainPanel.setLayout(new GridBagLayout());
 
         // Create the components
+        guest = if_guest;
         white_lab = new JLabel("white");
         white_lab.setFont(new Font("Algerian", Font.PLAIN, 20));
         white_name = new JTextField(20);

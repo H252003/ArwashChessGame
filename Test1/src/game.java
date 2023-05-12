@@ -11,6 +11,8 @@ public class game extends JFrame {
     private static final int boardSize = 400;
     private static final int squareSize = boardSize / 8;
     public static JPanel board;
+
+    public static game gameDispose;
     public static JPanel whiteOut;
     public static JPanel blackOut;
     public static square[][] squares;
@@ -59,6 +61,8 @@ public class game extends JFrame {
         player1.add(timer1);
         player2.add(timer2);
         player2.add(name2);
+        gameDispose = this;
+        gameDispose.setDefaultCloseOperation(EXIT_ON_CLOSE);
         board.setBackground(new Color(255, 255, 255));
         whiteOut.setBackground(Color.black);
         blackOut.setBackground(new Color(255, 255, 255));
@@ -172,7 +176,7 @@ public class game extends JFrame {
         Timer2 = new TimerLabel(timer2, time);
         WhiteName = new NameLabel(name2, whiteName, "white");
         BlackName = new NameLabel(name1, blackName, "black");
-
+        TimerLabel.whiteTurn =true;
         // Check if it's the white player's turn
         if (TimerLabel.whiteTurn) {
             Timer2.startTimer();
@@ -196,6 +200,8 @@ public class game extends JFrame {
         String time = TimerLabel.elapsedTime(Timer1,Timer2);
 
         JOptionPane.showMessageDialog(null, sayIt);
+        gameDispose.dispose();
+        new new_game(true);
         new_game.endData(winner, time);
         new_game.gameData = new_game.whitePlayer + "%" + new_game.blackPlayer + "%" + new_game.Winner +"%"+ new_game.Time;
         User.WriteToFile(new_game.gameData);
