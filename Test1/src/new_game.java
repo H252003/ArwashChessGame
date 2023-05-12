@@ -19,6 +19,8 @@ public class new_game extends JFrame {
         return false;
     }
     private JLabel white_lab = new JLabel();
+    public static String Winner;
+    public static String Time;
     private JTextField white_name = new JTextField();
     private JLabel black_lab =new JLabel();
     private JTextField black_name =new JTextField();
@@ -130,7 +132,8 @@ public class new_game extends JFrame {
                     String whitePlayer = new_game.this.white_name.getText();
                     String blackPlayer = new_game.this.black_name.getText();
                     //   timer = new_game.this.timer_value.getText();
-                    gameData = whitePlayer + "%" + blackPlayer + "%" + "winner" +"%"+"timetaken";
+
+                    gameData = whitePlayer + "%" + blackPlayer + "%" + Winner +"%"+ Time;
                     User.WriteToFile(gameData);// save data entered in the file of user
                 }
             }
@@ -157,7 +160,16 @@ public class new_game extends JFrame {
                 }
             }
         });
+
     }
+
+
+    public static void endData(String winner, String time) {
+        Winner = winner;
+        Time = time;
+
+    }
+
 
 
     public static void main(String args[])

@@ -15,6 +15,7 @@ public class TimerLabel extends JLabel {
     public int getMinute(){
         return minute;
     }
+    public static int clock;
 
     private int second;
     private int minute;
@@ -27,8 +28,8 @@ public class TimerLabel extends JLabel {
     }
     public TimerLabel(JLabel timerLabel, String time) {
         super();
-        int clock = Integer.parseInt(time);
-        second = clock;
+        clock = Integer.parseInt(time);
+//        second = clock;
         countdownTimer(timerLabel,clock);
         timer.start();
     }
@@ -58,8 +59,7 @@ public class TimerLabel extends JLabel {
 
                 if(minute == 0 && second == 0) {
                     timer.stop();
-                    // do something when the timer reaches zero
-                }
+                    game.endGame(TimerLabel.whiteTurn,"Timer ended");}
             }
         });
     }
@@ -70,6 +70,37 @@ public class TimerLabel extends JLabel {
 
     public void stopTimer() {
         timer.stop();
+    }
+    public static String elapsedTime(TimerLabel Timer1, TimerLabel Timer2){
+        int minuteInit = clock;
+        int secondInit = 00;
+        int minuteFinal1 = Timer1.getMinute();
+        int secondFinal1= Timer1.getSecond();
+        int minuteFinal2 = Timer2.getMinute();
+        int secondFinal2 = Timer2.getSecond();
+        int minutes1 = minuteInit - minuteFinal1;
+        int seconds1 = secondInit - secondFinal1;
+        if (seconds1 < 0){
+            seconds1 = seconds1 + 60;
+            minutes1--;
+        }
+        int minutes2 = minuteInit - minuteFinal2;
+        int seconds2 = secondInit - secondFinal2;
+        if (seconds2 < 0){
+            seconds2 = seconds2 + 60;
+            minutes2--;
+        }
+        int minute = minutes1 + minutes2;
+        int second = seconds1 + seconds2;
+        if (second > 60) {
+        second= second -60;
+        minute++;
+        }
+       DecimalFormat dFormat = new DecimalFormat("00");
+       String ddSecond = dFormat.format(second);
+       String ddMinute = dFormat.format(minute);
+        return (ddMinute + ":" + ddSecond);
+
     }
 
 

@@ -86,7 +86,7 @@ public class square extends JButton implements ActionListener {
         }
         if (noMovesAvalAll) {
 //            if (noMovesAvalKing){
-            game.endGame("checkMate");
+            game.endGame(TimerLabel.whiteTurn,"checkMate");
 //            } else {
 //                game.endGame("staleMate");
         }

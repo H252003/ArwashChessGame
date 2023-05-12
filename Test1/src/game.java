@@ -16,6 +16,9 @@ public class game extends JFrame {
     public static square[][] squares;
     public static TimerLabel Timer1 = new TimerLabel();
     public static TimerLabel Timer2 = new TimerLabel();
+    public static NameLabel WhiteName;
+    public static NameLabel BlackName;
+
 //    public static chckScan CheckScan = new chckScan(this);
 
 
@@ -152,8 +155,8 @@ public class game extends JFrame {
 
         Timer1 = new TimerLabel(timer1, time);
         Timer2 = new TimerLabel(timer2, time);
-        NameLabel WhiteName = new NameLabel(name2, whiteName);
-        NameLabel BlackName = new NameLabel(name1, blackName);
+        WhiteName = new NameLabel(name2, whiteName, "white");
+        BlackName = new NameLabel(name1, blackName, "black");
 
         // Check if it's the white player's turn
         if (TimerLabel.whiteTurn) {
@@ -173,11 +176,15 @@ public class game extends JFrame {
 
 
 
-    public static void endGame(String sayIt){
-        JOptionPane.showMessageDialog(null, sayIt);
+    public static void endGame(boolean turn, String sayIt){
+        String winner = NameLabel.setWinner(WhiteName, BlackName, turn);
+        String time = TimerLabel.elapsedTime(Timer1,Timer2);
 
-        //when ok is pressed >> dispose
+        JOptionPane.showMessageDialog(null, sayIt);
+        new_game.endData(winner, time);
     }
+
+
 
 
 
