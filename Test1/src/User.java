@@ -1,4 +1,4 @@
-import java.io.File;
+import  java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
@@ -48,7 +48,7 @@ public class User {
             // take username entered in string
             String filepath = "src/resources/";
             FileWriter writer = new FileWriter(filepath+user, true);
-            writer.write("\n" + gameData); // go to the file specified by username using file path and write in it game data entered(players+timer)
+            writer.write(  gameData+"\n"); // go to the file specified by username using file path and write in it game data entered(players+timer)
             writer.close();
         } catch (IOException evt) {
             throw new RuntimeException(evt);

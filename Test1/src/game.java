@@ -182,6 +182,8 @@ public class game extends JFrame {
 
         JOptionPane.showMessageDialog(null, sayIt);
         new_game.endData(winner, time);
+        new_game.gameData = new_game.whitePlayer + "%" + new_game.blackPlayer + "%" + new_game.Winner +"%"+ new_game.Time;
+        User.WriteToFile(new_game.gameData);
     }
 
 

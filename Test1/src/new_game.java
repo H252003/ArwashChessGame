@@ -21,6 +21,9 @@ public class new_game extends JFrame {
     private JLabel white_lab = new JLabel();
     public static String Winner;
     public static String Time;
+    public static String whitePlayer;
+    public static String blackPlayer;
+
     private JTextField white_name = new JTextField();
     private JLabel black_lab =new JLabel();
     private JTextField black_name =new JTextField();
@@ -129,12 +132,12 @@ public class new_game extends JFrame {
                         throw new RuntimeException(ex);
                     }
 
-                    String whitePlayer = new_game.this.white_name.getText();
-                    String blackPlayer = new_game.this.black_name.getText();
+                     whitePlayer = new_game.this.white_name.getText();
+                     blackPlayer = new_game.this.black_name.getText();
                     //   timer = new_game.this.timer_value.getText();
 
-                    gameData = whitePlayer + "%" + blackPlayer + "%" + Winner +"%"+ Time;
-                    User.WriteToFile(gameData);// save data entered in the file of user
+                    //gameData = whitePlayer + "%" + blackPlayer + "%" + Winner +"%"+ Time;
+                    //User.WriteToFile(gameData);// save data entered in the file of user
                 }
             }
         });
