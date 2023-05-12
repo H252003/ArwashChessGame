@@ -198,13 +198,13 @@ public class game extends JFrame {
     public static void endGame(boolean turn, String sayIt){
         String winner = NameLabel.setWinner(WhiteName, BlackName, turn);
         String time = TimerLabel.elapsedTime(Timer1,Timer2);
-
-        JOptionPane.showMessageDialog(null, sayIt);
-        gameDispose.dispose();
-        new new_game(true);
         new_game.endData(winner, time);
         new_game.gameData = new_game.whitePlayer + "%" + new_game.blackPlayer + "%" + new_game.Winner +"%"+ new_game.Time;
         User.WriteToFile(new_game.gameData);
+        JOptionPane.showMessageDialog(null, sayIt);
+        gameDispose.dispose();
+        new new_game(true);
+
     }
 
 
