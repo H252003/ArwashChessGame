@@ -242,7 +242,7 @@ public class game extends JFrame {
                             squares[i][j].setBackground(new Color(253, 240, 1));
                     }
                     // color same team pieces with red
-                    else if(square.oldPiece.pieceCanMove(i,j) && square.oldPiece.isSameTeam(squares[i][j].piece)) // && squares[i][j].piece.moveHitPiece(i,j)
+                    else if(square.oldPiece.pieceCanMove(i,j) && square.oldPiece.isSameTeam(squares[i][j].piece) ) //&& squares[i][j].piece.moveHitPiece(i,j)
                         squares[i][j].setBackground(new Color(253, 0, 2));
                 }
 
@@ -257,11 +257,14 @@ public class game extends JFrame {
     public static void getBack(square[][] squares) {
         for (int i = 0; i < 8; i++) {
             for (int j = 0; j < 8; j++) {
+
                 if ((i + j) % 2 == 0) {
                     squares[i][j].setBackground(new Color(0, 0, 0));
                 } else {
                     squares[i][j].setBackground(new Color(219, 107, 107));
                 }
+                if(square.oldPiece.isValidMove(squares, i, j) && squares[i][j].piece instanceof King)
+                    squares[i][j].setBackground(new Color(255, 0, 167));
 
             }
         }
