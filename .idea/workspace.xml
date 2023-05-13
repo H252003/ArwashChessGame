@@ -5,10 +5,31 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="af89e118-29e0-4ccb-8827-b334c8305be4" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Test1/src/User.java" beforeDir="false" afterPath="$PROJECT_DIR$/Test1/src/User.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Test1/src/game.java" beforeDir="false" afterPath="$PROJECT_DIR$/Test1/src/game.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Test1/src/square.java" beforeDir="false" afterPath="$PROJECT_DIR$/Test1/src/square.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Test1/src/out/production/Test1/Bishop.class" beforeDir="false" afterPath="$PROJECT_DIR$/Test1/src/out/production/Test1/Bishop.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Test1/src/out/production/Test1/ChessGame.class" beforeDir="false" afterPath="$PROJECT_DIR$/Test1/src/out/production/Test1/ChessGame.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Test1/src/out/production/Test1/King.class" beforeDir="false" afterPath="$PROJECT_DIR$/Test1/src/out/production/Test1/King.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Test1/src/out/production/Test1/Knight.class" beforeDir="false" afterPath="$PROJECT_DIR$/Test1/src/out/production/Test1/Knight.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Test1/src/out/production/Test1/Main_jr.class" beforeDir="false" afterPath="$PROJECT_DIR$/Test1/src/out/production/Test1/Main_jr.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Test1/src/out/production/Test1/Pawn.class" beforeDir="false" afterPath="$PROJECT_DIR$/Test1/src/out/production/Test1/Pawn.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Test1/src/out/production/Test1/Piece.class" beforeDir="false" afterPath="$PROJECT_DIR$/Test1/src/out/production/Test1/Piece.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Test1/src/out/production/Test1/Queen.class" beforeDir="false" afterPath="$PROJECT_DIR$/Test1/src/out/production/Test1/Queen.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Test1/src/out/production/Test1/Rock.class" beforeDir="false" afterPath="$PROJECT_DIR$/Test1/src/out/production/Test1/Rock.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Test1/src/out/production/Test1/Status.class" beforeDir="false" afterPath="$PROJECT_DIR$/Test1/src/out/production/Test1/Status.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Test1/src/out/production/Test1/TimerLabel$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/Test1/src/out/production/Test1/TimerLabel$1.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Test1/src/out/production/Test1/User.class" beforeDir="false" afterPath="$PROJECT_DIR$/Test1/src/out/production/Test1/User.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Test1/src/out/production/Test1/game.class" beforeDir="false" afterPath="$PROJECT_DIR$/Test1/src/out/production/Test1/game.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Test1/src/out/production/Test1/new_game$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/Test1/src/out/production/Test1/new_game$1.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Test1/src/out/production/Test1/new_game$2.class" beforeDir="false" afterPath="$PROJECT_DIR$/Test1/src/out/production/Test1/new_game$2.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Test1/src/out/production/Test1/new_game.class" beforeDir="false" afterPath="$PROJECT_DIR$/Test1/src/out/production/Test1/new_game.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Test1/src/out/production/Test1/resources/Mohisham" beforeDir="false" afterPath="$PROJECT_DIR$/Test1/src/out/production/Test1/resources/Mohisham" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Test1/src/out/production/Test1/resources/adham" beforeDir="false" afterPath="$PROJECT_DIR$/Test1/src/out/production/Test1/resources/adham" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Test1/src/out/production/Test1/resources/bassant" beforeDir="false" afterPath="$PROJECT_DIR$/Test1/src/out/production/Test1/resources/bassant" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Test1/src/out/production/Test1/resources/judy" beforeDir="false" afterPath="$PROJECT_DIR$/Test1/src/out/production/Test1/resources/judy" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Test1/src/out/production/Test1/resources/meram" beforeDir="false" afterPath="$PROJECT_DIR$/Test1/src/out/production/Test1/resources/meram" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Test1/src/out/production/Test1/resources/null" beforeDir="false" afterPath="$PROJECT_DIR$/Test1/src/out/production/Test1/resources/null" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -26,12 +47,13 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "last_opened_file_path": "D:/Eng/SBE/1st/oop/test-project"
   }
-}</component>
+}]]></component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">

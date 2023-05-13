@@ -13,8 +13,13 @@ public class game extends JFrame {
     public static JPanel board;
 
     public static game gameDispose;
-    public static JPanel whiteOut;
-    public static JPanel blackOut;
+    public static JLayeredPane whiteOut;
+    public static JLayeredPane blackOut;
+    //     JLayeredPane player1;
+//     JLayeredPane player2;
+//    JLayeredPane time1;
+//     JLayeredPane time2;
+    JLayeredPane base;
     public static square[][] squares;
     public static TimerLabel Timer1 = new TimerLabel();
     public static TimerLabel Timer2 = new TimerLabel();
@@ -42,43 +47,81 @@ public class game extends JFrame {
     game(String whiteName, String blackName, String time) throws IOException {
 
         this.setTitle("Arwash Chess Game");
-        this.setVisible(true);
-        this.setResizable(true);
-        this.setSize(900, 900);
+
+        this.setResizable(false);
+        this.setSize(712, 632);
         this.setLayout(new BorderLayout());
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         this.getMinimumSize();
+        this.setLayout(null);
+
+
         this.getContentPane().setBackground(new Color(255, 255, 255));
-        board = new JPanel(new GridLayout(8, 8));
-        whiteOut = new JPanel(new GridLayout(8 , 2));
-        blackOut = new JPanel(new GridLayout(8 , 2));
-        JPanel player1 = new JPanel();
-        JPanel player2 = new JPanel();
+        board=new JPanel();
+        whiteOut=new JLayeredPane();
+        blackOut=new JLayeredPane();
+        base = new JLayeredPane();
+//        player1 = new JLayeredPane();
+//        player2 = new JLayeredPane();
+//        time2=new JLayeredPane();
+//        time1=new JLayeredPane();
+
+
+
+        ImageIcon image = new ImageIcon("Test1/src/resources/Rectangle 1.png");
+        JLabel imgLabel = new JLabel(image);
+        imgLabel.setBounds(0,0,700,600);
+        ImageIcon image1 = new ImageIcon("Test1/src/resources/galaxy.jpg");
+        JLabel boardImg = new JLabel(image1);
+        boardImg.setBounds(150,100,400,400);
+        ImageIcon image2 = new ImageIcon("Test1/src/resources/tiles.png");
+        JLabel tilesPic = new JLabel(image2);
+        tilesPic.setBounds(150,100,400,400);
+//        this.setVisible(true);
+        board.setLayout(new GridLayout(8,8));
+        board.setOpaque(false);
+        whiteOut.setLayout(new GridLayout(8,2));
+        blackOut.setLayout(new GridLayout(8,2));
+        board.setBounds(150,100,400,400);
+        whiteOut.setBounds(21,100,100,400);
+        blackOut.setBounds(579,100,100,400);
+        base.setBounds(0,0,700,600);
+
+
         JLabel name1 = new JLabel("player1 name");
         JLabel name2 = new JLabel("player2 name");
         JLabel timer1 = new JLabel("timer 1");
         JLabel timer2 = new JLabel("timer 2");
-        player1.add(name1);
-        player1.add(timer1);
-        player2.add(timer2);
-        player2.add(name2);
+
+        name1.setBounds(350,16,200,30);
+        name2.setBounds(350,552,200,30);
+        timer2.setBounds(335,60,87,26);
+        timer1.setBounds(335,513,87,26);
+////        player1.add(name1);
+//        player1.add(timer1);
+//        player2.add(timer2);
+////        player2.add(name2);
         gameDispose = this;
         gameDispose.setDefaultCloseOperation(EXIT_ON_CLOSE);
-        board.setBackground(new Color(255, 255, 255));
-        whiteOut.setBackground(Color.black);
-        blackOut.setBackground(new Color(255, 255, 255));
-        player1.setBackground(new Color(128, 128, 128));
-        player2.setBackground(new Color(128, 128, 128));
-        board.setPreferredSize(new Dimension(400, 400));
-        whiteOut.setPreferredSize(new Dimension(50, 50));
-        blackOut.setPreferredSize(new Dimension(50, 50));
-        player1.setPreferredSize(new Dimension(50, 50));
-        player2.setPreferredSize(new Dimension(50, 50));
-        this.add(board, BorderLayout.CENTER);
-        this.add(whiteOut, BorderLayout.WEST);
-        this.add(blackOut, BorderLayout.EAST);
-        this.add(player1, BorderLayout.SOUTH);
-        this.add(player2, BorderLayout.NORTH);
+        board.setBackground(new Color(0, 0, 0,0));
+        whiteOut.setBackground(new Color(0,0,0,65));
+        blackOut.setBackground(new Color(0, 0, 0,65));
+//        player1.setBackground(new Color(0, 0, 0, 65));
+//        player2.setBackground(new Color(0, 0, 0, 65));
+//        board.setPreferredSize(new Dimension(400, 400));
+//        whiteOut.setPreferredSize(new Dimension(100, 400));
+//        blackOut.setPreferredSize(new Dimension(100, 400));
+//        player1.setPreferredSize(new Dimension(200, 30));
+//        player2.setPreferredSize(new Dimension(200, 30));
+//       this.add(board,BorderLayout.CENTER);
+//        this.add(whiteOut, BorderLayout.WEST);
+//        this.add(blackOut, BorderLayout.EAST);
+//        this.add(player1, BorderLayout.SOUTH);
+//        this.add(player2, BorderLayout.NORTH);
+//        board.setLocation(100,155);
+//        whiteOut.setLocation(100,37);
+//        blackOut.setLocation(100,573);
+
         squares = new square[8][8];
 
         for (int i = 0; i < 8; i++) {
@@ -152,15 +195,36 @@ public class game extends JFrame {
                 int row = i;
                 int col = j;
                 if ((i + j) % 2 == 0) {
-                    squares[i][j].setBackground(new Color(0, 0, 0));
+                    squares[i][j].setBackground(new Color(0, 0, 0,30));
+                    squares[i][j].setOpaque(false);
                 } else {
-                    squares[i][j].setBackground(new Color(219, 107, 107));
+                    squares[i][j].setBackground(new Color(0,0,0,150));
+                    squares[i][j].setOpaque(false);
+
                 }
                 board.add(squares[i][j]);
 
 
             }
         }
+
+//        this.add(board);
+        this.add(blackOut);
+        this.add(whiteOut);
+        base.add(imgLabel,Integer.valueOf(0));
+        base.add(boardImg, Integer.valueOf(1));
+        base.add(tilesPic, Integer.valueOf(2));
+        base.add(board, Integer.valueOf(3));
+        base.add(name1,Integer.valueOf(3));
+        base.add(name2,Integer.valueOf(3));
+        base.add(timer1,Integer.valueOf(3));
+        base.add(timer2,Integer.valueOf(3));
+        this.add(base);
+
+
+
+
+
         // add component listener to maintain square ratio of board
         addComponentListener(new ComponentAdapter() {
             @Override
@@ -177,7 +241,6 @@ public class game extends JFrame {
         Timer2 = new TimerLabel(timer2, time);
         WhiteName = new NameLabel(name2, whiteName, "white");
         BlackName = new NameLabel(name1, blackName, "black");
-        gameEnded = false;
         TimerLabel.whiteTurn =true;
         // Check if it's the white player's turn
         if (TimerLabel.whiteTurn) {
@@ -256,6 +319,8 @@ public class game extends JFrame {
                 for (int j = 0; j < 8; j++) {
 
                     if (square.oldPiece.isValidMove(squares, i, j)) {
+
+                        squares[i][j].setOpaque(true);
 //                        if(square.oldPiece.isSameTeam(square.oldPiece , squares[i][j].piece))
 //                            squares[i][j].setBackground(new Color(255, 0, 0));
                         if(squares[i][j].piece == null)
@@ -264,8 +329,10 @@ public class game extends JFrame {
                             squares[i][j].setBackground(new Color(253, 240, 1));
                     }
                     // color same team pieces with red
-                    else if(square.oldPiece.pieceCanMove(i,j) && square.oldPiece.isSameTeam(squares[i][j].piece) ) //&& squares[i][j].piece.moveHitPiece(i,j)
+                    else if(square.oldPiece.pieceCanMove(i,j) && square.oldPiece.isSameTeam(squares[i][j].piece) ) { //&& squares[i][j].piece.moveHitPiece(i,j)
                         squares[i][j].setBackground(new Color(253, 0, 2));
+                        squares[i][j].setOpaque(true);
+                    }
                 }
 
             }
@@ -279,11 +346,12 @@ public class game extends JFrame {
     public static void getBack(square[][] squares) {
         for (int i = 0; i < 8; i++) {
             for (int j = 0; j < 8; j++) {
+                squares[i][j].setOpaque(false);
 
                 if ((i + j) % 2 == 0) {
-                    squares[i][j].setBackground(new Color(0, 0, 0));
+                    squares[i][j].setBackground(new Color(0, 0, 0,30));
                 } else {
-                    squares[i][j].setBackground(new Color(219, 107, 107));
+                    squares[i][j].setBackground(new Color(0,0,0,150));
                 }
                 if(square.oldPiece.isValidMove(squares, i, j) && squares[i][j].piece instanceof King)
                     squares[i][j].setBackground(new Color(255, 0, 167));
@@ -323,7 +391,10 @@ public class game extends JFrame {
 
 
     public static void main(String args[]) throws IOException {
-        game g = new game("A", "B", "1");
+        System.setProperty("sun.java2d.uiScale","1.0");
+        game g = new game("A", "B", "4");
+        g.setVisible(true);
+
 
     }
 
