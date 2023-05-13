@@ -57,7 +57,7 @@ public class TimerLabel extends JLabel {
                     //System.out.println(ddMinute);
                     //System.out.println(ddSecond);
 
-                if(minute == 0 && second == 0) {
+                if(minute == 0 && second == 0 && !game.gameEnded) {
                     timer.stop();
                     game.endGame(TimerLabel.whiteTurn,"Timer ended");}
             }
@@ -72,6 +72,8 @@ public class TimerLabel extends JLabel {
         timer.stop();
     }
     public static String elapsedTime(TimerLabel Timer1, TimerLabel Timer2){
+//        Timer1.stopTimer();
+//        Timer2.stopTimer();
         int minuteInit = clock;
         int secondInit = 00;
         int minuteFinal1 = Timer1.getMinute();

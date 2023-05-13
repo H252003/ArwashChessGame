@@ -20,6 +20,7 @@ public class game extends JFrame {
     public static TimerLabel Timer2 = new TimerLabel();
     public static NameLabel WhiteName;
     public static NameLabel BlackName;
+    public static boolean gameEnded;
 
 //    public static chckScan CheckScan = new chckScan(this);
 
@@ -176,6 +177,7 @@ public class game extends JFrame {
         Timer2 = new TimerLabel(timer2, time);
         WhiteName = new NameLabel(name2, whiteName, "white");
         BlackName = new NameLabel(name1, blackName, "black");
+        gameEnded = false;
         TimerLabel.whiteTurn =true;
         // Check if it's the white player's turn
         if (TimerLabel.whiteTurn) {
@@ -203,6 +205,9 @@ public class game extends JFrame {
         User.WriteToFile(new_game.gameData);
         JOptionPane.showMessageDialog(null, sayIt);
         gameDispose.dispose();
+        gameEnded = true;
+        Timer1.setEnabled(false);
+        Timer2.setEnabled(false);
         new new_game(true);
 
     }
@@ -307,7 +312,7 @@ public class game extends JFrame {
 
 
     public static void main(String args[]) throws IOException {
-        game g = new game("A", "B", "4");
+        game g = new game("A", "B", "1");
 
     }
 
