@@ -41,7 +41,7 @@ public class square extends JButton implements ActionListener {
     chckScan check = new chckScan();
 
     public void colorCanMove(String color) {
-//        boolean noMovesAvalKing = true;
+        boolean noMovesAvalKing = true;
         boolean noMovesAvalAll = true;
 //        boolean inStale = false;
 
@@ -64,10 +64,10 @@ public class square extends JButton implements ActionListener {
 
                                 if (kingIsMoving) {
                                     if (game.checkKing.isKingChecked(game.squares[0][0], x, y, true)) {
+//                                        noMovesAvalKing = false;
                                         oldPiece = tmp;
                                         continue;
                                     }
-//                                    noMovesAvalKing = false;
 
                                 }
 
@@ -76,6 +76,7 @@ public class square extends JButton implements ActionListener {
                                 break;
 
                             }
+                            else if(!kingIsMoving) noMovesAvalKing = false;
                         }
                         if(!noMovesAvalAll) break;
                     }
@@ -85,15 +86,15 @@ public class square extends JButton implements ActionListener {
             }
         }
         if (noMovesAvalAll) {
-//            if (noMovesAvalKing){
-            game.endGame(TimerLabel.whiteTurn,"checkMate");
-//            } else {
-//                game.endGame("staleMate");
+            if (noMovesAvalKing){
+            game.endGame(TimerLabel.whiteTurn,"staleMate");
+            } else {
+                game.endGame(TimerLabel.whiteTurn,"checkMate");
         }
         //game.endGame("checkMate");//checkmate
 
     }
-//        }
+        }
 
     public boolean canCastle(){
         return this.piece.getClass() == King.class && piece.isFirst_move && game.squares[this.row][6].piece == null&&
