@@ -21,6 +21,8 @@ public class new_game extends JFrame {
     private JLabel white_lab = new JLabel();
     public static String Winner;
     public static String Time;
+    public static String status2;
+
     public static String whitePlayer;
     public static String blackPlayer;
 
@@ -168,9 +170,11 @@ public class new_game extends JFrame {
     }
 
 
-    public static void endData(String winner, String time) {
+    public static void endData(String winner, String time,String status) {
         Winner = winner;
         Time = time;
+        status2=status;
+
 
     }
 

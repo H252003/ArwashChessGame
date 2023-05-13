@@ -43,7 +43,7 @@ public class Main_jr extends JFrame implements ActionListener {
             new_game Game = new new_game(false);
         }
         if(e.getSource()== status_btn){
-            Status status= new Status();
+            Status status=  new Status();
         }
         if(e.getSource()== logout_btn){
             int reply = JOptionPane.showConfirmDialog(null, "Do you want to logout ?", "Warning", JOptionPane.YES_NO_OPTION);

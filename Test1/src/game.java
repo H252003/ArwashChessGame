@@ -200,8 +200,9 @@ public class game extends JFrame {
     public static void endGame(boolean turn, String sayIt){
         String winner = NameLabel.setWinner(WhiteName, BlackName, turn);
         String time = TimerLabel.elapsedTime(Timer1,Timer2);
-        new_game.endData(winner, time);
-        new_game.gameData = new_game.whitePlayer + "%" + new_game.blackPlayer + "%" + new_game.Winner +"%"+ new_game.Time;
+        String status2=sayIt;
+        new_game.endData(winner, time,status2);
+        new_game.gameData = new_game.whitePlayer + "%" + new_game.blackPlayer + "%" + new_game.Winner +"%"+ new_game.Time+"%" +new_game.status2;
         User.WriteToFile(new_game.gameData);
 
         Timer1.stopTimer();

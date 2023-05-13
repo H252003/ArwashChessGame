@@ -140,12 +140,12 @@ class Pawn extends Piece {
     public boolean pieceCanMove(int newX, int newY) {
         if (this.color.equals("white")){
             colorIndex = -1;
-            colorIndex2=6;
+            colorIndex2=7;
         }
 
         else {
             colorIndex = 1;
-            colorIndex2=1;
+            colorIndex2=0;
         }
         //this.icon== new ImageIcon(getClass().getClassLoader().getResource("resources/chess_white_pawn-removebg-preview (1).png"))
         //                ||this.icon==new ImageIcon(getClass().getClassLoader().getResource("resources/black_pawn-removebg-preview (1).png")))

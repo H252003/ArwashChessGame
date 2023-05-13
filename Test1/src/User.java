@@ -13,7 +13,7 @@ public class User {
     {
         boolean isLoggedIn = false;
         try {
-            File myObj = new File("resources/accounts");
+            File myObj = new File("src/resources/accounts");
             Scanner myReader;
             myReader = new Scanner(myObj);
             // take from file
@@ -46,7 +46,7 @@ public class User {
         try {
             String user = login_page.user;
             // take username entered in string
-            String filepath = "resources/";
+            String filepath = "src/resources/";
             FileWriter writer = new FileWriter(filepath+user, true);
             writer.write(  gameData+"\n"); // go to the file specified by username using file path and write in it game data entered(players+timer)
             writer.close();
@@ -57,7 +57,7 @@ public class User {
 
     public static void ReadDataFromFile(){
         try {
-            String filePath="resources/";
+            String filePath="src/resources/";
             String user = login_page.user;
             File myObj = new File(filePath+user);// go to the specified file & take data from it
             Scanner myReader = new Scanner(myObj);
@@ -76,14 +76,14 @@ public class User {
 
         int numberOfGames=0;
         int listSize= gameDataList.size();
-        while(listSize%4==0 && listSize!=0){// calc n. of games by dividing elements of list by 4 as table has 4 columns
+        while(listSize%5==0 && listSize!=0){// calc n. of games by dividing elements of list by 5 as table has 5 columns
             numberOfGames++;
-            listSize-=4;
+            listSize-=5;
         }
-        GamesArray= new String[numberOfGames][4];// store elements of list in 2d array to make table
+        GamesArray= new String[numberOfGames][5];// store elements of list in 2d array to make table
         int k=0;
         for (int i = 0; i < numberOfGames; i++) {
-            for (int j = 0; j < 4; j++) {
+            for (int j = 0; j < 5; j++) {
                 GamesArray[i][j] = gameDataList.get(k);
                 k++;
             }
