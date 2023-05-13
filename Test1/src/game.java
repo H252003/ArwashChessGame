@@ -205,6 +205,12 @@ public class game extends JFrame {
         User.WriteToFile(new_game.gameData);
         JOptionPane.showMessageDialog(null, sayIt);
         gameDispose.dispose();
+
+        Timer2.minute = 0;
+        Timer1.minute = 0;
+        Timer2.second = 0;
+        Timer1.second = 0;
+
         gameEnded = true;
         Timer1.setEnabled(false);
         Timer2.setEnabled(false);

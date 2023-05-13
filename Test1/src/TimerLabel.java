@@ -17,8 +17,8 @@ public class TimerLabel extends JLabel {
     }
     public static int clock;
 
-    private int second;
-    private int minute;
+    public int second;
+    public int minute;
     private String ddSecond, ddMinute;
     private DecimalFormat dFormat = new DecimalFormat("00");
 
@@ -59,6 +59,8 @@ public class TimerLabel extends JLabel {
 
                 if(minute == 0 && second == 0 && !game.gameEnded) {
                     timer.stop();
+                    minute = 0;
+                    second = 0;
                     game.endGame(TimerLabel.whiteTurn,"Timer ended");}
             }
         });
