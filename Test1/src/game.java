@@ -203,6 +203,12 @@ public class game extends JFrame {
         new_game.endData(winner, time);
         new_game.gameData = new_game.whitePlayer + "%" + new_game.blackPlayer + "%" + new_game.Winner +"%"+ new_game.Time;
         User.WriteToFile(new_game.gameData);
+
+        Timer1.stopTimer();
+        Timer2.stopTimer();
+        Timer1.setEnabled(false);
+        Timer2.setEnabled(false);
+
         JOptionPane.showMessageDialog(null, sayIt);
         gameDispose.dispose();
 
@@ -212,8 +218,6 @@ public class game extends JFrame {
         Timer1.second = 0;
 
         gameEnded = true;
-        Timer1.setEnabled(false);
-        Timer2.setEnabled(false);
         new new_game(true);
 
     }
