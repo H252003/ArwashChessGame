@@ -13,7 +13,7 @@ public class User {
     {
         boolean isLoggedIn = false;
         try {
-            File myObj = new File("resources/accounts");
+            File myObj = new File("Test1/src/resources/accounts");
             Scanner myReader;
             myReader = new Scanner(myObj);
             // take from file
@@ -46,7 +46,7 @@ public class User {
         try {
             String user = login_page.user;
             // take username entered in string
-            String filepath = "resources/";
+            String filepath = "Test1/src/resources/";
             FileWriter writer = new FileWriter(filepath+user, true);
             writer.write(  gameData+"\n"); // go to the file specified by username using file path and write in it game data entered(players+timer)
             writer.close();
@@ -57,7 +57,7 @@ public class User {
 
     public static void ReadDataFromFile(){
         try {
-            String filePath="resources/";
+            String filePath="Test1/src/resources/";
             String user = login_page.user;
             File myObj = new File(filePath+user);// go to the specified file & take data from it
             Scanner myReader = new Scanner(myObj);
