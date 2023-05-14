@@ -189,7 +189,7 @@ public class new_game extends JFrame {
 //    {
 //        // Set up the JFrame
 //        setTitle("New Game");
-//        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 //        setSize(500, 400);
 //
 //        // Create a new JPanel with a GridLayout
@@ -301,14 +301,14 @@ public class new_game extends JFrame {
                 {
                     System.out.println("this is a guest!!");
                     firstPage guest_ = new firstPage();
-                    guest_.show();   //show the first page
+                   // guest_.show();   //show the first page
                     frame.dispose();   //close new game page
                 }
                 else{        //this is a user
                     System.out.println("this is a user !!!!!");
 
                     Main_jr user = new Main_jr();
-                    user.show();   //show the first page
+                   // user.show();   //show the first page
                     frame. dispose();   //close new game page
 
                 }
