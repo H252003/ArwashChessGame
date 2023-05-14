@@ -6,8 +6,12 @@
   <component name="ChangeListManager">
     <list default="true" id="af89e118-29e0-4ccb-8827-b334c8305be4" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Test1/src/User.java" beforeDir="false" afterPath="$PROJECT_DIR$/Test1/src/User.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/test-project/User.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/test-project/User.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Test1/src/firstPage.java" beforeDir="false" afterPath="$PROJECT_DIR$/Test1/src/firstPage.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Test1/src/game.java" beforeDir="false" afterPath="$PROJECT_DIR$/Test1/src/game.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Test1/src/login_page.java" beforeDir="false" afterPath="$PROJECT_DIR$/Test1/src/login_page.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Test1/src/resources/null" beforeDir="false" afterPath="$PROJECT_DIR$/Test1/src/resources/null" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/test-project/game.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/test-project/game.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/test-project/resources/null" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/test-project/resources/null" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -29,7 +33,7 @@
   &quot;keyToString&quot;: {
     &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
     &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;last_opened_file_path&quot;: &quot;D:/Eng/SBE/1st/oop/test-project&quot;
+    &quot;last_opened_file_path&quot;: &quot;D:/Eng/SBE/1st/oop/final-GUI/Test1&quot;
   }
 }</component>
   <component name="RunManager">

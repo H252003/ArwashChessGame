@@ -77,7 +77,7 @@ public class game extends JFrame {
         ImageIcon image2 = new ImageIcon("Test1/src/resources/tiles.png");
         JLabel tilesPic = new JLabel(image2);
         tilesPic.setBounds(150,100,400,400);
-//        this.setVisible(true);
+        this.setVisible(true);
         board.setLayout(new GridLayout(8,8));
         board.setOpaque(false);
         whiteOut.setLayout(new GridLayout(8,2));
