@@ -61,7 +61,7 @@ public class TimerLabel extends JLabel {
                     timer.stop();
                     minute = 0;
                     second = 0;
-                    game.endGame(TimerLabel.whiteTurn,"endTime");}
+                    game.endGame(!TimerLabel.whiteTurn,"endTime");}
             }
         });
     }

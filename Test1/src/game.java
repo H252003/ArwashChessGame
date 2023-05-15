@@ -21,8 +21,8 @@ public class game extends JFrame {
 //     JLayeredPane time2;
     JLayeredPane base;
     public static square[][] squares;
-    public static TimerLabel Timer1 = new TimerLabel();
-    public static TimerLabel Timer2 = new TimerLabel();
+    public static TimerLabel TimerB = new TimerLabel();
+    public static TimerLabel TimerW = new TimerLabel();
     public static NameLabel WhiteName;
     public static NameLabel BlackName;
     public static boolean gameEnded;
@@ -88,15 +88,15 @@ public class game extends JFrame {
         base.setBounds(0,0,700,600);
 
 
-        JLabel name1 = new JLabel("player1 name");
-        JLabel name2 = new JLabel("player2 name");
-        JLabel timer1 = new JLabel("timer 1");
-        JLabel timer2 = new JLabel("timer 2");
+        JLabel white_name = new JLabel(whiteName);
+        JLabel black_name = new JLabel(blackName);
+        JLabel black_timer = new JLabel("timer 1");
+        JLabel white_timer = new JLabel("timer 2");
 
-        name1.setBounds(350,16,200,30);
-        name2.setBounds(350,552,200,30);
-        timer2.setBounds(335,60,87,26);
-        timer1.setBounds(335,513,87,26);
+        white_name.setBounds(350,16,200,30);
+        black_name.setBounds(350,552,200,30);
+        white_timer.setBounds(335,60,87,26);
+        black_timer.setBounds(335,513,87,26);
 ////        player1.add(name1);
 //        player1.add(timer1);
 //        player2.add(timer2);
@@ -215,10 +215,10 @@ public class game extends JFrame {
         base.add(boardImg, Integer.valueOf(1));
         base.add(tilesPic, Integer.valueOf(2));
         base.add(board, Integer.valueOf(3));
-        base.add(name1,Integer.valueOf(3));
-        base.add(name2,Integer.valueOf(3));
-        base.add(timer1,Integer.valueOf(3));
-        base.add(timer2,Integer.valueOf(3));
+        base.add(white_name,Integer.valueOf(3));
+        base.add(black_name,Integer.valueOf(3));
+        base.add(black_timer,Integer.valueOf(3));
+        base.add(white_timer,Integer.valueOf(3));
         this.add(base);
 
 
@@ -237,23 +237,23 @@ public class game extends JFrame {
         });
 
 
-        Timer1 = new TimerLabel(timer1, time);
-        Timer2 = new TimerLabel(timer2, time);
-        WhiteName = new NameLabel(name2, whiteName, "white");
-        BlackName = new NameLabel(name1, blackName, "black");
+        TimerB = new TimerLabel(black_timer, time);
+        TimerW = new TimerLabel(white_timer, time);
+        WhiteName = new NameLabel(white_name, whiteName, "white");
+        BlackName = new NameLabel(black_name, blackName, "black");
         TimerLabel.whiteTurn =true;
         // Check if it's the white player's turn
         if (TimerLabel.whiteTurn) {
-            Timer2.startTimer();
-            Timer1.stopTimer();
+            TimerW.startTimer();
+            TimerB.stopTimer();
             // Check if the time has run out for the black player
 
         }
 
         // Check if it's the black player's turn
         else {
-            Timer1.startTimer();
-            Timer2.stopTimer();
+            TimerB.startTimer();
+            TimerW.stopTimer();
             // Check if the time has run out for the white player
         }
     }
@@ -262,24 +262,24 @@ public class game extends JFrame {
 
     public static void endGame(boolean turn, String sayIt){
         String winner = NameLabel.setWinner(WhiteName, BlackName, turn);
-        String time = TimerLabel.elapsedTime(Timer1,Timer2);
+        String time = TimerLabel.elapsedTime(TimerB, TimerW);
         String status2=sayIt;
         new_game.endData(winner, time,status2);
         new_game.gameData = new_game.whitePlayer + "%" + new_game.blackPlayer + "%" + new_game.Winner +"%"+ new_game.Time+"%" +new_game.status2;
         User.WriteToFile(new_game.gameData);
 
-        Timer1.stopTimer();
-        Timer2.stopTimer();
-        Timer1.setEnabled(false);
-        Timer2.setEnabled(false);
+        TimerB.stopTimer();
+        TimerW.stopTimer();
+        TimerB.setEnabled(false);
+        TimerW.setEnabled(false);
 
         JOptionPane.showMessageDialog(null, sayIt);
         gameDispose.dispose();
 
-        Timer2.minute = 0;
-        Timer1.minute = 0;
-        Timer2.second = 0;
-        Timer1.second = 0;
+        TimerW.minute = 0;
+        TimerB.minute = 0;
+        TimerW.second = 0;
+        TimerB.second = 0;
 
         gameEnded = true;
         new new_game(true);
@@ -392,7 +392,7 @@ public class game extends JFrame {
 
     public static void main(String args[]) throws IOException {
         System.setProperty("sun.java2d.uiScale","1.0");
-        game g = new game("A", "B", "4");
+        game g = new game("A", "B", "1");
         g.setVisible(true);
 
 

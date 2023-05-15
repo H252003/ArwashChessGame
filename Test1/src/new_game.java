@@ -54,12 +54,12 @@ public class new_game extends JFrame {
         label.add(Timer);
 
         JTextField BlackPlayer = new JTextField();
-        BlackPlayer.setBounds(328, 140, 260, 40);
+        BlackPlayer.setBounds(328, 200, 260, 40);
         BlackPlayer.setFont(new Font("Callibri", Font.BOLD, 15));
         BlackPlayer.setForeground(Color.black);
         label.add(BlackPlayer);
         JTextField WhitePlayer = new JTextField();
-        WhitePlayer.setBounds(328, 200, 260, 40);
+        WhitePlayer.setBounds(328, 140, 260, 40);
         WhitePlayer.setFont(new Font("Callibri", Font.BOLD, 15));
         WhitePlayer.setForeground(Color.black);
         label.add(WhitePlayer);
@@ -276,15 +276,15 @@ public class new_game extends JFrame {
                     System.out.println("White player is: " + WhitePlayer.getText());
                     System.out.println("Black player is: " + BlackPlayer.getText());
                     System.out.println("Time allowed is: " +Time);
+                    whitePlayer = WhitePlayer.getText();
+                    blackPlayer = BlackPlayer.getText();
                     frame.dispose();
                     try {
-                        game Game = new game(WhitePlayer.getText(), BlackPlayer.getText(), Time.getText());
+                        game Game = new game(whitePlayer, blackPlayer, Time.getText());
                     } catch (IOException ex) {
                         throw new RuntimeException(ex);
                     }
 
-                    whitePlayer = WhitePlayer.getText();
-                    blackPlayer = BlackPlayer.getText();
 //                       timer = Time.getText();
 //
 //                    gameData = White1+ "%" + Black1 + "%" + Winner +"%"+ Time;

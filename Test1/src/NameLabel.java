@@ -12,11 +12,11 @@ public class NameLabel {
         this.name = Name;
 
     }
-    public static String setWinner(NameLabel name1, NameLabel name2, boolean turn){
-        if (name1.color == "white" && turn)
-            return name2.name;
-        if (name2.color == "black" && !turn)
-            return name1.name;
+    public static String setWinner(NameLabel white_name, NameLabel black_name, boolean isWhiteTurn){
+        if (white_name.color.equals("white") && isWhiteTurn)
+            return black_name.name;
+        if (black_name.color.equals("black") && !isWhiteTurn)
+            return white_name.name;
         return "No Winner";
 
     }

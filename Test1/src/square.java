@@ -209,11 +209,11 @@ public class square extends JButton implements ActionListener {
 
                 //start timer
                 if (TimerLabel.whiteTurn) {
-                    game.Timer2.startTimer();
-                    game.Timer1.stopTimer();
+                    game.TimerW.startTimer();
+                    game.TimerB.stopTimer();
                 } else {
-                    game.Timer1.startTimer();
-                    game.Timer2.stopTimer();
+                    game.TimerB.startTimer();
+                    game.TimerW.stopTimer();
                 }
             }
 

@@ -6,14 +6,13 @@
   <component name="ChangeListManager">
     <list default="true" id="af89e118-29e0-4ccb-8827-b334c8305be4" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Test1/src/Status.java" beforeDir="false" afterPath="$PROJECT_DIR$/Test1/src/Status.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Test1/src/NameLabel.java" beforeDir="false" afterPath="$PROJECT_DIR$/Test1/src/NameLabel.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Test1/src/game.java" beforeDir="false" afterPath="$PROJECT_DIR$/Test1/src/game.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Test1/src/new_game.java" beforeDir="false" afterPath="$PROJECT_DIR$/Test1/src/new_game.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Test1/src/promotion.java" beforeDir="false" afterPath="$PROJECT_DIR$/Test1/src/promotion.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Test1/src/resources/Mohisham" beforeDir="false" afterPath="$PROJECT_DIR$/Test1/src/resources/Mohisham" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Test1/src/resources/judy" beforeDir="false" afterPath="$PROJECT_DIR$/Test1/src/resources/judy" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Test1/src/resources/null" beforeDir="false" afterPath="$PROJECT_DIR$/Test1/src/resources/null" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/test-project/new_game$2.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/test-project/new_game$2.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/test-project/new_game.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/test-project/new_game.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/test-project/resources/null" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/test-project/resources/null" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Test1/src/square.java" beforeDir="false" afterPath="$PROJECT_DIR$/Test1/src/square.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
