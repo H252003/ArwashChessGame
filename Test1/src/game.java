@@ -8,40 +8,24 @@ import java.io.IOException;
 
 import javax.swing.JOptionPane;
 public class game extends JFrame {
-    private static final int boardSize = 400;
+    private static final int boardSize = 400; //board not the whole frame
     private static final int squareSize = boardSize / 8;
     public static JPanel board;
 
-    public static game gameDispose;
+    public static game gameDispose; // static object same address as game to endgame
     public static JLayeredPane whiteOut;
     public static JLayeredPane blackOut;
-    //     JLayeredPane player1;
-//     JLayeredPane player2;
-//    JLayeredPane time1;
-//     JLayeredPane time2;
-    JLayeredPane base;
-    public static square[][] squares;
+
+    JLayeredPane base; //first layer (background)
+    public static square[][] squares;  //buttons of the board
     public static TimerLabel TimerB = new TimerLabel();
     public static TimerLabel TimerW = new TimerLabel();
     public static NameLabel WhiteName;
     public static NameLabel BlackName;
     public static boolean gameEnded;
 
-//    public static chckScan CheckScan = new chckScan(this);
 
 
-    //    method to set margins
-    private int calculateMarginSize() {
-        int marginSize = 0;
-        int width = getWidth();
-        int height = getHeight();
-
-        if (width > height) {
-            marginSize = (width - height) / 2;
-        }
-
-        return marginSize;
-    }
 
     public static chckScan checkKing = new chckScan();
     game(String whiteName, String blackName, String time) throws IOException {
@@ -52,7 +36,6 @@ public class game extends JFrame {
         this.setSize(712, 632);
         this.setLayout(new BorderLayout());
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        this.getMinimumSize();
         this.setLayout(null);
 
 
@@ -61,22 +44,22 @@ public class game extends JFrame {
         whiteOut=new JLayeredPane();
         blackOut=new JLayeredPane();
         base = new JLayeredPane();
-//        player1 = new JLayeredPane();
-//        player2 = new JLayeredPane();
-//        time2=new JLayeredPane();
-//        time1=new JLayeredPane();
 
 
 
-        ImageIcon image = new ImageIcon("Test1/src/resources/Rectangle 1.png");
-        JLabel imgLabel = new JLabel(image);
+
+        ImageIcon baseImage = new ImageIcon("Test1/src/resources/Rectangle 1.png");
+        JLabel imgLabel = new JLabel(baseImage);
         imgLabel.setBounds(0,0,700,600);
-        ImageIcon image1 = new ImageIcon("Test1/src/resources/galaxy.jpg");
-        JLabel boardImg = new JLabel(image1);
+
+        ImageIcon boardBckGrond = new ImageIcon("Test1/src/resources/galaxy.jpg");
+        JLabel boardImg = new JLabel(boardBckGrond);
         boardImg.setBounds(150,100,400,400);
+
         ImageIcon image2 = new ImageIcon("Test1/src/resources/tiles.png");
         JLabel tilesPic = new JLabel(image2);
         tilesPic.setBounds(150,100,400,400);
+
         this.setVisible(true);
         board.setLayout(new GridLayout(8,8));
         board.setOpaque(false);
@@ -94,33 +77,17 @@ public class game extends JFrame {
         JLabel white_timer = new JLabel("timer 2");
 
         white_name.setBounds(350,16,200,30);
+        white_name.setForeground(new Color(255, 255, 255));
         black_name.setBounds(350,552,200,30);
+        black_name.setForeground(new Color(255, 255, 255));
         white_timer.setBounds(335,60,87,26);
         black_timer.setBounds(335,513,87,26);
-////        player1.add(name1);
-//        player1.add(timer1);
-//        player2.add(timer2);
-////        player2.add(name2);
+
         gameDispose = this;
         gameDispose.setDefaultCloseOperation(EXIT_ON_CLOSE);
         board.setBackground(new Color(0, 0, 0,0));
         whiteOut.setBackground(new Color(0,0,0,65));
         blackOut.setBackground(new Color(0, 0, 0,65));
-//        player1.setBackground(new Color(0, 0, 0, 65));
-//        player2.setBackground(new Color(0, 0, 0, 65));
-//        board.setPreferredSize(new Dimension(400, 400));
-//        whiteOut.setPreferredSize(new Dimension(100, 400));
-//        blackOut.setPreferredSize(new Dimension(100, 400));
-//        player1.setPreferredSize(new Dimension(200, 30));
-//        player2.setPreferredSize(new Dimension(200, 30));
-//       this.add(board,BorderLayout.CENTER);
-//        this.add(whiteOut, BorderLayout.WEST);
-//        this.add(blackOut, BorderLayout.EAST);
-//        this.add(player1, BorderLayout.SOUTH);
-//        this.add(player2, BorderLayout.NORTH);
-//        board.setLocation(100,155);
-//        whiteOut.setLocation(100,37);
-//        blackOut.setLocation(100,573);
 
         squares = new square[8][8];
 
@@ -128,6 +95,7 @@ public class game extends JFrame {
             for (int j = 0; j < 8; j++) {
                 squares[i][j] = new square(i, j);
                 squares[i][j].setPreferredSize(new Dimension(squareSize, squareSize));
+                //i is the row .. j is the col
 
 //                if(i==7 && j==7)
 //                    squares[i][j] = new square(new King("black", i, j));
@@ -192,16 +160,11 @@ public class game extends JFrame {
                     if (j == 7)
                         squares[i][j] = new square(new Rock("white", i, j));
                 }
-                int row = i;
-                int col = j;
-                if ((i + j) % 2 == 0) {
+
+
                     squares[i][j].setBackground(new Color(0, 0, 0,30));
                     squares[i][j].setOpaque(false);
-                } else {
-                    squares[i][j].setBackground(new Color(0,0,0,150));
-                    squares[i][j].setOpaque(false);
 
-                }
                 board.add(squares[i][j]);
 
 
@@ -225,16 +188,6 @@ public class game extends JFrame {
 
 
 
-        // add component listener to maintain square ratio of board
-        addComponentListener(new ComponentAdapter() {
-            @Override
-            public void componentResized(ComponentEvent e) {
-                int marginSize = calculateMarginSize();
-                whiteOut.setPreferredSize(new Dimension(marginSize, 0));
-                blackOut.setPreferredSize(new Dimension(marginSize, 0));
-                revalidate();
-            }
-        });
 
 
         TimerB = new TimerLabel(black_timer, time);
@@ -282,29 +235,17 @@ public class game extends JFrame {
         TimerB.second = 0;
 
         gameEnded = true;
-        new new_game(true);
+        if(new_game.guest)
+            new new_game(true);
+        else new Main_jr();
 
     }
 
 
-
-
-
-    //    Piece getKing(Icon icon)
-//    {
-//        for (int i = 0; i < 8; i++) {
-//            for (int j = 0; j < 8; j++) {
-//
-//                if(squares[i][j].piece.icon == icon)
-//                    return squares[i][j].piece;
-//            }
-//            }
-//        return null;
-//    }
     public static square findKing(boolean isWhite  ) {
         for (int i = 0; i < 8; i++) {
             for (int j = 0; j < 8; j++) {
-                if (game.squares[i][j].piece != null && (isWhite == Piece.isWhite(game.squares[i][j].piece.color)) && (game.squares[i][j].piece.getClass() == King.class))
+                if (game.squares[i][j].piece != null && (isWhite == Piece.isWhite(game.squares[i][j].piece.color)) && (game.squares[i][j].piece instanceof King))
                 {
                     return game.squares[i][j];
                 }
