@@ -10,11 +10,11 @@ public abstract class Piece {
     public int y;
     public Icon icon;
 
-    public boolean checked=false;
+    public boolean checked=false; //king
 
-    public boolean isFirst_move = true;
-    public boolean isPromoted = false;
-    public boolean inLastRow = false;
+    public boolean isFirst_move = true; // because castle and pawn
+
+    public boolean inLastRow = false; // promotion
 
     public boolean isValidMove(square[][] squares, int x, int y){
         if(this.isSameTeam(squares[x][y].piece)){
@@ -38,13 +38,11 @@ public abstract class Piece {
         this.color = color;
         this.x = x;
         this.y = y;
-        //this.isFirst_move = true;
-
 
     }
 
     public static boolean isWhite(String color){
-        if(color == "white"){return true ;
+        if(color.equals("white")){return true ;
         }
         return false; }
 
@@ -64,28 +62,15 @@ public abstract class Piece {
         return color;
     }
 
-    public int getX() {
-        return x;
-    }
 
-    public int getY() {
-        return y;
-    }
 
-    public void setX(int x) {
-        this.x = x;
-    }
-
-    public void setY(int y) {
-        this.y = y;
-    }
     public abstract boolean nextMoveEat(int newX, int newY,int kingX, int kingY );
     public abstract boolean pieceCanMove(int newX, int newY);
     //import javax.swing.JOptionPane;
     //
 
     public  Piece promotedPawn(square[][] squares, int newX, int newY){
-        //String promotedPiece= null;
+
         Object[] options = {"queen", "knight", "bishop","rook"};
         int piece =  JOptionPane.showOptionDialog(null, "Choose a piece:", "mabrooooook",JOptionPane.PLAIN_MESSAGE, JOptionPane.PLAIN_MESSAGE,null,options,options[0]);
         if (piece == 3) {
@@ -110,7 +95,7 @@ public abstract class Piece {
 
 
 class Pawn extends Piece {
-    private boolean hasMoved = false;
+
     public boolean isPromoted = false;
     public static int colorIndex;
     public static int colorIndex2;
@@ -147,20 +132,16 @@ class Pawn extends Piece {
             colorIndex = 1;
             colorIndex2=0;
         }
-        //this.icon== new ImageIcon(getClass().getClassLoader().getResource("resources/chess_white_pawn-removebg-preview (1).png"))
-        //                ||this.icon==new ImageIcon(getClass().getClassLoader().getResource("resources/black_pawn-removebg-preview (1).png")))
-        // promotion
-        //&& game.squares[this.x][this.y].piece.icon==new ImageIcon(getClass().getClassLoader().getResource("resources/chess_white_pawn-removebg-preview (1).png"))
-        //               || game.squares[this.x][this.y].piece.icon==new ImageIcon(getClass().getClassLoader().getResource("resources/black_pawn-removebg-preview (1).png"))
+
         if (this.x==colorIndex2 && !isPromoted) {
-            // promotedPawn(game.squares, this.x, this.y); //square.oldPiece =
+
             this.isPromoted = true;
             this.inLastRow = true;
         }
 
 
         //push pawn 1
-        if(this.y == newY && newX == this.x - colorIndex ) //&& game.squares[newX][newY].piece == null
+        if(this.y == newY && newX == this.x - colorIndex )
             return true;
 
         //push pawn 2
@@ -177,16 +158,7 @@ class Pawn extends Piece {
 
         return false;
     }
-   /* if(color=="white")
-    colorIndex=7;
-        else colorIndex=0;*/
 
-
-
-
-
-
-//
 
     public boolean moveHitPiece(int newX, int newY)
     {
@@ -201,9 +173,8 @@ class Pawn extends Piece {
         //push pawn 1
         if(newY == kingY && kingX == newX - colorIndex ) {
             checked=true;
-            System.out.println(checked);
 
-            //game.squares[kingX][kingY].piece.
+
             return true;
 
         }
@@ -266,7 +237,7 @@ class Knight extends Piece {
         if(Math.abs(newX-this.x) == 1 || Math.abs(newY-this.y) ==1)
             return false;
 
-        return Math.abs(newX-this.x)*Math.abs(newY-this.y)==6;
+        return Math.abs(newX-this.x) * Math.abs(newY-this.y) == 6;
     }
 }
 
@@ -304,7 +275,6 @@ class Bishop extends Piece {
             //make it not eat its opposite when shifting colors
             if(this.x == newX)
                 if(game.squares[newX][newY].piece == null || isSameTeam(game.squares[newX][newY].piece))
-
                     return Math.abs(this.y - newY) == 1;
 
             return Math.abs(this.x - newX) ==  Math.abs(this.y - newY);

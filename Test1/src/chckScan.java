@@ -27,9 +27,9 @@ public class chckScan {
             kingRow = newX;
         }
 
-        return hitByRook(newY, newX, king, kingCol, kingRow, 0, 1, virtualKingIsMoving) || //up
+        return hitByRook(newY, newX, king, kingCol, kingRow, 0, 1, virtualKingIsMoving) || //down
                 hitByRook(newY, newX, king, kingCol, kingRow, 1, 0, virtualKingIsMoving) ||  //right
-                hitByRook(newY, newX, king, kingCol, kingRow, 0, -1, virtualKingIsMoving) ||  //down
+                hitByRook(newY, newX, king, kingCol, kingRow, 0, -1, virtualKingIsMoving) ||  //up
                 hitByRook(newY, newX, king, kingCol, kingRow, -1, 0, virtualKingIsMoving) || //left
 
                 hitByBishop(newY, newX, king, kingCol, kingRow,-1,-1, virtualKingIsMoving) || // up left

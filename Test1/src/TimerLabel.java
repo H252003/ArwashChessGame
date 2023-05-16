@@ -57,11 +57,11 @@ public class TimerLabel extends JLabel {
                     //System.out.println(ddMinute);
                     //System.out.println(ddSecond);
 
-                if(minute == 0 && second == 0 && !game.gameEnded) {
+                if(minute == 0 && second == 0 ) {//&& !game.gameEnded
                     timer.stop();
                     minute = 0;
                     second = 0;
-                    game.endGame(!TimerLabel.whiteTurn,"endTime");}
+                    game.endGame(TimerLabel.whiteTurn,"endTime");}
             }
         });
     }
