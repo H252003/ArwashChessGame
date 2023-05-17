@@ -37,6 +37,7 @@ Here is a UML diagram that illustrates the class structure of the Java Chess Gam
 Here is a Gantt chart that outlines the development timeline for the Java Chess Game:
 
 <img width="290" alt="Screenshot 2023-05-17 224401" src="https://github.com/Meram-Mahmoud/test-project/assets/126452097/4549b6ac-bf8b-4ceb-9750-a383b323a15f">
+
 # Screenshots
 
 Here are some screenshots of the game in action:
