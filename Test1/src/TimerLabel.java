@@ -7,7 +7,7 @@ public class TimerLabel extends JLabel {
 
 
     public static boolean whiteTurn = true;
-    private Timer timer;
+    private Timer timer; //object of class timer
 
     public int getSecond() {
         return second;
@@ -15,12 +15,12 @@ public class TimerLabel extends JLabel {
     public int getMinute(){
         return minute;
     }
-    public static int clock;
+    public static int clock; //initial time value
 
     public int second;
     public int minute;
-    private String ddSecond, ddMinute;
-    private DecimalFormat dFormat = new DecimalFormat("00");
+    private String ddSecond, ddMinute; //Decimal format of second/minute
+    private DecimalFormat dFormat = new DecimalFormat("00"); //The traditional format of a timer
 
     public TimerLabel()
     {
@@ -28,8 +28,7 @@ public class TimerLabel extends JLabel {
     }
     public TimerLabel(JLabel timerLabel, String time) {
         super();
-        clock = Integer.parseInt(time);
-//        second = clock;
+        clock = Integer.parseInt(time); //turn String time into integer
         countdownTimer(timerLabel,clock);
         timer.start();
     }
@@ -41,12 +40,12 @@ public class TimerLabel extends JLabel {
 
         timer = new Timer(1000, new ActionListener() {
             @Override
-            public void actionPerformed(ActionEvent e) {
+            public void actionPerformed(ActionEvent e) { //when the player's turn starts
 
                 second--;
                 ddSecond = dFormat.format(second);
                 ddMinute = dFormat.format(minute);
-                setText(ddMinute + ":" + ddSecond);
+                timerLabel.setText(ddMinute + ":" + ddSecond); //update timer every second
 
                 if(second == -1) {
                     second = 59;
@@ -54,8 +53,6 @@ public class TimerLabel extends JLabel {
                     ddSecond = dFormat.format(second);
                     ddMinute = dFormat.format(minute);
                     timerLabel.setText(ddMinute + ":" + ddSecond);
-                    //System.out.println(ddMinute);
-                    //System.out.println(ddSecond);
 
                 if(minute == 0 && second == 0 ) {//&& !game.gameEnded
                     timer.stop();
@@ -73,27 +70,33 @@ public class TimerLabel extends JLabel {
     public void stopTimer() {
         timer.stop();
     }
-    public static String elapsedTime(TimerLabel Timer1, TimerLabel Timer2){
-//        Timer1.stopTimer();
-//        Timer2.stopTimer();
+    public static String elapsedTime(TimerLabel TimerB, TimerLabel TimerW){
+        //initial time
         int minuteInit = clock;
         int secondInit = 00;
-        int minuteFinal1 = Timer1.getMinute();
-        int secondFinal1= Timer1.getSecond();
-        int minuteFinal2 = Timer2.getMinute();
-        int secondFinal2 = Timer2.getSecond();
+        //time for black player
+        int minuteFinal1 = TimerB.getMinute();
+        int secondFinal1= TimerB.getSecond();
+        //time for white player
+        int minuteFinal2 = TimerW.getMinute();
+        int secondFinal2 = TimerW.getSecond();
+        //elapsed time for black player
         int minutes1 = minuteInit - minuteFinal1;
         int seconds1 = secondInit - secondFinal1;
+        //handle negatives
         if (seconds1 < 0){
             seconds1 = seconds1 + 60;
             minutes1--;
         }
+        //elapse time for white player
         int minutes2 = minuteInit - minuteFinal2;
         int seconds2 = secondInit - secondFinal2;
+        //handle negatives
         if (seconds2 < 0){
             seconds2 = seconds2 + 60;
             minutes2--;
         }
+        //sum of elapsed time for both players
         int minute = minutes1 + minutes2;
         int second = seconds1 + seconds2;
         if (second > 60) {

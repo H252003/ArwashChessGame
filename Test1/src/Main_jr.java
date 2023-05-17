@@ -17,7 +17,7 @@ public class Main_jr extends JFrame implements ActionListener {
         frame.setLayout(null);
         frame.setTitle("Chess Game");
         frame.getContentPane().setBackground(new Color(0x494949));
-        ImageIcon image = new ImageIcon("Test1/src/resources/logo.jpg");
+        ImageIcon image = new ImageIcon("resources/logo.jpg");
         frame.setIconImage(image.getImage());
         start_btn.setBounds(300, 275, 200, 40);
         start_btn.setFont(new Font("Callibri", Font.BOLD, 22));
@@ -25,7 +25,7 @@ public class Main_jr extends JFrame implements ActionListener {
         status_btn.setFont(new Font("Callibri", Font.BOLD, 22));
         logout_btn.setBounds(10, 700, 100, 40);
         //logout_btn.setFont(new Font("Callibri", Font.BOLD, 22));
-        ImageIcon cover=new ImageIcon("Test1/src/resources/main_800x800.jpeg");
+        ImageIcon cover=new ImageIcon("resources/main_800x800.jpeg");
         label.setIcon(cover);
         label.setBounds(0, 0, 800, 800);
         start_btn.addActionListener(this);

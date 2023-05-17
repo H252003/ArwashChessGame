@@ -13,12 +13,12 @@ public class NameLabel {
 
     }
     public static String setWinner(NameLabel white_name, NameLabel black_name, boolean isWhiteTurn){
-        if (white_name.color.equals("white") && isWhiteTurn)
+        //returns name of winner in string
+        //winner is the player in the opposite turn
+        if (isWhiteTurn)
             return black_name.name;
-        if (black_name.color.equals("black") && !isWhiteTurn)
+        else
             return white_name.name;
-        return "No Winner";
-
     }
 }
 

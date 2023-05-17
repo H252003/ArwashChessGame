@@ -14,10 +14,10 @@ public class firstPage extends JFrame {
         frame.setSize(800,800);
         frame.setResizable(false);
         frame.setTitle("Arwash Chess Game");
-        ImageIcon logo=new ImageIcon("Test1/src/resources/logo.jpg");
+        ImageIcon logo=new ImageIcon("resources/logo.jpg");
         frame.setIconImage(logo.getImage());
         JLabel label=new JLabel();
-        ImageIcon cover=new ImageIcon("Test1/src/resources/chess game44_804x800.jpeg");
+        ImageIcon cover=new ImageIcon("resources/chess game44_804x800.jpeg");
         label.setIcon(cover);
         label.setBounds(250,100,400,100);
         JButton loginButton=new JButton("Login");
@@ -57,12 +57,5 @@ public class firstPage extends JFrame {
                 frame.dispose();                  //close it to open guest page
             }
         });
-    }
-
-
-
-    public static void main(String args[])
-    {
-        new firstPage();
     }
 }

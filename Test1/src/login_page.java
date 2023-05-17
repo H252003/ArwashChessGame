@@ -14,10 +14,10 @@ public class login_page extends JFrame {
         frame.setSize(800,800);
         frame.setResizable(false);
         frame.setTitle("Arwash Chess Game");
-        ImageIcon logo =new ImageIcon("Test1/src/resources/logo.jpg");
+        ImageIcon logo =new ImageIcon("resources/logo.jpg");
         frame.setIconImage(logo.getImage());
         JLabel label=new JLabel();
-        ImageIcon cover=new ImageIcon("Test1/src/resources/login44_806x800.jpeg");
+        ImageIcon cover=new ImageIcon("resources/login44_806x800.jpeg");
         label.setIcon(cover);
         label.setBounds(250,100,400,100);
 

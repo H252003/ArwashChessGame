@@ -7,30 +7,29 @@ public class chckScan {
     }
 
     public boolean isKingChecked(square squares, int newX, int newY, boolean virtualKingIsMoving) {
+        //find the king to start from its square
         square king = game.findKing(TimerLabel.whiteTurn);
         assert king != null;
-
+        //assign the coordinates of the king
         int kingCol = king.col;
         int kingRow = king.row;
 
-
-        if (square.oldPiece != null && square.oldPiece.getClass() == King.class) {
+            //make the king move to the gven coordinates
+        if (square.oldPiece != null && square.oldPiece instanceof King) {
             kingCol = newY;
             kingRow = newX;
 
         }
-
-        /////////////////
-
-        if(virtualKingIsMoving) {
+        if(virtualKingIsMoving)
+        {
             kingCol = newY;
             kingRow = newX;
         }
 
-        return hitByRook(newY, newX, king, kingCol, kingRow, 0, 1, virtualKingIsMoving) || //down
-                hitByRook(newY, newX, king, kingCol, kingRow, 1, 0, virtualKingIsMoving) ||  //right
-                hitByRook(newY, newX, king, kingCol, kingRow, 0, -1, virtualKingIsMoving) ||  //up
-                hitByRook(newY, newX, king, kingCol, kingRow, -1, 0, virtualKingIsMoving) || //left
+        return hitByRook(newY, newX, king, kingCol, kingRow, 0, 1, virtualKingIsMoving) || //down of king
+                hitByRook(newY, newX, king, kingCol, kingRow, 1, 0, virtualKingIsMoving) ||  //right of king
+                hitByRook(newY, newX, king, kingCol, kingRow, 0, -1, virtualKingIsMoving) ||  //up of king
+                hitByRook(newY, newX, king, kingCol, kingRow, -1, 0, virtualKingIsMoving) || //left of king
 
                 hitByBishop(newY, newX, king, kingCol, kingRow,-1,-1, virtualKingIsMoving) || // up left
                 hitByBishop(newY,newX, king, kingCol, kingRow,1,-1, virtualKingIsMoving) || // up right
@@ -46,16 +45,22 @@ public class chckScan {
 
     }
 
+    //check if the king is checked by a rook or a rook is in the way
     private boolean hitByRook(int col, int row, square king, int kingCol, int kingRow, int colVal, int rowVal,boolean virtualKing) {
         for (int i = 1; i < 8; i++) {
+            //condition to stop when arrive at the needed square
             if (kingCol + (i * colVal) == col && kingRow + (i * rowVal) == row && !virtualKing)
                 break;
+            //check if in boundaries
             if (kingCol + (i * colVal) > -1 && kingCol + (i * colVal) < 8 && kingRow + (i * rowVal) > -1 && kingRow + (i * rowVal) < 8) {
+                //get the piece on this square
                 Piece piece = game.squares[kingRow + (i * rowVal)][kingCol + (i * colVal)].piece;
-                if (piece != null && piece != square.oldPiece) {//
+                //check if the square have a piece & pinned pieces to protect the king
+                if (piece != null && piece != square.oldPiece) {
                     if (!piece.isSameTeam(king.piece) && (piece.getClass() == Rock.class || piece.getClass() == Queen.class))
                         return true;
-                    else if(virtualKing && piece.getClass() == King.class && piece.isSameTeam(king.piece))
+                    //
+                    else if(virtualKing && piece instanceof King && piece.isSameTeam(king.piece))
                         continue;
                     break;
                 }
@@ -74,7 +79,7 @@ public class chckScan {
                 if (piece != null && piece != square.oldPiece) {//
                     if (!piece.isSameTeam(king.piece) && (piece.getClass() == Queen.class)) //piece.getClass() == Bishop.class ||
                         return true;
-                    else if(virtualKing && piece.getClass() == King.class && piece.isSameTeam(king.piece))
+                    else if(virtualKing && piece instanceof King && piece.isSameTeam(king.piece))
                         continue;
                     break;
                 }
@@ -83,9 +88,10 @@ public class chckScan {
         return false;
     }
 
+    //check if the piece is bishop
     private boolean checkBishop(Piece p, square king, int col , int row){
 
-        return p!= null && !p.isSameTeam(king.piece) && p.getClass() == Bishop.class && !(p.y== col && p.x==row); //
+        return p!= null && !p.isSameTeam(king.piece) && p instanceof Bishop && !(p.y== col && p.x==row); //not to consider its square
     }
     private boolean eatByBishop(int col, int row, square king, int kingCol, int kingRow) {
         boolean res1 = false,res2 = false,res3= false,res4 = false,res5 = false,res6 = false,res7 = false, res8 = false,
@@ -121,7 +127,7 @@ public class chckScan {
 
     private boolean checkknight(Piece p, square king, int col , int row){
 
-        return p!= null && !p.isSameTeam(king.piece) && p.getClass() == Knight.class && !(p.y== col && p.x==row);
+        return p!= null && !p.isSameTeam(king.piece) && p instanceof Knight && !(p.y== col && p.x==row);
     }
 
     private boolean hitByKnight(int col, int row, square king, int kingCol, int kingRow) {
@@ -148,7 +154,7 @@ public class chckScan {
     }
     private boolean checkKing(Piece p, square king){
 
-        return p!= null && !p.isSameTeam(king.piece) && p.getClass() == King.class ;
+        return p!= null && !p.isSameTeam(king.piece) && p instanceof King ;
     }
 
     private boolean hitByKing( square king, int kingCol, int kingRow) {
@@ -174,7 +180,7 @@ public class chckScan {
 
     }
     private  boolean hitByPawn(int col, int row, square king, int kingCol, int kingRow){
-        int colorVal ;
+        int colorVal ; //choose to move in one direction depend on color
         boolean res1 = false ;
         boolean res2 = false ;
         boolean res3 = false ;
@@ -185,7 +191,7 @@ public class chckScan {
             colorVal = -1 ;}
 
         if(kingCol +1 <8 ){
-
+            //check in boundaries
             if(kingRow+colorVal>-1 && kingRow+colorVal<8){
                 res1 = checkPawn(game.squares[kingRow+colorVal][kingCol+1].piece, king, col, row) ;
             }
@@ -208,9 +214,6 @@ public class chckScan {
     }
     private boolean checkPawn(Piece p, square king,int col , int row){
 
-        return p!= null && !p.isSameTeam(king.piece) && p.getClass() == Pawn.class && !(p.y== col && p.x==row)  ; //
+        return p!= null && !p.isSameTeam(king.piece) && p instanceof Pawn && !(p.y== col && p.x==row) ; //
     }
 }
-
-
-

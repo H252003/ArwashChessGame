@@ -48,15 +48,15 @@ public class game extends JFrame {
 
 
 
-        ImageIcon baseImage = new ImageIcon("Test1/src/resources/Rectangle 1.png");
+        ImageIcon baseImage = new ImageIcon("resources/Rectangle 1.png");
         JLabel imgLabel = new JLabel(baseImage);
         imgLabel.setBounds(0,0,700,600);
 
-        ImageIcon boardBckGrond = new ImageIcon("Test1/src/resources/galaxy.jpg");
+        ImageIcon boardBckGrond = new ImageIcon("resources/galaxy.jpg");
         JLabel boardImg = new JLabel(boardBckGrond);
         boardImg.setBounds(150,100,400,400);
 
-        ImageIcon image2 = new ImageIcon("Test1/src/resources/tiles.png");
+        ImageIcon image2 = new ImageIcon("resources/tiles.png");
         JLabel tilesPic = new JLabel(image2);
         tilesPic.setBounds(150,100,400,400);
 
@@ -109,61 +109,61 @@ public class game extends JFrame {
 
 
                 // stoleMate check
-                if(i==7 && j==7)
-                    squares[i][j] = new square(new King("black", i, j));
-                if(i==5 && j==5)
-                    squares[i][j] = new square(new Queen("white", i, j));
-                if(i==3 && j==6)
-                    squares[i][j] = new square(new Rock("white", i, j));
-                if(i==0 && j==0)
-                    squares[i][j] = new square(new King("white", i, j));
-                if(i==5 && j==3)
-                    squares[i][j] = new square(new Pawn("white", i, j));
-
-
-//                if (i == 6) {
-//                    squares[i][j] = new square(new Pawn("black", i, j));
-//                } else if (i == 7) {
-//                    if (j == 3)
-//                        squares[i][j] = new square(new Queen("black", i, j));
-//                    if (j == 4)
-//                        squares[i][j] = new square(new King("black", i, j));
-//                    if (j == 1)
-//                        squares[i][j] = new square(new Knight("black", i, j));
-//                    if (j == 6)
-//                        squares[i][j] = new square(new Knight("black", i, j));
-//                    if (j == 2)
-//                        squares[i][j] = new square(new Bishop("black", i, j));
-//                    if (j == 5)
-//                        squares[i][j] = new square(new Bishop("black", i, j));
-//                    if (j == 0)
-//                        squares[i][j] = new square(new Rock("black", i, j));
-//                    if (j == 7)
-//                        squares[i][j] = new square(new Rock("black", i, j));
-//                } else if (i == 1) {
+//                if(i==7 && j==7)
+//                    squares[i][j] = new square(new King("black", i, j));
+//                if(i==4 && j==5)
+//                    squares[i][j] = new square(new Queen("white", i, j));
+//                if(i==3 && j==6)
+//                    squares[i][j] = new square(new Rock("white", i, j));
+//                if(i==0 && j==0)
+//                    squares[i][j] = new square(new King("white", i, j));
+//                if(i==5 && j==3)
 //                    squares[i][j] = new square(new Pawn("white", i, j));
-//                } else if (i == 0) {
-//                    if (j == 3)
-//                        squares[i][j] = new square(new Queen("white", i, j));
-//                    if (j == 4)
-//                        squares[i][j] = new square(new King("white", i, j));
-//                    if (j == 1)
-//                        squares[i][j] = new square(new Knight("white", i, j));
-//                    if (j == 0)
-//                        squares[i][j] = new square(new Rock("white", i, j));
-//                    if (j == 6)
-//                        squares[i][j] = new square(new Knight("white", i, j));
-//                    if (j == 2)
-//                        squares[i][j] = new square(new Bishop("white", i, j));
-//                    if (j == 5)
-//                        squares[i][j] = new square(new Bishop("white", i, j));
-//                    if (j == 7)
-//                        squares[i][j] = new square(new Rock("white", i, j));
-//                }
+//
+
+                if (i == 6) {
+                    squares[i][j] = new square(new Pawn("black", i, j));
+                } else if (i == 7) {
+                    if (j == 3)
+                        squares[i][j] = new square(new Queen("black", i, j));
+                    if (j == 4)
+                        squares[i][j] = new square(new King("black", i, j));
+                    if (j == 1)
+                        squares[i][j] = new square(new Knight("black", i, j));
+                    if (j == 6)
+                        squares[i][j] = new square(new Knight("black", i, j));
+                    if (j == 2)
+                        squares[i][j] = new square(new Bishop("black", i, j));
+                    if (j == 5)
+                        squares[i][j] = new square(new Bishop("black", i, j));
+                    if (j == 0)
+                        squares[i][j] = new square(new Rock("black", i, j));
+                    if (j == 7)
+                        squares[i][j] = new square(new Rock("black", i, j));
+                } else if (i == 1) {
+                    squares[i][j] = new square(new Pawn("white", i, j));
+                } else if (i == 0) {
+                    if (j == 3)
+                        squares[i][j] = new square(new Queen("white", i, j));
+                    if (j == 4)
+                        squares[i][j] = new square(new King("white", i, j));
+                    if (j == 1)
+                        squares[i][j] = new square(new Knight("white", i, j));
+                    if (j == 0)
+                        squares[i][j] = new square(new Rock("white", i, j));
+                    if (j == 6)
+                        squares[i][j] = new square(new Knight("white", i, j));
+                    if (j == 2)
+                        squares[i][j] = new square(new Bishop("white", i, j));
+                    if (j == 5)
+                        squares[i][j] = new square(new Bishop("white", i, j));
+                    if (j == 7)
+                        squares[i][j] = new square(new Rock("white", i, j));
+                }
 
 
                     squares[i][j].setBackground(new Color(0, 0, 0,30));
-                    squares[i][j].setOpaque(false);
+                    squares[i][j].setOpaque(false); //make it transparent to show the photo under
 
                 board.add(squares[i][j]);
 
@@ -171,7 +171,7 @@ public class game extends JFrame {
             }
         }
 
-//        this.add(board);
+//        add layers
         this.add(blackOut);
         this.add(whiteOut);
         base.add(imgLabel,Integer.valueOf(0));
@@ -185,29 +185,23 @@ public class game extends JFrame {
         this.add(base);
 
 
-
-
-
-
-
         TimerB = new TimerLabel(black_timer, time);
         TimerW = new TimerLabel(white_timer, time);
         WhiteName = new NameLabel(white_name, whiteName, "white");
         BlackName = new NameLabel(black_name, blackName, "black");
         TimerLabel.whiteTurn =true;
+
         // Check if it's the white player's turn
         if (TimerLabel.whiteTurn) {
             TimerW.startTimer();
             TimerB.stopTimer();
-            // Check if the time has run out for the black player
-
         }
 
         // Check if it's the black player's turn
         else {
             TimerB.startTimer();
             TimerW.stopTimer();
-            // Check if the time has run out for the white player
+
         }
     }
 
